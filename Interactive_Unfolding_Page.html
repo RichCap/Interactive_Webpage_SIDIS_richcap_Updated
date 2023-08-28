@@ -1,0 +1,2552 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+
+
+
+<head> 
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
+    
+    <title>SIDIS Analysis by Richard Capobianco</title>
+   
+    <!-- <link rel="stylesheet" type="text/css" href="http://www.jlab.org/Hall-B/secure/e1/markov/2GeV/newDesign/tables/accTable/style.css" />  -->
+    <link rel="stylesheet" type="text/css" href="style.css" /> 
+   
+    <script language="JavaScript">
+
+        function Current_Version_Name(Image_Version, z_pT_Bin_Number_Name, Image_Type){
+            var currentFolderVersion = "All_Images/Unfolding_Images/";
+            var Variable_Extra       = document.getElementById("Extra_Variable");
+            var Variable_Extra_Value = Variable_Extra.value;
+
+            if(Image_Version.includes("Sim_y_bin")){
+                currentFolderVersion = "All_Images/SIDIS_python_Images_From_Gen_Cuts_V2_Sim_6_21_2023/Unfolding_Images/";
+                // alert(currentFolderVersion);
+                if(Image_Type.includes("Delta_") || Image_Type.includes("Missing_Mass_") || Image_Type.includes("Phase_Space")){
+                    alert("Only the Unfolding Histograms are to be included in this version of the images.")
+                    Image_Version = "Current";
+                }
+            }
+
+            if(Image_Version.includes("Simulated")){
+                currentFolderVersion = "All_Images/SIDIS_python_Images_From_Multi_Dimension_Unfold_V3_Simulated_Test_3_14_2023/Unfolding_Images/";
+                // alert(currentFolderVersion);
+                if(Image_Type.includes("Delta_") || Image_Type.includes("Missing_Mass_") || Image_Type.includes("Phase_Space")){
+                    alert("Only the Unfolding Histograms are to be included in this version of the images.")
+                    Image_Version = "Current";
+                }
+            }
+
+
+            if(Image_Version.includes("gen_cut") && (Image_Type.includes("Unfold") || Image_Type.includes("Mult") || Image_Type.includes("All_Events"))){
+                // alert(Image_Type);
+                // alert(Image_Type.includes("Unfold") || Image_Type.includes("Mult") || Image_Type.includes("All_Events"));
+                if(Image_Version.includes("Current")){
+                    currentFolderVersion = "All_Images/SIDIS_python_Images_From_Gen_Cuts_V1_6_16_2023/Unfolding_Images/";
+                }
+                // if(Image_Version.includes("Old_V2")){
+                //     currentFolderVersion = "All_Images/SIDIS_python_Images_From_New_Binning_Schemes_V7_New_6_13_2023/Unfolding_Images/";
+                // }
+                // if(Image_Version.includes("Old_V1")){
+                //     currentFolderVersion = "All_Images/SIDIS_python_Images_From_New_Binning_Schemes_V7_6_7_2023/Unfolding_Images/";
+                // }
+                // document.getElementById("Image_Type", Image_Type.replace("_smear", ""));
+
+                // if(Image_Type.includes("_smear")){
+                //     // alert("Warning: smearing option not available yet (select the 'Standard Unfolding' options for y-binning)");
+                //     Image_Type = Image_Type.replace("_smear", "");
+                //     var select_bin     = document.getElementById('Q2_y_select');
+                //     var select_bin_2   = document.getElementById('Q2_y_select_2');
+                //     var select_bin_r   = document.getElementById('Q2_xB_select');
+                //     var select_bin_r_2 = document.getElementById('Q2_xB_select_2');
+                //     select_bin.setAttribute("selected", "selected");
+                //     select_bin_2.setAttribute("selected", "selected");
+                //     select_bin_r.removeAttribute("selected");
+                //     select_bin_r_2.removeAttribute("selected");
+                //     var select_type   = document.getElementById('Unfold_select');
+                //     var select_type_r = document.getElementById('Unfold_smear_select');
+                //     select_type.setAttribute("selected", "selected");
+                //     select_type_r.removeAttribute("selected");
+                //     var bin_type     = document.getElementById('Q2-xB or Q2-y Bin');
+                //     var bin_type_2   = document.getElementById('Q2-xB or Q2-y Bin 2');
+                //     var image_type   = document.getElementById('Image_Type');
+                //     bin_type.value   = "Q2_y"
+                //     bin_type_2.value = "Q2_y"
+                //     image_type.value = "Unfold"
+                //     change_bin_type(form="1");
+                //     change_picture_fit_richcap();
+                // }
+            }
+            else{
+                if(Image_Version.includes("gen_cut")){// && Image_Version.includes("Old_V1")){
+                    Image_Version = "Current"
+                }
+            }
+
+            if(Image_Version.includes("y_bin") && (Image_Type.includes("Unfold") || Image_Type.includes("Mult") || Image_Type.includes("All_Events"))){
+                // alert(Image_Type);
+                // alert(Image_Type.includes("Unfold") || Image_Type.includes("Mult") || Image_Type.includes("All_Events"));
+                if(Image_Version.includes("Current")){
+                    currentFolderVersion = "All_Images/SIDIS_python_Images_From_Gen_Cuts_V6_7_19_2023/Unfolding_Images/";
+                }
+                if(Image_Version.includes("Old_V4")){
+                    currentFolderVersion = "All_Images/SIDIS_python_Images_From_Gen_Cuts_V2_Fixed_6_21_2023/Unfolding_Images/";
+                }
+                if(Image_Version.includes("Old_V3")){
+                    currentFolderVersion = "All_Images/SIDIS_python_Images_From_New_Binning_Schemes_V8_6_16_2023/Unfolding_Images/";
+                }
+                if(Image_Version.includes("Old_V2")){
+                    currentFolderVersion = "All_Images/SIDIS_python_Images_From_New_Binning_Schemes_V7_New_6_13_2023/Unfolding_Images/";
+                }
+                if(Image_Version.includes("Old_V1")){
+                    currentFolderVersion = "All_Images/SIDIS_python_Images_From_New_Binning_Schemes_V7_6_7_2023/Unfolding_Images/";
+                }
+                // document.getElementById("Image_Type", Image_Type.replace("_smear", ""));
+
+                // if(Image_Type.includes("_smear")){
+                //     // alert("Warning: smearing option not available yet (select the 'Standard Unfolding' options for y-binning)");
+                //     Image_Type = Image_Type.replace("_smear", "");
+                //     var select_bin     = document.getElementById('Q2_y_select');
+                //     var select_bin_2   = document.getElementById('Q2_y_select_2');
+                //     var select_bin_r   = document.getElementById('Q2_xB_select');
+                //     var select_bin_r_2 = document.getElementById('Q2_xB_select_2');
+                //     select_bin.setAttribute("selected", "selected");
+                //     select_bin_2.setAttribute("selected", "selected");
+                //     select_bin_r.removeAttribute("selected");
+                //     select_bin_r_2.removeAttribute("selected");
+                //     var select_type   = document.getElementById('Unfold_select');
+                //     var select_type_r = document.getElementById('Unfold_smear_select');
+                //     select_type.setAttribute("selected", "selected");
+                //     select_type_r.removeAttribute("selected");
+                //     var bin_type     = document.getElementById('Q2-xB or Q2-y Bin');
+                //     var bin_type_2   = document.getElementById('Q2-xB or Q2-y Bin 2');
+                //     var image_type   = document.getElementById('Image_Type');
+                //     bin_type.value   = "Q2_y"
+                //     bin_type_2.value = "Q2_y"
+                //     image_type.value = "Unfold"
+                //     change_bin_type(form="1");
+                //     change_picture_fit_richcap();
+                // }
+            }
+            else{
+                if(Image_Version.includes("y_bin") && (Image_Version.includes("Old_V1") || Image_Version.includes("Old_V2") || Image_Version.includes("Old_V3"))){
+                    Image_Version = "Current"
+                }
+            }
+
+
+            if(! Image_Version.includes("y_bin") && ! Image_Version.includes("gen_cut")){
+                if(Image_Version.includes("Current") || Image_Version.includes("Old_V7")){
+                    currentFolderVersion = "All_Images/SIDIS_python_Images_From_Multi_Dimension_Unfold_V3_3_14_2023/Unfolding_Images/";
+                    if((Image_Version.includes("Current")) && (Image_Type.includes("Delta_") || Image_Type.includes("Missing_Mass_") || Image_Type.includes("Phase_Space"))){
+                        currentFolderVersion = "All_Images/SIDIS_python_Images_From_Multi_Dimension_Unfold_V5_4_25_2023/Unfolding_Images/";
+                    }
+                    else{
+                        if((Image_Version.includes("Old_V7")) && (Image_Type.includes("Delta_") || Image_Type.includes("Missing_Mass_") || Image_Type.includes("Phase_Space"))){
+                            currentFolderVersion = "All_Images/SIDIS_python_Images_From_Multi_Dimension_Unfold_V3_3_14_2023/Unfolding_Images/";
+                            alert(currentFolderVersion)
+                        }
+                    }
+
+                    // alert(Image_Type);
+                    // if(Image_Type.includes("Delta_") || Image_Type.includes("Missing_Mass_") || Image_Type.includes("Phase_Space")){
+                    // // if(Image_Type.includes("Delta_") || Image_Type.includes("Missing_Mass_") || Image_Type.includes("Phase_Space") || (! Variable_Extra_Value.includes("Combined") && Image_Type.includes("All_Events"))){
+                    //     Image_Version = "Old_V6";
+                    //     // if(! Variable_Extra_Value.includes("Combined") && Image_Type.includes("All_Events")){
+                    //     //     alert("Only the Multi-dimensional histograms in this option were updated as of 3-13-2023.\n\nUse older versions of the images to see the 1D unfolding examples.");
+                    //     // }
+                    // }
+                    // if(Image_Type.includes("All_Events")){
+                    //     alert("Only the Multi-dimensional histograms in this option were updated as of 3-13-2023.\n\nUse older versions of the images to see the 1D unfolding examples.")
+                    // }
+                }
+
+                if(Image_Version.includes("Old_V6")){
+                    currentFolderVersion = "All_Images/SIDIS_python_Images_From_Analysis_Note_Update_VF_APS_2_28_2023/Unfolding_Images/";
+                }
+                if(Image_Version.includes("Old_V5")){
+                    currentFolderVersion = "All_Images/SIDIS_python_Images_From_Analysis_Note_Update_V4_2_21_2023/Unfolding_Images/";
+                }
+                if(Image_Version.includes("Old_V4")){
+                    if(z_pT_Bin_Number_Name.includes("All") && ! Image_Type.includes("Modified")){
+                        currentFolderVersion = "All_Images/SIDIS_python_Images_From_Unfolding_Tests_V13_2_14_2023/Unfolding_Images/";
+                        Image_Version = "Old_V3";
+                    }
+                    else{
+                        currentFolderVersion = "All_Images/SIDIS_python_Images_From_Unfolding_Tests_V13_2_14_2023/Unfolding_Images/";
+                    }
+                }
+                if(Image_Version.includes("Old_V3")){
+                    if(z_pT_Bin_Number_Name.includes("All") && ! Image_Type.includes("Modified")){
+                        currentFolderVersion = "All_Images/SIDIS_python_Images_From_Unfolding_Tests_V12_1_30_2023/Unfolding_Images/";
+                        Image_Version = "Old_V2";
+                    }
+                    else{
+                        currentFolderVersion = "All_Images/SIDIS_python_Images_From_Unfolding_Tests_V12_2_5_2023/Unfolding_Images/";
+                    }
+                }
+                if(Image_Version.includes("Old_V2")){
+                    currentFolderVersion = "All_Images/SIDIS_python_Images_From_Unfolding_Tests_V12_1_30_2023/Unfolding_Images/";
+                }
+                if(Image_Version.includes("Old_V1")){
+                    currentFolderVersion = "All_Images/SIDIS_python_Images_V1_From_Unfolding_Tests_V12_1_25_2023/Unfolding_Images/";
+                }
+            }
+
+            if(Image_Type.includes("New_Smearing")){
+                currentFolderVersion = "All_Images/Smearing_Images_New/";
+                if(! Image_Version.includes("Current")){
+                    alert("This option is not currently set to allow for older versions...")
+                }
+            }
+
+            return currentFolderVersion;
+        }
+
+        function Hide_Options(Image_Type, Extra_Options, Bin, Bin_Title, z_pT_Bin, z_pT_Bin_Title, Select_Table_Title, Select_Table_Title_2, Divide_Extra, z_pT_Bin_Number_Name, Multi_Dim_Options, Multi_Dim_New_Options, Delta_Options, Unfolding_Options, Parameter_Options){
+            if(Image_Type.includes("All_Events")){
+                Extra_Options.removeAttribute("hidden");
+                Bin_Title.setAttribute("hidden", "hidden");
+                Multi_Dim_Options.setAttribute("hidden", "hidden");
+                Multi_Dim_New_Options.setAttribute("hidden", "hidden");
+            }
+            else{
+                Extra_Options.setAttribute("hidden", "hidden");
+                if(Image_Type.includes("Multi_Dim")){
+                    Multi_Dim_Options.removeAttribute("hidden");
+                    Multi_Dim_New_Options.removeAttribute("hidden");
+                    Bin_Title.setAttribute("hidden", "hidden");
+                }
+                else{
+                    Multi_Dim_Options.setAttribute("hidden", "hidden");
+                    Multi_Dim_New_Options.setAttribute("hidden", "hidden");
+                    Bin_Title.removeAttribute("hidden");
+                }
+            }
+
+            if(Image_Type.includes("Delta_") || Image_Type.includes("Missing_Mass_") || Image_Type.includes("Phase_Space") || Image_Type.includes("Smearing_Histos") || Image_Type.includes("New_Smearing") || Image_Type.includes("All_Events") || Image_Type.includes("Multi_Dim")){
+                Bin.setAttribute("hidden", "hidden");
+                Bin_Title.setAttribute("hidden", "hidden");
+                z_pT_Bin.setAttribute("hidden", "hidden");
+                z_pT_Bin_Title.setAttribute("hidden", "hidden");
+                Select_Table_Title.setAttribute("hidden", "hidden");
+                Select_Table_Title_2.setAttribute("hidden", "hidden");
+                Divide_Extra.setAttribute("hidden", "hidden");
+            }
+            // else{
+            //     if(z_pT_Bin.value != "1"){
+            //         Select_Table_Title.setAttribute("hidden", "hidden");
+            //         alert("No table test");
+            //         alert(z_pT_Bin_Title.value);
+            //     }
+            // }
+
+
+            var New_Smearing_div   = document.getElementById("New_Smearing_div");
+            var New_Smearing_div_2 = document.getElementById("New_Smearing_div_2");
+            if(Image_Type.includes("New_Smearing")){
+                New_Smearing_div.removeAttribute("hidden");
+                New_Smearing_div_2.removeAttribute("hidden");
+            }
+            else{
+                New_Smearing_div.setAttribute("hidden", "hidden");
+                New_Smearing_div_2.setAttribute("hidden", "hidden");
+            }
+
+            if(Image_Type.includes("Delta_") || Image_Type.includes("Missing_Mass_") || Image_Type.includes("Smearing_Histos")){
+                Delta_Options.removeAttribute("hidden");
+                // Image_Info_Button.removeAttribute("hidden");
+            }
+            else{
+                Delta_Options.setAttribute("hidden", "hidden");
+            }
+
+            if(z_pT_Bin.value == "All" && Image_Type.includes("Unfold")){
+                Unfolding_Options.removeAttribute("hidden");
+            }
+            else{
+                Unfolding_Options.setAttribute("hidden", "hidden");
+            }
+
+            if(Image_Type.includes("Pars")){
+                Parameter_Options.removeAttribute("hidden");
+                Bin_Title.setAttribute("hidden", "hidden");
+            }
+            else{
+                Parameter_Options.setAttribute("hidden", "hidden");
+            }
+
+            if(Image_Type.includes("New_Smearing")){
+                Bin.setAttribute("hidden", "hidden");
+                Bin_Title.setAttribute("hidden", "hidden");
+                z_pT_Bin.setAttribute("hidden", "hidden");
+                z_pT_Bin_Title.setAttribute("hidden", "hidden");
+                Select_Table_Title.setAttribute("hidden", "hidden");
+                Select_Table_Title_2.setAttribute("hidden", "hidden");
+                Divide_Extra.setAttribute("hidden", "hidden");
+            }
+
+        }
+
+        function toUnicodeVariant(str, variant, flags) {
+
+            const offsets = {
+                m: [0x1d670, 0x1d7f6],
+                b: [0x1d400, 0x1d7ce],
+                i: [0x1d434, 0x00030],
+                bi: [0x1d468, 0x00030],
+                c: [0x0001d49c, 0x00030],
+                bc: [0x1d4d0, 0x00030],
+                g: [0x1d504, 0x00030],
+                d: [0x1d538, 0x1d7d8],
+                bg: [0x1d56c, 0x00030],
+                s: [0x1d5a0, 0x1d7e2],
+                bs: [0x1d5d4, 0x1d7ec],
+                is: [0x1d608, 0x00030],
+                bis: [0x1d63c, 0x00030],
+                o: [0x24B6, 0x2460],
+                on: [0x0001f150, 0x2460],
+                p: [0x249c, 0x2474],
+                q: [0x1f130, 0x00030],
+                qn: [0x0001F170, 0x00030],
+                w: [0xff21, 0xff10],
+                u: [0x2090, 0xff10]
+            }
+
+            const variantOffsets = {
+                'monospace': 'm',
+                'bold' : 'b',
+                'italic' : 'i',
+                'bold italic' : 'bi',
+                'script': 'c',
+                'bold script': 'bc',
+                'gothic': 'g',
+                'gothic bold': 'bg',
+                'doublestruck': 'd',
+                'sans': 's',
+                'bold sans' : 'bs',
+                'italic sans': 'is',
+                'bold italic sans': 'bis',
+                'parenthesis': 'p',
+                'circled': 'o',
+                'circled negative': 'on',
+                'squared': 'q',
+                'squared negative': 'qn',
+                'fullwidth': 'w'
+            }
+
+            // special characters (absolute values)
+            const special = {
+                m: {
+                    ' ': 0x2000,
+                    '-': 0x2013
+                },
+                i: {
+                    'h': 0x210e
+                },
+                g: {
+                    'C': 0x212d,
+                    'H': 0x210c,
+                    'I': 0x2111,
+                    'R': 0x211c,
+                    'Z': 0x2128
+                },
+                d: {
+                'C': 0x2102,
+                'H': 0x210D,
+                'N': 0x2115,
+                'P': 0x2119,
+                'Q': 0x211A,
+                'R': 0x211D,
+                'Z': 0x2124
+                },
+                o: {
+                    '0': 0x24EA,
+                    '1': 0x2460,
+                    '2': 0x2461,
+                    '3': 0x2462,
+                    '4': 0x2463,
+                    '5': 0x2464,
+                    '6': 0x2465,
+                    '7': 0x2466,
+                    '8': 0x2467,
+                    '9': 0x2468,
+                },
+                on: {},
+                p: {},
+                q: {},
+                qn: {},
+                w: {}
+            }
+            //support for parenthesized latin letters small cases 
+            //support for full width latin letters small cases 
+            //support for circled negative letters small cases 
+            //support for squared letters small cases 
+            //support for squared letters negative small cases 
+            ;['p', 'w', 'on', 'q', 'qn'].forEach(t => {
+                for (var i = 97; i <= 122; i++) {
+                    special[t][String.fromCharCode(i)] = offsets[t][0] + (i-97)
+                }
+            })		
+
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
+            const numbers = '0123456789'
+
+            const getType = function(variant) {
+                if (variantOffsets[variant]) return variantOffsets[variant]
+                if (offsets[variant]) return variant
+                return 'm' //monospace as default
+            }
+            const getFlag = function(flag, flags) {
+                if (!flags) return false
+                return flag.split('|').some(f => flags.split(',').indexOf(f) > -1)
+            }
+
+            const type = getType(variant)
+            const underline = getFlag('underline|u', flags)
+            const strike = getFlag('strike|s', flags)
+            let result = ''
+
+            for (let c of str) {
+                let index
+                if (special[type] && special[type][c]) c = String.fromCodePoint(special[type][c])
+                if (type && (index = chars.indexOf(c)) > -1) {
+                    result += String.fromCodePoint(index + offsets[type][0]) 
+                } else if (type && (index = numbers.indexOf(c)) > -1) {
+                    result += String.fromCodePoint(index + offsets[type][1]) 
+                } else {
+                    result += c 
+                }
+                if (underline) result += '\u0332' // add combining underline
+                if (strike) result += '\u0336' // add combining strike
+            }
+            return result
+        }
+
+        function info_button_function(){
+            // alert("test: will provide more info of on-screen image(s)...");
+            var Histo_Type_Input = document.getElementById("Image_Type");
+            var Histo_Type = Histo_Type_Input.value;
+            var Image_Version_Input = document.getElementById("Image_Version");
+            var Image_Version = Image_Version_Input.value;
+            if(Histo_Type.includes("Modified_")){
+                // alert("The onscreen plots are modified from the original smearing functions developed by FX.");
+                alert("The onscreen plots use " + toUnicodeVariant('modified smearing function(s)', 'bold', 'underline') + " " + toUnicodeVariant('based on the original function developed by FX', 'bold') + ".\n\nNow smearing each particle with a unique function.");
+            }
+            else{
+                if(Histo_Type.includes("All_Events")){
+                    var Variable_Extra = document.getElementById("Extra_Variable");
+                    alert("These plots show the unfolding results of additional kinematic variables (1D examples) as well as examples of the unfolded φh distribution for all Q2-xB-z-pT bins.\n\nAlso includes the options for multidimensional unfolding example(s).")
+                    if(Variable_Extra.Includes("Combined_phi_t_Q2")){
+                        if(Variable_Extra.Includes("Combined_phi_t_Q2_xB")){
+                            alert("The selected plot shows the simultaneous unfolding of Q2, xB, and φh variables.\n\nProcedure uses a new binning definition which combines the two variables so that the φh distribution is shown for every Q2-xB bin.")
+                        }
+                        else{
+                            alert("The selected plot shows the simultaneous unfolding of the Q2 and φh variables.\n\nProcedure uses a new binning definition which combines the two variables so that the φh distribution is shown for every Q2 bin.")
+                        }
+                    }
+                }
+                else{
+                    if(Histo_Type.includes("Multi_Dim")){
+                        alert("The onscreen plots show examples of the Multidimensional Unfolding procedure.\n\nThe procedure involves a unique method of binning the data into the response matrices, so additional plots are shown here that are not unfolded to show that the other plots are still made correctly.");
+                        alert(toUnicodeVariant('Current Issue: ', 'bold') + "The binning procedure used here may not be reliable as of 3-7-2023.\n\nOverlap between plots may exist in the last/first bins, and the last Q2 and Q2-xB bins are not included due to a counting error.\n\nThe fit lines are not appearing for unknown reasons (may be a problem of scale).\n\nThese plots are to be " + toUnicodeVariant('PRELIMINARY EXAMPLES ONLY', 'bold') + " until these issues are resolve.");
+
+                    }
+                    else{
+                        if(Histo_Type.includes("Delta_")){
+                            alert("The onscreen plots use " + toUnicodeVariant('the smearing function ', 'bold') + toUnicodeVariant('developed by FX', 'bold', 'underline') + ".");
+                        }
+                        else{
+                            if(Histo_Type.includes("y_bin") || Image_Version.includes("y_bin")){
+                                alert("This version of the results uses Q2-y bins instead of the original Q2-xB bins used in previous versions.\n\nSome image options may not be available or will revert to the last working version of the image instead.\n\nSome options that are automatically selected may not update immediately without another manual input of some kind (i.e., change the bin number after setting the Image Version).");
+                            }
+                            var z_pT_Bin = document.getElementById("z-pT Bin");
+                            alert("If the option for z-pT bins 'Checking Individual z-pT Bins', then the 'Select Image Type' option will not affect which Unfolding Images are shown (all will be visible for individual bin option).\n\nThe 'Select Image Type' option will change the other option for z-pT bins is selected or if any of the smearing histograms are selected.")
+                            alert("Of the 5 1D Unfolded plots, the 3 in the top row are created using the RooUnfold Libraries while the bottom 2 plots were created without that library.\n\n(TSVDUnfold was used to create the SVD plots in the second row which may or may not differ slightly from the other SVD results while testing is on-going - No noticiable difference observed yet)")
+                            alert("Can click on the cells to lock the images to prevent them from updating while scrolling.\n\nClick any cell again to unlock the images and double-click the cell to open the image below the table in a separate window.")
+                            if(Histo_Type.includes("Smeared") || Histo_Type.includes("smear") || Histo_Type.includes("Smear")){
+                                alert("The images on screen use the smeared Reconstructed Monte Carlo Data sets before unfolding.")
+                            }
+                            else{
+                                alert("The images on screen do " + toUnicodeVariant('NOT', 'bold') + " use the smeared Reconstructed Monte Carlo Data sets before unfolding.\n\n(i.e., the resolution of the simulated data is not realistic yet)")
+                            }
+                        }
+                    }
+                }
+            }
+
+            var currentFolderVersion = "All_Images/Unfolding_Images/";
+            if(Image_Version.includes("Old")){
+                alert("The versions of the images currently shown are from a previous iteration of this analysis.\n\nThe 'Current Version' was last added on 3-14-2023 while the 'Latest (y-bin) Version' was added on 6-7-2023.")
+            }
+            else{
+                if(Histo_Type.includes("Delta_") || Histo_Type.includes("Missing_Mass_") || Histo_Type.includes("Phase_Space")){
+                    alert("Smearing/Correction Histograms have not been updated since 4-25-2023.\n\n Switching to older version of images.");
+                }
+            }
+            
+            alert("This page is now going to be refreshed...")
+            
+            // var Delta_Type_Input = document.getElementById("Delta Type");
+            // var Delta_Type = Delta_Type_Input.value;
+            // if(Delta_Type.includes("_P")){
+            //     alert("The onscreen plots are modified from the original smearing functions developed by FX.");
+            // }
+            // else{
+            //     alert("The onscreen plots use the smearing functions developed by FX.");
+            // }
+
+        }
+
+        function Analysis_Note_Link(){
+            var currentName = "Measurement_of_Cosphi_and_Cos2phi_Moments_of_the_Unpolarized_SIDIS_pi+_Cross-section_at_CLAS12-APS_Release.pdf"
+            aaa = window.open(currentName, currentName, 'height=6, width=600, scrollbars=yes, resizable=yes');
+        }
+
+        function README_Update_Link(){
+            var currentName = "README.md"
+            aaa = window.open(currentName, currentName, 'height=6, width=600, scrollbars=yes, resizable=no');
+        }
+
+        function Newer_Page_Version_Link(){
+            var currentName = "Interactive_Unfolding_Page_Updated.html"
+            aaa = window.open(currentName, currentName, 'height=6, width=600, scrollbars=yes, resizable=no');
+        }
+
+        function change_picture_Corrections(Image_Type, Image_Version, Bin, z_pT_Bin, Vs_Mom_hide, dTheta_hide, Histo_Type_3, currentFolderVersion){
+            // alert("Showing Smearing Plots");
+            document.images.pic1.width = 1200;
+            if(Image_Type.includes("Compare") || Image_Type.includes("Mom_Cors")){
+                document.images.pic1.height = 800;
+            }
+            else{
+                document.images.pic1.height = 1900;
+            }
+            Bin.value = 1;
+            z_pT_Bin.value = "All";
+            if(Image_Type.includes("El") || Image_Type.includes("Pip")){
+                currentName = currentFolderVersion.replace("Unfolding_Images/", "Smearing_Images/") + Image_Type + ".png";
+            }
+            else{
+                if(Image_Type.includes("Electron") || Image_Type.includes("Pip")){
+                    alert("OLD TEST");
+                    currentName = "All_Images/Smearing_Images/" + Image_Type + ".png";
+                }
+                else{
+                    var Delta_Type       = document.getElementById("Delta Type");
+                    if(Image_Version.includes("Current")){
+                        Delta_Type.value = "Delta_P";
+                    }
+                    var Particle_Type = document.getElementById("Particle");
+                    if(Image_Type.includes("Modified")){
+                        if(Image_Version.includes("Current") || Image_Version.includes("Old_V7")){
+                            Vs_Mom_hide.removeAttribute("hidden");
+                            dTheta_hide.removeAttribute("hidden");
+                            if(Image_Type.includes("Delta_")){
+                                if(Image_Type.includes("Compare")){
+                                    currentName = currentFolderVersion.replace("Unfolding_Images/", "Smearing_Images/") + Image_Type + "/" + Histo_Type_3.value + "_Modified_" + Delta_Type.value + "_" + Particle_Type.value + "_Histograms_Smear_Compare.png";
+                                }
+                                else{
+                                    currentName = currentFolderVersion.replace("Unfolding_Images/", "Smearing_Images/") + Image_Type + "/" + Histo_Type_3.value + "_Modified_" + Delta_Type.value + "_" + Particle_Type.value + "_Histograms.png";
+                                }
+                            } else{
+                                if(Image_Type.includes("Compare")){
+                                    currentName = currentFolderVersion.replace("Unfolding_Images/", "Smearing_Images/") + "Missing_Mass/Modified_Missing_Mass_" + (Histo_Type_3.value).replace("Mom", "P") + "_" + (Particle_Type.value).replace("Electron", "El")  + "_Smear_Compare.png";
+                                }
+                                else{
+                                    if(Image_Type.includes("Without_Cors")){
+                                        currentName = currentFolderVersion.replace("Unfolding_Images/", "Smearing_Images/") + "Missing_Mass/Modified_Missing_Mass_" + (Histo_Type_3.value).replace("Mom", "P") + "_" + (Particle_Type.value).replace("Electron", "El") + "_Without_Cors.png";
+                                    }
+                                    else{
+                                        currentName = currentFolderVersion.replace("Unfolding_Images/", "Smearing_Images/") + "Missing_Mass/Modified_Missing_Mass_" + (Histo_Type_3.value).replace("Mom", "P") + "_" + (Particle_Type.value).replace("Electron", "El") + ".png";
+                                    }
+                                }
+                            }
+                        } else{
+                            if(Image_Version.includes("Old_V4")){
+                                Vs_Mom_hide.removeAttribute("hidden");
+                                dTheta_hide.removeAttribute("hidden");
+                                if(Image_Type.includes("Delta_")){
+                                    if(Image_Type.includes("Compare")){
+                                        currentName = currentFolderVersion.replace("Unfolding_Images/", "Smearing_Images/") + Histo_Type_3.value + "/" + Image_Type + "/Modified_" + Delta_Type.value + "_" + Particle_Type.value + "_Histograms_Smear_Compare.png";
+                                    }
+                                    else{
+                                        currentName = currentFolderVersion.replace("Unfolding_Images/", "Smearing_Images/") + Histo_Type_3.value + "/" + Image_Type + "/Modified_" + Delta_Type.value + "_" + Particle_Type.value + "_Histograms.png";
+                                    }
+                                } else{
+                                    if(Image_Type.includes("Compare")){
+                                        currentName = currentFolderVersion.replace("Unfolding_Images/", "Smearing_Images/") + "Missing_Mass/Modified_Missing_Mass_" + (Histo_Type_3.value).replace("Mom", "P") + "_" + (Particle_Type.value).replace("Electron", "El")  + "_Smear_Compare.png";
+                                    }
+                                    else{
+                                        currentName = currentFolderVersion.replace("Unfolding_Images/", "Smearing_Images/") + "Missing_Mass/Modified_Missing_Mass_" + (Histo_Type_3.value).replace("Mom", "P") + "_" + (Particle_Type.value).replace("Electron", "El") + ".png";
+                                    }
+                                }
+                            } else{
+                                Vs_Mom_hide.removeAttribute("hidden");
+                                dTheta_hide.removeAttribute("hidden");
+                                if(Image_Type.includes("Compare")){
+                                    currentName = "All_Images/Smearing_Images/" + Histo_Type_3.value + "/" + Image_Type + "/Modified_" + Delta_Type.value + "_" + Particle_Type.value + "_Histograms_Smear_Compare.png";
+                                }
+                                else{
+                                    currentName = "All_Images/Smearing_Images/" + Histo_Type_3.value + "/" + Image_Type + "/Modified_" + Delta_Type.value + "_" + Particle_Type.value + "_Histograms.png";
+                                }
+                            }
+                        }
+                    } else{
+                        Vs_Mom_hide.setAttribute("hidden", "hidden");
+                        dTheta_hide.setAttribute("hidden", "hidden");
+                        if(Image_Type.includes("Compare")){
+                            currentName = "All_Images/Smearing_Images/" + Histo_Type_3.value + "/" + Image_Type + "/" + Delta_Type.value + "_" + Particle_Type.value + "_Histograms_Smear_Compare.png";
+                        }
+                        else{
+                            currentName = "All_Images/Smearing_Images/" + Histo_Type_3.value + "/" + Image_Type + "/" + Delta_Type.value + "_" + Particle_Type.value + "_Histograms.png";
+                        }
+                    }
+                }
+            }
+
+            return currentName;
+        }
+
+        function change_picture_fit_richcap(){
+            // alert("Start (change_picture_fit_richcap)")
+            var Bin            = document.getElementById("Q2-xB Bin");
+            var Bin_Type       = document.getElementById("Q2-xB or Q2-y Bin");
+            var BinNumber_Name = Bin_Type.value + "_Bin_" + Bin.value;
+            // var BinNumber_Name = "Q2_xB_Bin_" + Bin.value;
+
+            var Image_Type_Input = document.getElementById("Image_Type");
+            var Image_Type       = Image_Type_Input.value;
+
+            var currentName = "";
+
+            var z_pT_Bin = document.getElementById("z-pT Bin");
+
+            var z_pT_Bin_Number_Name      = "z_pT_Bin_" + z_pT_Bin.value;
+            var Bin_Title                 = document.getElementById("div01");
+            var Delta_Options             = document.getElementById("div02");
+            var Extra_Options             = document.getElementById("div03");
+            var Multi_Dim_Options         = document.getElementById("div04");
+            var Multi_Dim_New_Options     = document.getElementById("New_Multi_Dim_div");
+            var Unfolding_Options         = document.getElementById("div05");
+            var Parameter_Options         = document.getElementById("div06");
+            var Image_Info_Button         = document.getElementById("Info_Button");
+            var z_pT_Bin_Title            = document.getElementById("z-pT Bin Title");
+            var z_pT_Axis_Title           = document.getElementById("z-pT Axis");
+            var z_pT_Axis_Title_text      = z_pT_Axis_Title.value;
+            var Multi_Unfold_doc          = document.getElementById("Multi_Unfold");
+            var Multi_Unfold              = Multi_Unfold_doc.value;
+            var Divide_Extra              = document.getElementById("divE");
+            var Select_Table_Title        = document.getElementById("div1");
+            var Select_Table_Title_2      = document.getElementById("divtable2");
+            var Unfolding_Options_Select  = document.getElementById("Unfolding Option");
+            var Correction_Options_Select = document.getElementById("Correction Histogram Type");
+
+            var Smearing_Multi_Dim        = document.getElementById("Multi_Dim_Smearing");
+            var Variable_Multi_Dim        = document.getElementById("Multi_Dim_Variable");
+            var Variable_Multi_Dim_New    = document.getElementById("Multi_Dim_Variable_New");
+            var Smearing_Extra            = document.getElementById("Extra_Smearing");
+            var Variable_Extra            = document.getElementById("Extra_Variable");
+
+
+            var Histo_Type_3 = document.getElementById("X-axis Variable");
+            var Vs_Mom_hide  = document.getElementById("Vs_Mom");
+            var dTheta_hide  = document.getElementById("dTheta");
+
+
+            var Image_Version_Input  = document.getElementById("Image_Version");
+            var Image_Version        = Image_Version_Input.value;
+            var currentFolderVersion = "All_Images/Unfolding_Images/";
+
+            if(Image_Type.includes("Smearing_Histos")){
+                Image_Type           = Correction_Options_Select.value;
+            }
+
+            currentFolderVersion     = Current_Version_Name(Image_Version, z_pT_Bin_Number_Name, Image_Type);
+
+            Hide_Options(Image_Type, Extra_Options, Bin, Bin_Title, z_pT_Bin, z_pT_Bin_Title, Select_Table_Title, Select_Table_Title_2, Divide_Extra, z_pT_Bin_Number_Name, Multi_Dim_Options, Multi_Dim_New_Options, Delta_Options, Unfolding_Options, Parameter_Options);
+            
+
+            var Unfolding_Options_Select_Val = Unfolding_Options_Select.value;
+            if(Image_Type.includes("_smear")){
+                Unfolding_Options_Select_Val = Unfolding_Options_Select_Val + "_smear";
+            }
+            if(Image_Type.includes("Unfold")){
+                Image_Type           = Unfolding_Options_Select_Val;
+            }
+            else{
+                z_pT_Bin_Number_Name = "z_pT_Bin_All";
+                z_pT_Bin.value       = "All";
+            }
+            // alert(Unfolding_Options_Select_Val)
+
+
+            if(Image_Type.includes("New_Smearing")){
+                change_picture_smear_richcap();
+            }
+            else{
+                if(Image_Type.includes("Delta_") || Image_Type.includes("Missing_Mass_") || Image_Type.includes("Phase_Space")){
+                    currentName = change_picture_Corrections(Image_Type, Image_Version, Bin, z_pT_Bin, Vs_Mom_hide, dTheta_hide, Histo_Type_3, currentFolderVersion);
+                }
+                else{
+                    if(! Image_Type.includes("New_Smearing")){
+                        if(Image_Type.includes("All_Events") || Image_Type.includes("Multi_Dim")){
+                            if(Image_Type.includes("Multi_Dim_Histo_Combined")){
+                                Multi_Dim_Options.removeAttribute("hidden");
+                                Extra_Options.setAttribute("hidden", "hidden");
+                                Multi_Dim_New_Options.setAttribute("hidden", "hidden");
+                                Bin_Title.setAttribute("hidden", "hidden");
+
+                                currentName = "All_Images/Multi_Dim_Histo_Combined/" + Variable_Multi_Dim.value + Smearing_Multi_Dim.value;
+                            }
+                            else{
+                                if(Image_Type.includes("Multi_Dim")){
+                                    Multi_Dim_New_Options.removeAttribute("hidden");
+                                    Extra_Options.setAttribute("hidden", "hidden");
+                                    Multi_Dim_Options.setAttribute("hidden", "hidden");
+                                    Bin_Title.setAttribute("hidden", "hidden");
+
+                                    currentName = currentFolderVersion.replace("Unfolding_Images", "Multi_Dim_Histo")  + Variable_Multi_Dim_New.value + ".png";
+                                    // alert(currentName)
+                                }
+                                else{
+                                    Extra_Options.removeAttribute("hidden");
+                                    Bin_Title.setAttribute("hidden", "hidden");
+                                    Multi_Dim_New_Options.setAttribute("hidden", "hidden");
+                                    Multi_Dim_Options.setAttribute("hidden", "hidden");
+
+                                    currentName = currentFolderVersion + "Response_Matrix_Normal_All_Events_" + Variable_Extra.value + Smearing_Extra.value;
+                                    // alert(currentName);
+                                    if((Variable_Extra.value).includes("Multi_Dim")){
+                                        currentName = "All_Images/SIDIS_python_Images_From_New_Binning_Schemes_V7_6_7_2023/Unfolding_Images/Response_Matrix_Normal_All_Events_" + Variable_Extra.value + ".png";
+                                    }
+                                }
+                            }
+                        }
+                        else{
+                            // alert("Showing Unfolding Plots");
+                            if(z_pT_Bin_Number_Name.includes("All")){
+                                // alert("Showing all z-pT Bins");
+                                if(Image_Type.includes("_Smeared")){
+                                    alert("NOTE: Currently, the option to show the smeared unfolded plots together for every z-pT bin is unavailable.\n\nPlease select the individual z-pT option to view the unfolded histograms with the smearing function applied (to the simulation)")
+                                    // currentFolderVersion = currentFolderVersion + "Smeared/";
+                                }
+                                document.images.pic1.width = 1300;
+                                document.images.pic1.height = 725;
+                                Bin.removeAttribute("hidden");
+                                Bin_Title.removeAttribute("hidden");
+                                z_pT_Bin.removeAttribute("hidden");
+                                z_pT_Bin_Title.removeAttribute("hidden");
+                                Select_Table_Title.setAttribute("hidden", "hidden");
+                                Select_Table_Title_2.setAttribute("hidden", "hidden");
+                                Divide_Extra.setAttribute("hidden", "hidden");
+                                currentName = currentFolderVersion + z_pT_Bin_Number_Name + "/" + BinNumber_Name + "/Unfolded_Histos_" + BinNumber_Name + "_" + Image_Type + ".png";
+                                if(Image_Type.includes("Smeared") || Image_Type.includes("smear")){
+                                    currentName = currentFolderVersion + "Smeared/" + z_pT_Bin_Number_Name + "/" + BinNumber_Name + "/Unfolded_Histos_" + BinNumber_Name + "_" + Image_Type + ".png";
+                                }
+                            }
+                            else{
+                                // alert("Showing individual z-pT Bins");
+                                document.images.pic1.width  = 1200;
+                                document.images.pic1.height = 1200;
+                                document.images.pic2.width  = 600;
+                                document.images.pic2.height = 550;
+                                Bin.removeAttribute("hidden");
+                                Bin_Title.removeAttribute("hidden");
+                                z_pT_Bin.removeAttribute("hidden");
+                                z_pT_Bin_Title.removeAttribute("hidden");
+                                if(! z_pT_Bin_Number_Name.includes("Flipped")){
+                                    Select_Table_Title.removeAttribute("hidden");
+                                    Select_Table_Title_2.setAttribute("hidden", "hidden");
+                                }
+                                else{
+                                    Select_Table_Title_2.removeAttribute("hidden");
+                                    Select_Table_Title.setAttribute("hidden", "hidden");
+                                }
+                                Divide_Extra.removeAttribute("hidden");
+                                currentName = currentFolderVersion + "z_pT_Bin_Individual/" + BinNumber_Name + "/Response_Matrix_Normal_" +  BinNumber_Name + "_" + z_pT_Bin_Number_Name + ".png";
+                                if(Image_Type.includes("Smeared") || Image_Type.includes("smear")){
+                                    currentName = currentFolderVersion + "Smeared/z_pT_Bin_Individual/" + BinNumber_Name + "/Response_Matrix_Normal_" +  BinNumber_Name + "_" + z_pT_Bin_Number_Name + "_Smeared.png";
+                                }
+                            }
+                        }
+                    }
+                }
+
+
+                if(Image_Type.includes("Pars")){
+                    Bin_Title.setAttribute("hidden", "hidden");
+                    Smearing_Pars = "";
+                    if(Image_Type.includes("Smeared") || Image_Type.includes("smear")){
+                        Smearing_Pars = "_Smeared";
+                    }
+                    var Parameter_Option              = document.getElementById("Parameter Option");
+                    var Parameter_Option_Value        = Parameter_Option.value;
+                    var Parameter_Unfold_Option       = document.getElementById("Parameter Unfold Option");
+                    var Parameter_Unfold_Option_Value = Parameter_Unfold_Option.value;
+                    currentName = currentFolderVersion.replace("Unfolding_Images/", "Parameter_Images/") + Parameter_Option_Value + "_Pars_" + Parameter_Unfold_Option_Value + "_" + BinNumber_Name + Smearing_Pars + ".png";
+                }
+
+                // alert(z_pT_Axis_Title_text);
+                currentName = currentName.replace(".png", z_pT_Axis_Title_text + ".png");
+                currentName = currentName.replace("/Unfolded",               "/" + Multi_Unfold + "Unfolded");
+                currentName = currentName.replace("/Response_Matrix_Normal", "/" + Multi_Unfold + "Response_Matrix_Normal");
+                
+
+                if(currentFolderVersion.includes("SIDIS_python_Images_From_Gen_Cuts_V6_7_19_2023")){
+                    currentName = currentName.replace("RooUnfold_bayes", "Bayesian")
+                    currentName = currentName.replace("RooUnfold_svd",   "SVD")
+                    currentName = currentName.replace("_smear",          "_Smeared")
+                }
+
+                document.images.pic1.src = currentName;
+                if(Image_Version.includes("Extra")){
+                    document.images.pic1.src = currentName.replace(".png", "_Extra_Parameters.png");
+                }
+
+                if(Image_Type.includes("Response_Matrix_Normal_Q2_y_Bin_All_z_pT_Bin_All_1D_MM") || Image_Type.includes("Response_Matrix_Normal_Q2_y_Bin_All_z_pT_Bin_All_1D_W")){
+                    document.images.pic1.src = "All_Images/SIDIS_python_Images_From_New_Binning_Schemes_V5_6_5_2023/" + Image_Type + ".png"
+                }
+
+            }
+
+        }
+
+        function change_picture_smear_richcap(){
+            var Image_Type_Input = document.getElementById("Image_Type");
+            var Image_Type       = Image_Type_Input.value;
+
+            // if(Image_Type.includes("New_Smearing")){
+            //     alert("Will Run");
+            // }
+            // else{
+            //     alert("Do NOT run");
+            // }
+
+            var currentName = "";
+            var z_pT_Bin             = document.getElementById("z-pT Bin");
+            var z_pT_Bin_Number_Name = "z_pT_Bin_" + z_pT_Bin.value;
+            var Image_Version_Input  = document.getElementById("Image_Version");
+            var Image_Version        = Image_Version_Input.value;
+            var currentFolderVersion = "All_Images/Smearing_Images_New/";
+            currentFolderVersion     = Current_Version_Name(Image_Version, z_pT_Bin_Number_Name, Image_Type);
+            // alert(currentFolderVersion);
+
+
+            var Histogram_Type_Input = document.getElementById("Smearing Histogram Type");
+            var X_axis_Smear_Input   = document.getElementById("X-axis Smear Variable");
+            var Smear_Particle_Input = document.getElementById("Smear Particle");
+            var Smear_Factor_Input   = document.getElementById("Factor");
+            var Smear_Compare_Input  = document.getElementById("Smear Compare");
+
+
+            var Histogram_Type = Histogram_Type_Input.value;
+            var X_axis_Smear   = X_axis_Smear_Input.value;
+            var Smear_Particle = Smear_Particle_Input.value;
+            var Smear_Factor   = Smear_Factor_Input.value;
+            var Smear_Compare  = Smear_Compare_Input.value;
+
+            document.images.pic1.width  = 1200;
+            document.images.pic1.height = 1800;
+
+            if(Histogram_Type.includes("Phase")){
+                X_axis_Smear  = ""
+                Smear_Compare = ".png"
+                document.images.pic1.width  = 1400;
+                document.images.pic1.height = 700;
+            }
+            else{
+                X_axis_Smear = "_" + X_axis_Smear;
+            }
+            if(Smear_Compare.includes("Compare")){
+                document.images.pic1.width  = 975;
+                document.images.pic1.height = 650;
+            }
+
+            var New_Smearing_div_2 = document.getElementById("New_Smearing_div_2");
+            if(! Histogram_Type.includes("Phase")){
+                New_Smearing_div_2.removeAttribute("hidden");
+            }
+            else{
+                New_Smearing_div_2.setAttribute("hidden", "hidden");
+            }
+
+            currentName = currentFolderVersion + Histogram_Type + X_axis_Smear + "_" + Smear_Particle + "_" + Smear_Factor + Smear_Compare;
+
+            document.images.pic1.src = currentName;
+
+        }
+
+        function change_picture_fit_table(number){
+            // alert("Start (change_picture_fit_table)")
+            var Bin                   = document.getElementById("Q2-xB Bin");
+            var Bin_Type              = document.getElementById("Q2-xB or Q2-y Bin");
+            var z_pT_Bin              = document.getElementById("z-pT Bin");
+            var z_pT_Bin_Title        = document.getElementById("z-pT Bin Title");
+            var Divide_Extra          = document.getElementById("divE");
+            var Histo_Type_Input      = document.getElementById("Image_Type");
+            var Select_Table_Title    = document.getElementById("div1");
+            var Select_Table_Title_2  = document.getElementById("divtable2");
+            
+            var Histo_Type_Input_Name = Histo_Type_Input.value;
+
+            z_pT_Bin.value = number;
+
+            var Histo_Type           = Histo_Type_Input.value;
+            var BinNumber_Name       = Bin_Type.value + "_Bin_" + Bin.value;
+            var z_pT_Bin_Number_Name = "z_pT_Bin_" + number;
+            
+            z_pT_Bin.removeAttribute("hidden");
+            z_pT_Bin_Title.removeAttribute("hidden");
+            Divide_Extra.removeAttribute("hidden");
+
+            var Histo_Type_Main = "";
+
+            var Image_Version_Input = document.getElementById("Image_Version");
+            var Image_Version       = Image_Version_Input.value;
+
+            var currentFolderVersion = "All_Images/Unfolding_Images/";
+            currentFolderVersion     = Current_Version_Name(Image_Version, z_pT_Bin_Number_Name, Histo_Type_Input_Name);
+
+            var currentName  = currentFolderVersion + "z_pT_Bin_Individual/" + BinNumber_Name + "/Response_Matrix_Normal_" +  BinNumber_Name + "_" + z_pT_Bin_Number_Name + ".png";
+            var currentName2 = currentFolderVersion + "z_pT_Bin_Individual/" + BinNumber_Name + "/Response_Matrix_Normal_" +  BinNumber_Name + "_" + z_pT_Bin_Number_Name + "_Unfolded_Histos.png";
+
+            if(Histo_Type_Input_Name.includes("Smeared") || Histo_Type_Input_Name.includes("smear")){
+                var currentName  = currentFolderVersion + "Smeared/z_pT_Bin_Individual/" + BinNumber_Name + "/Response_Matrix_Normal_" +  BinNumber_Name + "_" + z_pT_Bin_Number_Name + "_Smeared.png";
+                var currentName2 = currentFolderVersion + "Smeared/z_pT_Bin_Individual/" + BinNumber_Name + "/Response_Matrix_Normal_" +  BinNumber_Name + "_" + z_pT_Bin_Number_Name + "_Unfolded_Histos_Smeared.png";
+            }
+
+
+            var Multi_Unfold_doc          = document.getElementById("Multi_Unfold");
+            var Multi_Unfold              = Multi_Unfold_doc.value;
+
+            currentName  = currentName.replace("/Response_Matrix_Normal",  "/" + Multi_Unfold + "Response_Matrix_Normal");
+            currentName2 = currentName2.replace("/Response_Matrix_Normal", "/" + Multi_Unfold + "Response_Matrix_Normal");
+
+            // alert("currentName: " + currentName)
+            // alert("currentName2: " + currentName2)
+            document.images.pic1.src = currentName;
+            document.images.pic2.src = currentName2;
+            if(Image_Version.includes("Extra")){
+                document.images.pic1.src = currentName.replace(".png", "_Extra_Parameters.png");
+                document.images.pic2.src = currentName2.replace(".png", "_Extra_Parameters.png");
+            }
+
+            // alert("Done (change_picture_fit_table)")
+        }
+
+        function PicturePopUp_click(picture){
+            aaa = window.open(picture.src, picture.src, 'height=6, width=600, scrollbars=yes, resizable=yes');
+        }
+        
+        function changePicturePopUp_richcap(number){
+            var Bin                   = document.getElementById("Q2-xB Bin");
+            var Bin_Type              = document.getElementById("Q2-xB or Q2-y Bin");
+            var z_pT_Bin              = document.getElementById("z-pT Bin");
+            var z_pT_Bin_Title        = document.getElementById("z-pT Bin Title");
+            var Divide_Extra          = document.getElementById("divE");
+            var Histo_Type_Input      = document.getElementById("Image_Type");
+            var Select_Table_Title    = document.getElementById("div1");
+            var Select_Table_Title_2  = document.getElementById("divtable2");
+            
+            var Histo_Type_Input_Name = Histo_Type_Input.value;
+
+            z_pT_Bin.value = number;
+
+            var Histo_Type           = Histo_Type_Input.value;
+            // var BinNumber_Name       = "Q2_xB_Bin_" + Bin.value;
+            var BinNumber_Name       = Bin_Type.value + "_Bin_" + Bin.value;
+            var z_pT_Bin_Number_Name = "z_pT_Bin_" + number;
+            
+            var Histo_Type_Main   = "";
+
+            var Image_Version_Input  = document.getElementById("Image_Version");
+            var Image_Version        = Image_Version_Input.value;
+            var currentFolderVersion = "All_Images/Unfolding_Images/";
+            currentFolderVersion     = Current_Version_Name(Image_Version, z_pT_Bin_Number_Name, Histo_Type_Input_Name);
+
+            var currentName  = currentFolderVersion + "z_pT_Bin_Individual/" + BinNumber_Name + "/Response_Matrix_Normal_" +  BinNumber_Name + "_" + z_pT_Bin_Number_Name + ".png";
+            var currentName2 = currentFolderVersion + "z_pT_Bin_Individual/" + BinNumber_Name + "/Response_Matrix_Normal_" +  BinNumber_Name + "_" + z_pT_Bin_Number_Name + "_Unfolded_Histos.png";
+
+            if(Histo_Type_Input_Name.includes("Smeared") || Histo_Type_Input_Name.includes("smear")){
+                var currentName  = currentFolderVersion + "Smeared/z_pT_Bin_Individual/" + BinNumber_Name + "/Response_Matrix_Normal_" +  BinNumber_Name + "_" + z_pT_Bin_Number_Name + "_Smeared.png";
+                var currentName2 = currentFolderVersion + "Smeared/z_pT_Bin_Individual/" + BinNumber_Name + "/Response_Matrix_Normal_" +  BinNumber_Name + "_" + z_pT_Bin_Number_Name + "_Unfolded_Histos_Smeared.png";
+            }
+
+            aaa = window.open(currentName, currentName, 'height=6,width=600,scrollbars=no,resizable=no');
+            // aaa = window.open(currentName2, currentName2)//, 'height=6,width=600,scrollbars=no,resizable=no');
+        }
+
+        function table_bin_numbers(){
+
+            var Bin = document.getElementById("Q2-xB Bin");
+            var Q2_xB_Num = Bin.value;
+
+            column_1 = document.getElementById("col_1");
+            column_2 = document.getElementById("col_2");
+            column_3 = document.getElementById("col_3");
+            column_4 = document.getElementById("col_4");
+            column_5 = document.getElementById("col_5");
+            column_6 = document.getElementById("col_6");
+            column_7 = document.getElementById("col_7");
+
+            row_num_1 = document.getElementById("row_7");
+            row_num_2 = document.getElementById("row_6");
+            row_num_3 = document.getElementById("row_5");
+            row_num_4 = document.getElementById("row_4");
+            row_num_5 = document.getElementById("row_3");
+            row_num_6 = document.getElementById("row_2");
+            row_num_7 = document.getElementById("row_1");
+
+            column_1_2 = document.getElementById("col_1_2");
+            column_2_2 = document.getElementById("col_2_2");
+            column_3_2 = document.getElementById("col_3_2");
+            column_4_2 = document.getElementById("col_4_2");
+            column_5_2 = document.getElementById("col_5_2");
+            column_6_2 = document.getElementById("col_6_2");
+            column_7_2 = document.getElementById("col_7_2");
+
+            row_num_1_2 = document.getElementById("row_1_2");
+            row_num_2_2 = document.getElementById("row_2_2");
+            row_num_3_2 = document.getElementById("row_3_2");
+            row_num_4_2 = document.getElementById("row_4_2");
+            row_num_5_2 = document.getElementById("row_5_2");
+            row_num_6_2 = document.getElementById("row_6_2");
+            row_num_7_2 = document.getElementById("row_7_2");
+
+            column_1.innerText = "0.05 - 0.2";
+            column_2.innerText = "0.2 - 0.3";
+            column_3.innerText = "0.3 - 0.4";
+            column_4.innerText = "0.4 - 0.5";
+            column_5.innerText = "0.5 - 0.6";
+            column_6.innerText = "0.6 - 0.75";
+            column_7.innerText = "0.75 - 1.0";
+
+            row_num_1.innerText = "0.15 - 0.2";
+            row_num_2.innerText = "0.2 - 0.24";
+            row_num_3.innerText = "0.24 - 0.29";
+            row_num_4.innerText = "0.29 - 0.36";
+            row_num_5.innerText = "0.36 - 0.445";
+            row_num_6.innerText = "0.445 - 0.55";
+            row_num_7.innerText = "0.55 - 0.7";
+
+            column_1.innerText = "column 1";
+            column_2.innerText = "column 2";
+            column_3.innerText = "column 3";
+            column_4.innerText = "column 4";
+            column_5.innerText = "column 5";
+            column_6.innerText = "column 6";
+            column_7.innerText = "column 7";
+
+            row_num_1.innerText = "row 7";
+            row_num_2.innerText = "row 6";
+            row_num_3.innerText = "row 5";
+            row_num_4.innerText = "row 4";
+            row_num_5.innerText = "row 3";
+            row_num_6.innerText = "row 2";
+            row_num_7.innerText = "row 1";
+
+
+            if(Q2_xB_Num == "2"){
+                row_num_1.innerText = "0.18 - 0.25";
+                row_num_2.innerText = "0.25 - 0.29";
+                row_num_3.innerText = "0.29 - 0.34";
+                row_num_4.innerText = "0.34 - 0.41";
+                row_num_5.innerText = "0.41 - 0.5";
+                row_num_6.innerText = "0.5 - 0.6";
+                row_num_7.innerText = "0.6 - 0.7";
+            }
+            if(Q2_xB_Num == "4"){
+                row_num_1.innerText = "";
+                row_num_2.innerText = "0.2 - 0.29";
+                row_num_3.innerText = "0.29 - 0.345";
+                row_num_4.innerText = "0.345 - 0.41";
+                row_num_5.innerText = "0.41 - 0.5";
+                row_num_6.innerText = "0.5 - 0.6";
+                row_num_7.innerText = "0.6 - 0.7";
+            }
+            if(Q2_xB_Num == "5"){
+                column_1.innerText = "0.05 - 0.22";
+                column_2.innerText = "0.22 - 0.32";
+                column_3.innerText = "0.32 - 0.41";
+                column_4.innerText = "0.41 - 0.51";
+                column_5.innerText = "0.51 - 0.65";
+                column_6.innerText = "0.65 - 1.0";
+                column_7.innerText = "";
+
+                row_num_1.innerText = "";
+                row_num_2.innerText = "0.15 - 0.215";
+                row_num_3.innerText = "0.215 - 0.26";
+                row_num_4.innerText = "0.26 - 0.32";
+                row_num_5.innerText = "0.32 - 0.4";
+                row_num_6.innerText = "0.4 - 0.5";
+                row_num_7.innerText = "0.5 - 0.7";
+            }
+            if(Q2_xB_Num == "6"){
+                column_1.innerText = "0.05 - 0.22";
+                column_2.innerText = "0.22 - 0.32";
+                column_3.innerText = "0.32 - 0.42";
+                column_4.innerText = "0.42 - 0.54";
+                column_5.innerText = "0.54 - 0.8";
+                column_6.innerText = "";
+                column_7.innerText = "";
+
+                row_num_1.innerText = "";
+                row_num_2.innerText = "";
+                row_num_3.innerText = "0.22 - 0.32";
+                row_num_4.innerText = "0.32 - 0.4";
+                row_num_5.innerText = "0.4 - 0.47";
+                row_num_6.innerText = "0.47 - 0.56";
+                row_num_7.innerText = "0.56 - 0.7";
+                
+            }
+            if(Q2_xB_Num == "7"){
+                column_1.innerText = "0.05 - 0.23";
+                column_2.innerText = "0.23 - 0.34";
+                column_3.innerText = "0.34 - 0.435";
+                column_4.innerText = "0.435 - 0.55";
+                column_5.innerText = "0.55 - 0.8";
+                column_6.innerText = "";
+                column_7.innerText = "";
+
+                row_num_1.innerText = "";
+                row_num_2.innerText = "";
+                row_num_3.innerText = "0.15 - 0.23";
+                row_num_4.innerText = "0.23 - 0.3";
+                row_num_5.innerText = "0.3 - 0.39";
+                row_num_6.innerText = "0.39 - 0.5";
+                row_num_7.innerText = "0.5 - 0.7";
+                
+            }
+            if(Q2_xB_Num == "8"){
+                column_1.innerText = "0.05 - 0.23";
+                column_2.innerText = "0.23 - 0.34";
+                column_3.innerText = "0.34 - 0.45";
+                column_4.innerText = "0.45 - 0.7";
+                column_5.innerText = "";
+                column_6.innerText = "";
+                column_7.innerText = "";
+
+                // row_num_1.innerText = "0.22 - 0.3";
+                // row_num_2.innerText = "0.3 - 0.36";
+                // row_num_3.innerText = "0.36 - 0.425";
+                // row_num_4.innerText = "0.425 - 0.5";
+                // row_num_5.innerText = "0.5 - 0.7";
+                // row_num_6.innerText = "";
+                // row_num_7.innerText = "";
+
+                row_num_1.innerText = "";
+                row_num_2.innerText = "";
+                row_num_3.innerText = "0.22 - 0.3";
+                row_num_4.innerText = "0.3 - 0.36";
+                row_num_5.innerText = "0.36 - 0.425";
+                row_num_6.innerText = "0.425 - 0.5";
+                row_num_7.innerText = "0.5 - 0.7";
+
+            }
+
+            var Version = document.getElementById("Image_Version");
+            if((Version.value).includes("y_bin")){
+                column_1.innerText = "column 1";
+                column_2.innerText = "column 2";
+                column_3.innerText = "column 3";
+                column_4.innerText = "column 4";
+                column_5.innerText = "column 5";
+                column_6.innerText = "column 6";
+                column_7.innerText = "column 7";
+
+                row_num_1.innerText = "row 7";
+                row_num_2.innerText = "row 6";
+                row_num_3.innerText = "row 5";
+                row_num_4.innerText = "row 4";
+                row_num_5.innerText = "row 3";
+                row_num_6.innerText = "row 2";
+                row_num_7.innerText = "row 1";
+
+                // column_1.innerText = "0.05 - 0.2";
+                // column_2.innerText = "0.2 - 0.3";
+                // column_3.innerText = "0.3 - 0.4";
+                // column_4.innerText = "0.4 - 0.5";
+                // column_5.innerText = "0.5 - 0.6";
+                // column_6.innerText = "0.6 - 0.75";
+                // column_7.innerText = "0.75 - 1.0";
+
+                // row_num_1.innerText = "0.15 - 0.20";
+                // row_num_2.innerText = "0.20 - 0.24";
+                // row_num_3.innerText = "0.24 - 0.29";
+                // row_num_4.innerText = "0.29 - 0.36";
+                // row_num_5.innerText = "0.36 - 0.445";
+                // row_num_6.innerText = "0.445 - 0.55";
+                // row_num_7.innerText = "0.55 - 0.73";
+
+                // if(Q2_xB_Num == "2"){
+                //     row_num_1.innerText = "0.18 - 0.24";
+                //     row_num_2.innerText = "0.24 - 0.30";
+                //     row_num_3.innerText = "0.30 - 0.36";
+                //     row_num_4.innerText = "0.36 - 0.43";
+                //     row_num_5.innerText = "0.43 - 0.52";
+                //     row_num_6.innerText = "0.52 - 0.62";
+                //     row_num_7.innerText = "0.62 - 0.74";
+                // }
+                // if(Q2_xB_Num == "3"){
+                //     row_num_1.innerText = "0.20 - 0.24";
+                //     row_num_2.innerText = "0.24 - 0.29";
+                //     row_num_3.innerText = "0.29 - 0.36";
+                //     row_num_4.innerText = "0.36 - 0.45";
+                //     row_num_5.innerText = "0.45 - 0.55";
+                //     row_num_6.innerText = "0.55 - 0.65";
+                //     row_num_7.innerText = "0.65 - 0.78";
+                // }
+                // if(Q2_xB_Num == "4"){
+                //     row_num_1.innerText = "";
+                //     row_num_2.innerText = "0.26 - 0.315";
+                //     row_num_3.innerText = "0.315 - 0.365";
+                //     row_num_4.innerText = "0.365 - 0.43";
+                //     row_num_5.innerText = "0.43 - 0.515";
+                //     row_num_6.innerText = "0.515 - 0.615";
+                //     row_num_7.innerText = "0.615 - 0.715";
+                // }
+                // if(Q2_xB_Num == "5"){
+                //     // column_1.innerText = "0.05 - 0.22";
+                //     // column_2.innerText = "0.22 - 0.32";
+                //     // column_3.innerText = "0.32 - 0.41";
+                //     // column_4.innerText = "0.41 - 0.51";
+                //     // column_5.innerText = "0.51 - 0.65";
+                //     // column_6.innerText = "0.65 - 1.0";
+                //     // column_7.innerText = "";
+
+                //     row_num_1.innerText = "";
+                //     row_num_2.innerText = "0.15 - 0.205";
+                //     row_num_3.innerText = "0.205 - 0.26";
+                //     row_num_4.innerText = "0.26 - 0.32";
+                //     row_num_5.innerText = "0.32 - 0.41";
+                //     row_num_6.innerText = "0.41 - 0.52";
+                //     row_num_7.innerText = "0.52 - 0.73";
+                // }
+                // if(Q2_xB_Num == "6"){
+                //     // column_1.innerText = "0.05 - 0.22";
+                //     // column_2.innerText = "0.22 - 0.32";
+                //     // column_3.innerText = "0.32 - 0.42";
+                //     // column_4.innerText = "0.42 - 0.54";
+                //     // column_5.innerText = "0.54 - 0.8";
+                //     // column_6.innerText = "";
+                //     // column_7.innerText = "";
+
+                //     row_num_1.innerText = "";
+                //     row_num_2.innerText = "";
+                //     row_num_3.innerText = "0.18 - 0.245";
+                //     row_num_4.innerText = "0.245 - 0.305";
+                //     row_num_5.innerText = "0.305 - 0.40";
+                //     row_num_6.innerText = "0.40 - 0.515";
+                //     row_num_7.innerText = "0.515 - 0.73";
+                    
+                // }
+                // if(Q2_xB_Num == "7"){
+                //     // column_1.innerText = "0.05 - 0.23";
+                //     // column_2.innerText = "0.23 - 0.34";
+                //     // column_3.innerText = "0.34 - 0.435";
+                //     // column_4.innerText = "0.435 - 0.55";
+                //     // column_5.innerText = "0.55 - 0.8";
+                //     // column_6.innerText = "";
+                //     // column_7.innerText = "";
+
+                //     row_num_1.innerText = "0.20 - 0.245";
+                //     row_num_2.innerText = "0.245 - 0.295";
+                //     row_num_3.innerText = "0.295 - 0.36";
+                //     row_num_4.innerText = "0.36 - 0.45";
+                //     row_num_5.innerText = "0.45 - 0.55";
+                //     row_num_6.innerText = "0.55 - 0.65";
+                //     row_num_7.innerText = "0.65 - 0.78";
+                    
+                // }
+                // // if(Q2_xB_Num == "8"){
+                // //     column_1.innerText = "0.05 - 0.23";
+                // //     column_2.innerText = "0.23 - 0.34";
+                // //     column_3.innerText = "0.34 - 0.45";
+                // //     column_4.innerText = "0.45 - 0.7";
+                // //     column_5.innerText = "";
+                // //     column_6.innerText = "";
+                // //     column_7.innerText = "";
+
+                // //     row_num_1.innerText = "";
+                // //     row_num_2.innerText = "";
+                // //     row_num_3.innerText = "0.22 - 0.3";
+                // //     row_num_4.innerText = "0.3 - 0.36";
+                // //     row_num_5.innerText = "0.36 - 0.425";
+                // //     row_num_6.innerText = "0.425 - 0.5";
+                // //     row_num_7.innerText = "0.5 - 0.7";
+                // // }
+                // // if(Q2_xB_Num == "9"){
+                // //     column_1.innerText = "0.05 - 0.23";
+                // //     column_2.innerText = "0.23 - 0.34";
+                // //     column_3.innerText = "0.34 - 0.45";
+                // //     column_4.innerText = "0.45 - 0.7";
+                // //     column_5.innerText = "";
+                // //     column_6.innerText = "";
+                // //     column_7.innerText = "";
+
+                // //     row_num_1.innerText = "";
+                // //     row_num_2.innerText = "";
+                // //     row_num_3.innerText = "0.22 - 0.3";
+                // //     row_num_4.innerText = "0.3 - 0.36";
+                // //     row_num_5.innerText = "0.36 - 0.425";
+                // //     row_num_6.innerText = "0.425 - 0.5";
+                // //     row_num_7.innerText = "0.5 - 0.7";
+                // // }
+                // // if(Q2_xB_Num == "10"){
+                // //     column_1.innerText = "0.05 - 0.23";
+                // //     column_2.innerText = "0.23 - 0.34";
+                // //     column_3.innerText = "0.34 - 0.45";
+                // //     column_4.innerText = "0.45 - 0.7";
+                // //     column_5.innerText = "";
+                // //     column_6.innerText = "";
+                // //     column_7.innerText = "";
+
+                // //     row_num_1.innerText = "";
+                // //     row_num_2.innerText = "";
+                // //     row_num_3.innerText = "0.22 - 0.3";
+                // //     row_num_4.innerText = "0.3 - 0.36";
+                // //     row_num_5.innerText = "0.36 - 0.425";
+                // //     row_num_6.innerText = "0.425 - 0.5";
+                // //     row_num_7.innerText = "0.5 - 0.7";
+                // // }
+                // // if(Q2_xB_Num == "11"){
+                // //     column_1.innerText = "0.05 - 0.23";
+                // //     column_2.innerText = "0.23 - 0.34";
+                // //     column_3.innerText = "0.34 - 0.45";
+                // //     column_4.innerText = "0.45 - 0.7";
+                // //     column_5.innerText = "";
+                // //     column_6.innerText = "";
+                // //     column_7.innerText = "";
+
+                // //     row_num_1.innerText = "";
+                // //     row_num_2.innerText = "";
+                // //     row_num_3.innerText = "0.22 - 0.3";
+                // //     row_num_4.innerText = "0.3 - 0.36";
+                // //     row_num_5.innerText = "0.36 - 0.425";
+                // //     row_num_6.innerText = "0.425 - 0.5";
+                // //     row_num_7.innerText = "0.5 - 0.7";
+                // // }
+                // // if(Q2_xB_Num == "12"){
+                // //     column_1.innerText = "0.05 - 0.23";
+                // //     column_2.innerText = "0.23 - 0.34";
+                // //     column_3.innerText = "0.34 - 0.45";
+                // //     column_4.innerText = "0.45 - 0.7";
+                // //     column_5.innerText = "";
+                // //     column_6.innerText = "";
+                // //     column_7.innerText = "";
+
+                // //     row_num_1.innerText = "";
+                // //     row_num_2.innerText = "";
+                // //     row_num_3.innerText = "0.22 - 0.3";
+                // //     row_num_4.innerText = "0.3 - 0.36";
+                // //     row_num_5.innerText = "0.36 - 0.425";
+                // //     row_num_6.innerText = "0.425 - 0.5";
+                // //     row_num_7.innerText = "0.5 - 0.7";
+                // // }
+                // // if(Q2_xB_Num == "13"){
+                // //     column_1.innerText = "0.05 - 0.23";
+                // //     column_2.innerText = "0.23 - 0.34";
+                // //     column_3.innerText = "0.34 - 0.45";
+                // //     column_4.innerText = "0.45 - 0.7";
+                // //     column_5.innerText = "";
+                // //     column_6.innerText = "";
+                // //     column_7.innerText = "";
+
+                // //     row_num_1.innerText = "";
+                // //     row_num_2.innerText = "";
+                // //     row_num_3.innerText = "0.22 - 0.3";
+                // //     row_num_4.innerText = "0.3 - 0.36";
+                // //     row_num_5.innerText = "0.36 - 0.425";
+                // //     row_num_6.innerText = "0.425 - 0.5";
+                // //     row_num_7.innerText = "0.5 - 0.7";
+                // // }
+                // // if(Q2_xB_Num == "14"){
+                // //     column_1.innerText = "0.05 - 0.23";
+                // //     column_2.innerText = "0.23 - 0.34";
+                // //     column_3.innerText = "0.34 - 0.45";
+                // //     column_4.innerText = "0.45 - 0.7";
+                // //     column_5.innerText = "";
+                // //     column_6.innerText = "";
+                // //     column_7.innerText = "";
+
+                // //     row_num_1.innerText = "";
+                // //     row_num_2.innerText = "";
+                // //     row_num_3.innerText = "0.22 - 0.3";
+                // //     row_num_4.innerText = "0.3 - 0.36";
+                // //     row_num_5.innerText = "0.36 - 0.425";
+                // //     row_num_6.innerText = "0.425 - 0.5";
+                // //     row_num_7.innerText = "0.5 - 0.7";
+                // // }
+                // // if(Q2_xB_Num == "15"){
+                // //     column_1.innerText = "0.05 - 0.23";
+                // //     column_2.innerText = "0.23 - 0.34";
+                // //     column_3.innerText = "0.34 - 0.45";
+                // //     column_4.innerText = "0.45 - 0.7";
+                // //     column_5.innerText = "";
+                // //     column_6.innerText = "";
+                // //     column_7.innerText = "";
+
+                // //     row_num_1.innerText = "";
+                // //     row_num_2.innerText = "";
+                // //     row_num_3.innerText = "0.22 - 0.3";
+                // //     row_num_4.innerText = "0.3 - 0.36";
+                // //     row_num_5.innerText = "0.36 - 0.425";
+                // //     row_num_6.innerText = "0.425 - 0.5";
+                // //     row_num_7.innerText = "0.5 - 0.7";
+                // // }
+                // // if(Q2_xB_Num == "16"){
+                // //     column_1.innerText = "0.05 - 0.23";
+                // //     column_2.innerText = "0.23 - 0.34";
+                // //     column_3.innerText = "0.34 - 0.45";
+                // //     column_4.innerText = "0.45 - 0.7";
+                // //     column_5.innerText = "";
+                // //     column_6.innerText = "";
+                // //     column_7.innerText = "";
+
+                // //     row_num_1.innerText = "";
+                // //     row_num_2.innerText = "";
+                // //     row_num_3.innerText = "0.22 - 0.3";
+                // //     row_num_4.innerText = "0.3 - 0.36";
+                // //     row_num_5.innerText = "0.36 - 0.425";
+                // //     row_num_6.innerText = "0.425 - 0.5";
+                // //     row_num_7.innerText = "0.5 - 0.7";
+                // // }
+                // // if(Q2_xB_Num == "17"){
+                // //     column_1.innerText = "0.05 - 0.23";
+                // //     column_2.innerText = "0.23 - 0.34";
+                // //     column_3.innerText = "0.34 - 0.45";
+                // //     column_4.innerText = "0.45 - 0.7";
+                // //     column_5.innerText = "";
+                // //     column_6.innerText = "";
+                // //     column_7.innerText = "";
+
+                // //     row_num_1.innerText = "";
+                // //     row_num_2.innerText = "";
+                // //     row_num_3.innerText = "0.22 - 0.3";
+                // //     row_num_4.innerText = "0.3 - 0.36";
+                // //     row_num_5.innerText = "0.36 - 0.425";
+                // //     row_num_6.innerText = "0.425 - 0.5";
+                // //     row_num_7.innerText = "0.5 - 0.7";
+                // // }
+
+            }
+
+            column_1.innerText = column_1.innerText;
+            column_2_2.innerText = column_2.innerText;
+            column_3_2.innerText = column_3.innerText;
+            column_4_2.innerText = column_4.innerText;
+            column_5_2.innerText = column_5.innerText;
+            column_6_2.innerText = column_6.innerText;
+            column_7_2.innerText = column_7.innerText;
+
+            row_num_1_2.innerText = row_num_1.innerText;
+            row_num_2_2.innerText = row_num_2.innerText;
+            row_num_3_2.innerText = row_num_3.innerText;
+            row_num_4_2.innerText = row_num_4.innerText;
+            row_num_5_2.innerText = row_num_5.innerText;
+            row_num_6_2.innerText = row_num_6.innerText;
+            row_num_7_2.innerText = row_num_7.innerText;
+
+        }
+
+        function bin_box_numbers(row, column, object, option){
+            var Bin       = document.getElementById("Q2-xB Bin");
+            var Q2_xB_Num = Bin.value;
+
+            var row_start = 7;
+            var Version = document.getElementById("Image_Version");
+            if((Version.value).includes("y_bin")){
+                if(Q2_xB_Num == "4"  || Q2_xB_Num == "5"  || Q2_xB_Num == "6"  || Q2_xB_Num == "7"  || Q2_xB_Num == "9" || Q2_xB_Num == "10" || Q2_xB_Num == "11"){
+                    row_start = 6;
+                }
+                if(Q2_xB_Num == "8"  || Q2_xB_Num == "12" || Q2_xB_Num == "13" || Q2_xB_Num == "14" || Q2_xB_Num == "15"){
+                    row_start = 5;
+                }
+                if(Q2_xB_Num == "16" || Q2_xB_Num == "17"){
+                    row_start = 4;
+                }
+            }
+            else{
+                if(Q2_xB_Num == "5"){
+                    row_start = 6;
+                }
+                if(Q2_xB_Num == "6" || Q2_xB_Num == "7"){
+                    row_start = 5;
+                }
+                if(Q2_xB_Num == "8"){
+                    row_start = 4;
+                }
+            }
+
+            var Bin_Number = row_start*(row - 1) + column;
+
+            if((Version.value).includes("y_bin")){
+                if((row_start < column) || (row > 6 && (Q2_xB_Num != "1" && Q2_xB_Num != "2" && Q2_xB_Num != "3" && Q2_xB_Num != "7")) || (row > 6 && (Q2_xB_Num == "10" || Q2_xB_Num == "2")) || (row > 5 && (Q2_xB_Num == "1" || Q2_xB_Num == "3" || Q2_xB_Num == "6" || Q2_xB_Num == "7" || Q2_xB_Num == "11" || Q2_xB_Num == "13" || Q2_xB_Num == "14" || Q2_xB_Num == "16" || Q2_xB_Num == "17")) || (row > 4 && (Q2_xB_Num == "12" || Q2_xB_Num == "15")) || (row > 6 && Q2_xB_Num == "8")){
+                    Bin_Number = "";
+                }
+            }
+            else{
+                if((row_start < column) || (row > 6 && (Q2_xB_Num != "1" && Q2_xB_Num != "2" && Q2_xB_Num != "3")) || (row > 5 && (Q2_xB_Num == "6" || Q2_xB_Num == "7")) || (row > 5 && Q2_xB_Num == "8")){
+                    Bin_Number = "";
+                }
+            }
+
+            object.innerText = Bin_Number;
+
+            var element = document.getElementById("mytable");
+
+            if(element.value){
+                if(option == "over" && Bin_Number != "" && (element.value != "Hold")){
+                    change_picture_fit_table(Bin_Number);
+                    object.style.backgroundColor = "lightblue";
+                }
+                if(option == "update" && Bin_Number != "" && (element.value != "Hold")){
+                    change_picture_fit_table(Bin_Number);
+                    object.style.backgroundColor = "white";
+                }
+                if(option == "click" && Bin_Number != "" && (element.value == "Unselected")){
+                    change_picture_fit_table(Bin_Number);
+                    object.style.backgroundColor = "blue";
+                    element.value = "Hold"
+                }
+                else{
+                    if(option == "click" && Bin_Number != "" && (element.value == "Hold")){
+                        change_picture_fit_table(Bin_Number);
+                        object.style.backgroundColor = "blue";
+                        element.value = "Unselected"
+                    }
+                }
+                if(option == "dblclick" && Bin_Number != "" && (element.value == "Unselected")){
+                    changePicturePopUp_richcap(Bin_Number);
+                    object.style.backgroundColor = "blue";
+                    element.value = "Hold"
+                }
+                else{
+                    if(option == "dblclick" && Bin_Number != "" && (element.value == "Hold")){
+                        changePicturePopUp_richcap(Bin_Number);
+                        object.style.backgroundColor = "blue";
+                        element.value = "Unselected"
+                    }
+                }
+            }
+            else{
+                element.value = "Unselected"
+                if(option == "over" && Bin_Number != ""){
+                    change_picture_fit_table(Bin_Number);
+                    object.style.backgroundColor = "lightblue";
+                }
+                if(option == "update" && Bin_Number != ""){
+                    change_picture_fit_table(Bin_Number);
+                    object.style.backgroundColor = "white";
+                }
+                if(option == "click" && Bin_Number != ""){
+                    change_picture_fit_table(Bin_Number);
+                    object.style.backgroundColor = "blue";
+                    element.value = "Hold"
+                }
+                if(option == "dblclick" && Bin_Number != ""){
+                    changePicturePopUp_richcap(Bin_Number);
+                    object.style.backgroundColor = "blue";
+                    element.value = "Hold"
+                }
+            }
+
+            // if(option == "over" && Bin_Number != ""){
+            //     change_picture_fit_table(Bin_Number);
+            // }
+            // if(option == "dblclick" && Bin_Number != ""){
+            //     changePicturePopUp_richcap(Bin_Number);
+            // }
+
+        }
+
+        function change_bin_extra_form(){
+            var Bin   = document.getElementById("Q2-xB Bin");
+            var Bin_2 = document.getElementById("Q2-xB Bin 2");
+            Bin.value = Bin_2.value;
+        }
+
+        function change_bin_type(form){
+            var Bin        = document.getElementById("Q2-xB Bin");
+            var Bin_2      = document.getElementById("Q2-xB Bin 2");
+            var Bin_Type   = document.getElementById("Q2-xB or Q2-y Bin");
+            var Bin_Type_2 = document.getElementById("Q2-xB or Q2-y Bin 2");
+            if(form == "1"){
+                Bin_Type_2.value = Bin_Type.value;
+            }
+            else{
+                Bin_Type.value   = Bin_Type_2.value;
+            }
+            var Bin_Type_value   = Bin_Type.value;
+            var Bin_Type_value_2 = Bin_Type_2.value;
+            var sliderValue      = document.getElementById("sliderValue");
+            var sliderValue_2    = document.getElementById("sliderValue_2");
+
+            // alert(Bin_Title_text);
+            // alert(Bin.getAttribute("max"));
+            // alert(sliderValue.textContent);
+            if(Bin_Type_value.includes("y")){
+                // alert("This option is not yet available...")
+                // Bin_Title.textContent = Bin_Title_text.replace("xB", "y")
+                Bin.setAttribute("max", "17");
+                Bin_2.setAttribute("max", "17");
+            }
+            else{
+                if(Bin.value > 8 || Bin_2.value > 8 ){
+                    Bin.value   = 8;
+                    Bin_2.value = 8;
+                    sliderValue.textContent   = 8;
+                    sliderValue_2.textContent = 8;
+                }
+                Bin.setAttribute("max", "8");
+                Bin_2.setAttribute("max", "8");
+                // Bin_Title.textContent = Bin_Title_text.replace("y", "xB")
+            }
+            // alert(sliderValue.textContent);
+        }
+
+    </script>
+
+    <script src="http://www.google.com/jsapi" type="text/javascript"></script> 
+    
+    <script type="text/javascript"> google.load("jquery", "1.2.6"); </script> 
+    
+    <!-- <script type="text/javascript" src="http://www.jlab.org/Hall-B/secure/e1/markov/2GeV/newDesign/tables/accTable/tableHighlight.js"></script> -->
+    <script type="text/javascript" src="tableHighlight.js"></script>
+
+</head> 
+
+
+<body class="vsc-initialized"> 
+    <div id="page-wrap">
+        <table border="0">
+            <tbody>
+                <tr>
+                    <td width="40%">
+                        <form name="systematicsType">
+
+                            <div id="div0">
+                                <table>
+                                    <colgroup></colgroup> 
+                                    <colgroup class="slim"></colgroup>
+                                    <thead>
+                                        <!-- <br/> -->
+
+                                        <form> <!-- Picking Histogram (Image) Type -->
+                                            <p font="500px">Select Image Type:</p>
+                                            <select onchange="change_picture_fit_richcap();" id="Image_Type" name="Image_Type" />
+                                                <optgroup label="Standard Unfolding">
+                                                    <option value="Unfold" id="Unfold_select" selected>Unfolded</option>
+                                                    <option value="Pars"   id="Pars_select">Fits of φ<sub>h</sub></option>
+                                                </optgroup>
+                                                <optgroup label="Smeared Unfolding">
+                                                    <option value="Unfold_smear" id="Unfold_smear_select">Smeared Unfolded</option>
+                                                    <option value="Pars_smear"   id="Pars_smear_select">Smeared Fits of φ<sub>h</sub></option>
+                                                </optgroup>
+                                                <optgroup label="Extra Unfolding Histos (y-bin)">
+                                                    <option value="Multi_Dim_Histo">Multi-Dimensional Unfolding</option>
+                                                </optgroup>
+                                                <optgroup label="Smearing/Correction Histos">
+                                                    <!-- <option value="Smearing_Histos">Smearing/Correction Histos</option> -->
+                                                    <option value="New_Smearing">New Smearing/Correction Histos</option>
+                                                </optgroup>
+                                                <!-- <optgroup label="Smearing Histos (Modified)">
+                                                    <option value="Modified_Delta_Histograms">Modified ∆ Histos</option>
+                                                    <option value="Modified_Delta_Histograms_Smear_Compare">Modified ∆ Histos (Smear Factors)</option>
+                                                    <option value="Modified_Missing_Mass_Histograms">Modified MM Histos</option>
+                                                    <option value="Modified_Missing_Mass_Histograms_Smear_Compare">Modified MM Histos (Smear Factors)</option>
+                                                </optgroup> -->
+                                                <!-- <optgroup label="Phase Space Histograms (Modified Smearing)">
+                                                    <option value="Phase_Space_El_SIDIS_Exclusive_Compare">Phase Space (Electrons)</option>
+                                                    <option value="Phase_Space_Pip_SIDIS_Exclusive_Compare">Phase Space (π<sup>+</sup> Pion)</option>
+                                                </optgroup> -->
+                                                <!-- <optgroup label="Smearing Histos (FX's Version)">
+                                                    <option value="Delta_Histograms">∆ Histos</option>
+                                                    <option value="Delta_Histograms_Smear_Compare">∆ Histos (Smear Factors)</option>
+                                                </optgroup> -->
+                                                <optgroup label="Extra Unfolding Histos (Old)">
+                                                    <option value="All_Events">Extra Unfolding Histos</option>
+                                                    <option value="Multi_Dim_Histo_Combined">Multi-Dimensional Unfolding</option>
+                                                </optgroup>
+                                                <optgroup label="Unfolding Missing Mass (w/ gen cut)">
+                                                    <option value="Response_Matrix_Normal_Q2_y_Bin_All_z_pT_Bin_All_1D_MM_Cut_1.5">Unfolding MM (1.5 GeV Cut)</option>
+                                                    <option value="Response_Matrix_Normal_Q2_y_Bin_All_z_pT_Bin_All_1D_MM_Cut_1">Unfolding MM (1 GeV Cut)</option>
+                                                    <option value="Response_Matrix_Normal_Q2_y_Bin_All_z_pT_Bin_All_1D_MM">Unfolding MM</option>
+                                                </optgroup>
+                                                <optgroup label="Unfolding Invariant Mass">
+                                                    <option value="Response_Matrix_Normal_Q2_y_Bin_All_z_pT_Bin_All_1D_W">Unfolding W</option>
+                                                </optgroup>
+                                                
+                                            </select>
+                                        </form>
+
+                                        <br/><br/>
+
+                                        <form> <!-- Image Version -->
+                                            <psmall id="psmall" font="5px">Update Version:  </psmall>
+                                            <select onchange="change_picture_fit_richcap();" id="Image_Version" name="Image_Version">
+                                                <optgroup label="Current Version">
+                                                    <option value="Current_y_bin">Latest (y-bin) Version</option>
+                                                    <option value="Current_gen_cut">Latest (gen cut) Version</option>
+                                                    <option value="Current_y_bin_Extra">Extra Parameter Version</option>
+                                                    <option value="Current">Last (xB-bin) Version</option>
+                                                </optgroup>
+                                                <optgroup label="Unfolding Tests">
+                                                    <option value="Sim_y_bin">Unfolding Test</option>
+                                                    <option value="Sim_y_bin_Extra">Unfolding Test (Extra Pars)</option>
+                                                </optgroup>
+                                                <optgroup label="Older Versions">
+                                                    <!-- <option value="Simulated">Unfolding Test (Old)</option> -->
+                                                    <option value="Old_V4_y_bin">(y-bin) As of 7-19-2023</option>
+                                                    <!-- <option value="Old_V3_y_bin">(y-bin) As of 6-21-2023</option>
+                                                    <option value="Old_V2_y_bin">(y-bin) As of 6-16-2023</option>
+                                                    <option value="Old_V1_y_bin">(y-bin) As of 6-14-2023</option> -->
+                                                    <option value="Old_V7">As of 3-14-2023</option>
+                                                    <option value="Old_V6">As of 2-28-2023</option>
+                                                    <!-- <option value="Old_V5">As of 2-21-2023</option>
+                                                    <option value="Old_V4">As of 2-14-2023</option>
+                                                    <option value="Old_V3">As of 2-5-2023</option>
+                                                    <option value="Old_V2">As of 1-30-2023</option>
+                                                    <option value="Old_V1">As of 1-25-2023</option> -->
+                                                </optgroup>
+                                            </select><br/><br/>
+                                        </form>
+
+                                    </thead>
+                                </table>
+                                
+                                <!-- <button onclick="info_button_function();" id="Info_Button" name="Info_Button"><span title="Will provide some information about the on-screen images">Image Info</span></button> -->
+                                <button onclick="README_Update_Link();"><span title="Link to README.md file with update notes for this page">Update Notes</span></button>
+                                <button onclick="Analysis_Note_Link();" id="Analysis_Note_Button" name="Analysis_Note_Button"><span title="Link to currently released Analysis Note">Analysis Note</span></button>
+                                <button onclick="Newer_Page_Version_Link();" id="Link_to_New_Webpage_Button" name="Link_to_New_Webpage_Button"><span title="This is a link to a newer version of this webpage">Newer Images</span></button>
+
+                            </div>
+
+                            <div id="div01">
+                                <table>
+                                    <colgroup></colgroup> 
+                                    <colgroup class="slim"></colgroup>
+                                    <thead>
+                                        <!-- <br/> -->
+
+                                        <!-- <form id="Q2-xB Bin Form" name="Q2_xB_bin_form">
+                                            <p font="450px" id="Q2-xB Bin Title">Select the Q<sup>2</sup>-x<sub>B</sub> Bin:</p>
+                                            <select onchange="change_picture_fit_richcap();table_bin_numbers();" id="Q2-xB Bin" name="Q2_xB_bin" />
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                                <option value="6">6</option>
+                                                <option value="7">7</option>
+                                                <option value="8">8</option>
+                                            </select><br/><br/>
+                                        </form> -->
+
+                                        <form id="Q2-xB or Q2-y Bin Form" name="Q2_xB_or_y_bin_form">
+                                            <p font="450px" id="Q2-xB or Q2-y Bin Title">Select Binning Option:</p>
+                                            <select onchange="change_bin_type(form='1'); change_picture_fit_richcap();" id="Q2-xB or Q2-y Bin" name="Q2_xB_or_y_bin" />
+                                                <option value="Q2_y"  id="Q2_y_select" selected>Q<sup>2</sup>-y Bins</option>
+                                                <option value="Q2_xB" id="Q2_xB_select">Q<sup>2</sup>-x<sub>B</sub> Bins</option>
+                                            </select><br/>
+                                        </form>
+
+                                        <form id="Q2-xB Bin Form" name="Q2_xB_bin_form">
+                                            <p font="450px" id="Q2-xB Bin Title">Q<sup>2</sup>-x<sub>B</sub>/Q<sup>2</sup>-y Bin: <span id="sliderValue">1</span></p>
+                                            <input type="range" min="1" max="17" value="1" onchange="change_picture_fit_richcap();table_bin_numbers(); handleSliderChange(event)" id="Q2-xB Bin" name="Q2_xB_bin">
+                                            <!-- <input type="range" min="1" max="8" value="1" onchange="handleSliderChange(event)" id="Q2-xB Bin" name="Q2_xB_bin"> -->
+                                        </form>
+
+                                        <form id="Multi_Unfold_Form" name="Multi_Unfold_Form">
+                                            <p font="450px" id="Multi_Unfold_Title">Select Dimensions:</p>
+                                            <select onchange="change_picture_fit_richcap();" id="Multi_Unfold" name="Multi_Unfold" />
+                                                <optgroup label="Unfold with simple 1D case (Original Method)">
+                                                    <option value="">1D Unfolding</option>
+                                                </optgroup>
+                                                <optgroup label="Multi-Dimensional Unfolding/Plotting">
+                                                    <option value="Multi_Unfold_Only_">Multi-Dimensional Unfolding</option>
+                                                </optgroup>
+                                            </select><br/>
+                                        </form> 
+                                        <br/>
+
+                                        <form id="z-pT Bin Form" name="z_pT_bin_form">
+                                            <p font="450px" id="z-pT Bin Title">Select the z-P<sub>T</sub> Bin:</p>
+                                            <select onchange="change_picture_fit_richcap();" id="z-pT Bin" name="z_pT_bin" />
+                                                <optgroup label="Checking All z-PT Bins">
+                                                    <!-- <option value="All">Plot (All) P<sub>T</sub> vs. z</option> -->
+                                                    <option value="All">Plot All Bins Together</option>
+                                                    <!-- <option value="All_Flipped">Plot (All) z vs. P<sub>T</sub></option>
+                                                    <option value="All_Flipped">Plot (All) P<sub>T</sub> vs. z</option> --> 
+                                                </optgroup>
+                                                <optgroup label="Checking Individual z-PT Bins">
+                                                    <!-- <option value="1">Plot (Individual) z vs. P<sub>T</sub></option> -->
+                                                    <option value="1">Plot Bins Individually</option>
+                                                    <!-- <option value="1_Flipped">Plot (Individual) P<sub>T</sub> vs. z</option> -->
+                                                </optgroup>
+                                                <!-- <optgroup label="Plot z vs. PT">
+                                                    <option value="All">Checking All z-P<sub>T</sub> Bins</option>
+                                                    <option value="1">Checking Individual z-P<sub>T</sub> Bins</option>
+                                                </optgroup>
+                                                <optgroup label="Plot PT vs. z">
+                                                    <option value="All_Flipped">Checking All P<sub>T</sub>-z Bins</option>
+                                                    <option value="1_Flipped">Checking Individual P<sub>T</sub>-z Bins</option>
+                                                </optgroup> -->
+                                            </select><br/>
+                                        </form> 
+                                        <br/>
+
+                                    </thead>
+
+                                </table>
+                            </div>
+
+                            <div id="div05">
+                                <table>
+                                    <colgroup></colgroup> 
+                                    <colgroup class="slim"></colgroup>
+                                    <thead>
+                                        <!-- <br/> -->
+
+                                        <form id="Unfolding Option Form" name="Unfolding_Option_form">
+                                            <p font="450px" id="Unfolding_Type">Select Unfolding Option:</p>
+                                            <select onchange="change_picture_fit_richcap();table_bin_numbers();" id="Unfolding Option" name="Unfolding_Option" />
+                                                <option value="RooUnfold_bayes">RooUnfold Bayesian</option>
+                                                <option value="Bin">Bin-By-Bin Unfolding</option>
+                                                <option value="Data">Data Histograms</option>
+                                                <optgroup label="Not Available with Multi-Dimensional Unfolding">
+                                                    <option value="Response">Response Matrix</option>
+                                                    <option value="RooUnfold_svd">RooUnfold SVD</option>
+                                                    <!-- <option value="SVD">SVD Unfolding</option> -->
+                                                </optgroup>
+                                                <optgroup label="Only available in recent y-binning verions">
+                                                    <option value="mdf">Reconstructed MC Only</option>
+                                                    <optgroup label="Not Available with smearing - still only available in recent verions">
+                                                        <option value="rdf">Experimental Data Only</option>
+                                                        <option value="gdf">Generated MC Only</option>
+                                                    </optgroup>
+                                                </optgroup>
+
+                                            </optgroup>
+
+                                            </select><br/><br/><br/>
+                                        </form>
+                                        
+                                        <form id="z-pT Axis Choice" name="z_pT_axis_choice">
+                                            <p font="450px" id="z-pT Axis Choice Title">z vs. P<sub>T</sub> or P<sub>T</sub> vs. z:</p>
+                                            <select onchange="change_picture_fit_richcap();" id="z-pT Axis" name="z_pT_axis" />
+                                                <optgroup label="Select 'Default' for older versions">
+                                                    <option value="">Default</option>
+                                                    <option value="_Flipped">Flipped</option>
+                                                </optgroup>
+                                            </select><br/><br/><br/><br/><br/>
+                                        </form>
+
+                                    </thead>
+
+                                </table>
+                            </div>
+
+                            <div id="div06" hidden="hidden">
+                                <table>
+                                    <colgroup></colgroup> 
+                                    <colgroup class="slim"></colgroup>
+                                    <thead>
+                                        <br/>
+
+
+                                        <!-- <form id="Q2-xB Bin Form 2" name="Q2_xB_bin_form_2">
+                                            <p font="450px" id="Q2-xB Bin 2 Title">Select the Q<sup>2</sup>-x<sub>B</sub> Bin:</p>
+                                            <select onchange="change_bin_extra_form();change_picture_fit_richcap();table_bin_numbers();" id="Q2-xB Bin 2" name="Q2_xB_bin_2" />
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                                <option value="6">6</option>
+                                                <option value="7">7</option>
+                                                <option value="8">8</option>
+                                            </select><br/><br/>
+                                        </form> -->
+
+                                        <form id="Q2-xB or Q2-y Bin Form 2" name="Q2_xB_or_y_bin_form_2">
+                                            <p font="450px" id="Q2-xB or Q2-y Bin Title 2">Select Binning Option:</p>
+                                            <select onchange="change_bin_type(form='2'); change_picture_fit_richcap();" id="Q2-xB or Q2-y Bin 2" name="Q2_xB_or_y_bin_2" />
+                                                <option value="Q2_y"  id="Q2_y_select_2" selected>Q<sup>2</sup>-y Bins</option>
+                                                <option value="Q2_xB" id="Q2_xB_select_2">Q<sup>2</sup>-x<sub>B</sub> Bins</option>
+                                            </select><br/>
+                                        </form>
+
+                                        <form id="Q2-xB Bin Form 2" name="Q2_xB_bin_form_2">
+                                            <p font="450px" id="Q2-xB Bin 2 Title">Q<sup>2</sup>-x<sub>B</sub>/Q<sup>2</sup>-y Bin: <span id="sliderValue_2">1</span></p>
+                                            <input type="range" min="1" max="8" value="1" onchange="change_bin_extra_form();change_picture_fit_richcap();table_bin_numbers(); handleSliderChange(event)" id="Q2-xB Bin 2" name="Q2_xB_bin_2">
+                                            <!-- <input type="range" min="1" max="8" value="1" onchange="handleSliderChange(event)" id="Q2-xB Bin" name="Q2_xB_bin"> -->
+                                        </form>
+
+                                        <form id="Parameter Option Form" name="Parameter_Option_Form">
+                                            <p font="450px" id="Parameter_Option_Type">Select Parameter:</p>
+                                            <select onchange="change_picture_fit_richcap();table_bin_numbers();" id="Parameter Option" name="Parameter_Option" />
+                                                <option value="z">Plot vs z</option>
+                                                <option value="PT">Plot vs PT</option>
+                                            </select><br/><br/>
+                                        </form>
+
+                                        <form id="Parameter Unfold Option Form" name="Parameter_Unfold_Option_Form">
+                                            <p font="450px" id="Parameter_Unfold_Option_Type">Select Unfolding Option:</p>
+                                            <select onchange="change_picture_fit_richcap();table_bin_numbers();" id="Parameter Unfold Option" name="Parameter_Unfold_Option" />
+                                                <option value="Bayes">RooUnfold Bayesian</option>
+                                                <option value="SVD">RooUnfold SVD</option>
+                                                <option value="Bin">Bin-By-Bin Unfolding</option>
+                                            </select><br/><br/>
+                                        </form>                                        
+
+                                    </thead>
+
+                                </table>
+                            </div>
+
+                            <script>
+                                const slider = document.getElementById("Q2-xB Bin");
+                                const slider_2 = document.getElementById("Q2-xB Bin 2");
+                                const sliderValue = document.getElementById("sliderValue");
+                                const sliderValue_2 = document.getElementById("sliderValue_2");
+                                function handleSliderChange(event){
+                                    const newValue = event.target.value;
+                                    sliderValue.innerText = newValue;
+                                    sliderValue_2.innerText = newValue;
+                                    // Do something with the new value, such as updating some other parts of the page
+                                }
+                                slider.addEventListener("input", handleSliderChange);
+                                slider_2.addEventListener("input", handleSliderChange);
+                            </script>
+
+                            <div id="div02" hidden="hidden">
+                                <table>
+                                    <colgroup></colgroup> 
+                                    <colgroup class="slim"></colgroup>
+                                        <thead>
+                                            <br/>
+                                            <form id="Correction Histogram Type Form" name="Correction_Histogram_Type_form">
+                                                <p font="450px" id="Correction Histogram Type Title">Select Histogram Variable:</p>
+                                                <select onchange="change_picture_fit_richcap();" id="Correction Histogram Type" name="Correction_Histogram_Type" />
+                                                    <optgroup label="All Histos">
+                                                        <option value="Modified_Delta_Histograms">Modified ∆ Histos</option>
+                                                        <option value="Modified_Missing_Mass_Histograms">Modified MM Histos</option>
+                                                    </optgroup>
+                                                    <optgroup label="All Histos (without Corrections)">
+                                                        <option value="Modified_Delta_Histograms_Without_Cors">∆ Histos (No Cors)</option>
+                                                        <option value="Modified_Delta_Histograms_Without_Mom_Cors">∆P Mom Corrections (No Cors)</option>
+                                                        <option value="Modified_Missing_Mass_Histograms_Without_Cors">MM Histos (No Cors)</option>
+                                                        <option value="Modified_Missing_Mass_Histograms_Smear_Compare_Without_Cors">MM Smear Factors (No Cors)</option>
+                                                    </optgroup>
+                                                    <optgroup label="Smearing Factors/Mom Cors">
+                                                        <option value="Modified_Delta_Histograms_Mom_Cors">∆P Mom Corrections</option>
+                                                        <option value="Modified_Delta_Histograms_Smear_Compare">Modified ∆ Smear Factors</option>
+                                                        <option value="Modified_Missing_Mass_Histograms_Smear_Compare">Modified MM Smear Factors</option>
+                                                    </optgroup>
+                                                    <optgroup label="Smearing Histos (FX's Version)">
+                                                        <option value="Delta_Histograms">∆ Histos</option>
+                                                        <option value="Delta_Histograms_Smear_Compare">∆ Histos (Smear Factors)</option>
+                                                    </optgroup>
+                                                </select><br/><br/>
+                                            </form>
+
+                                            <form id="Particle Form" name="Particle_form">
+                                                <p font="450px" id="Particle Title">Select Particle:</p>
+                                                <select onchange="change_picture_fit_richcap();" id="Particle" name="Particle" />
+                                                    <option value="Electron">Electron</option>
+                                                    <option value="Pip">π<sup>+</sup> Pion</option>
+                                                </select><br/><br/>
+                                            </form> 
+
+                                            <form id="Delta Type Form" name="Delta_Type_form">
+                                                <p font="450px" id="Delta Type Title" >Select Y-axis Variable:</p>
+                                                <select onchange="change_picture_fit_richcap();" id="Delta Type" name="Delta_Type"/>
+                                                    <option value="Delta_P">∆P</option>
+                                                    <option value="Delta_Theta" hidden="hidden" id="dTheta">∆&theta;</option>
+                                                </select><br/><br/>
+                                            </form>
+
+                                            <form id="X-axis Variable Form" name="X-axis_Variable_form">
+                                                <p font="450px" id="X-axis Variable Title">Select X-axis Variable:</p>
+                                                <select onchange="change_picture_fit_richcap();" id="X-axis Variable" name="X-axis_Variable" />
+                                                    <option value="Vs_Mom" hidden="hidden" id="Vs_Mom">Momentum</option>
+                                                    <option value="Vs_Theta">&theta;</option>
+                                                </select><br/><br/>
+                                            </form>
+
+                                        </thead>
+                                </table>
+
+
+                            </div>
+
+                            <div id="New_Smearing_div" hidden="hidden">
+                                <table>
+                                    <colgroup></colgroup> 
+                                    <colgroup class="slim"></colgroup>
+                                        <thead>
+                                            <br/>
+                                            <form id="Smearing Histogram Type Form" name="Smearing_Histogram_Type_form">
+                                                <p font="450px" id="Smearing Histogram Type Title">Select Histogram Type:</p>
+                                                <select onchange="change_picture_smear_richcap();" id="Smearing Histogram Type" name="Smearing_Histogram_Type" />
+                                                    <optgroup label="Mom Corrected (All)">
+                                                        <option value="Corrected_Missing_Mass">Missing Mass (Corrected)</option>
+                                                        <option value="Corrected_Delta_P">∆P (Corrected)</option>
+                                                        <!-- <option value="Delta_Theta">∆&theta; (Corrected)</option> -->
+                                                        <option value="Corrected_Phase_Space">Phase Space (Corrected)</option>
+                                                    </optgroup>
+                                                    <optgroup label="Mom Corrected (Data Only)">
+                                                        <option value="Missing_Mass">Missing Mass</option>
+                                                        <option value="Delta_P">∆P</option>
+                                                        <!-- <option value="Delta_Theta">∆&theta;</option> -->
+                                                        <option value="Phase_Space">Phase Space</option>
+                                                    </optgroup>
+                                                    <optgroup label="Without Mom Corrections">
+                                                        <option value="Uncorrected_Missing_Mass">Missing Mass (No Cors)</option>
+                                                        <option value="Uncorrected_Delta_P">∆P (No Cors)</option>
+                                                        <!-- <option value="Delta_Theta">∆&theta; (No Cors)</option> -->
+                                                        <option value="Uncorrected_Phase_Space">Phase Space (No Cors)</option>
+                                                    </optgroup>
+                                                </select><br/><br/>
+                                            </form>
+
+                                            <form id="Smear Particle Form" name="Smear_Particle_form">
+                                                <p font="450px" id="Smear Particle Title">Select Particle:</p>
+                                                <select onchange="change_picture_smear_richcap();" id="Smear Particle" name="Smear Particle" />
+                                                    <option value="El">Electron</option>
+                                                    <option value="Pip">π<sup>+</sup> Pion</option>
+                                                </select><br/><br/>
+                                            </form> 
+
+                                            <form id="Smear Factor Form" name="Smear_Factor_form">
+                                                <p font="450px" id="Factor Title">Select Smear Factor:</p>
+                                                <select onchange="change_picture_smear_richcap();" id="Factor" name="Factor" />
+                                                    <option value="0.5">0.5</option>
+                                                    <option value="0.7">0.7</option>
+                                                    <option value="0.75">0.75</option>
+                                                    <option value="1.0">1.0</option>
+                                                    <option value="1.5">1.5</option>
+                                                    <optgroup label="Mom Corrected (All) - Only">
+                                                        <option value="0.8">0.8</option>
+                                                        <option value="0.9">0.9</option>
+                                                    </optgroup>
+                                                </select>
+                                            </form> 
+
+
+                                        </thead>
+                                </table>
+
+                            </div>
+
+                            <div id="New_Smearing_div_2" hidden="hidden">
+                                <table>
+                                    <colgroup></colgroup> 
+                                    <colgroup class="slim"></colgroup>
+                                        <thead>
+                                            <br/>
+                                            <form id="X-axis Smear Variable Form" name="X-axis_Smear_Variable_form">
+                                                <p font="450px" id="X-axis Variable Title">Select X-axis Variable:</p>
+                                                <select onchange="change_picture_smear_richcap();" id="X-axis Smear Variable" name="X-axis_Smear_Variable" />
+                                                    <optgroup label="Does not matter for Phase Space">
+                                                        <option value="Vs_P">Momentum</option>
+                                                        <option value="Vs_Theta">&theta;</option>
+                                                    </optgroup>
+                                                </select><br/><br/>
+                                            </form>
+
+                                            <form id="Smear Compare Form" name="Smear_Compare_Form">
+                                                <p font="450px" id="Smear Compare Title">Select Image Option:</p>
+                                                <select onchange="change_picture_smear_richcap();" id="Smear Compare" name="Smear_Compare" />
+                                                    <optgroup label="Does not matter for Phase Space">
+                                                        <option value=".png">Default</option>
+                                                        <option value="_Smear_Compare.png">Comparison between MC and Data</option>
+                                                    </optgroup>
+                                                </select><br/><br/>
+                                            </form>
+
+
+                                        </thead>
+                                </table>
+                                
+                            </div>
+
+
+                            <div id="div03" hidden="hidden">
+                                <table>
+                                    <colgroup></colgroup> 
+                                    <colgroup class="slim"></colgroup>
+                                    <thead>
+                                        <br/>
+
+                                        <form id="Extra_Variable_Form" name="Extra_Variable_Form">
+                                            <p font="450px" id="Extra Variable">Select Variable:</p>
+                                            <select onchange="change_picture_fit_richcap();" id="Extra_Variable" name="Extra_Variable" />
+                                                <option value="Q2">Q<sup>2</sup></option>
+                                                <option value="xB">x<sub>B</sub></option>
+                                                <option value="z">z</option>
+                                                <option value="pT">p<sub>T</sub></option>
+                                                <option value="phi_h">φ<sub>h</sub> (All Bins)</option>
+                                                <!-- <option value="phi_h_Unfolded_Histos">φ<sub>h</sub> (All Bins - Fits)</option> -->
+                                                <option value="Combined_phi_t_Q2">Q<sup>2</sup>+φ<sub>h</sub> (Multidimensional bins - 2D)</option>
+                                                <option value="Combined_phi_t_Q2_xB_Bin_2">Q<sup>2</sup>-x<sub>B</sub> Bin+φ<sub>h</sub> (Multidimensional bins - 3D)</option>
+                                                <option value="Multi_Dim_Q2_phi_t">Q<sup>2</sup>+φ<sub>h</sub> (New Multidimensional bins - 2D)</option>
+                                                <option value="Multi_Dim_Q2_y_Bin_phi_t">Q<sup>2</sup>-y Bin+φ<sub>h</sub> (New Multidimensional bins - 3D)</option>
+                                            </select><br/><br/>
+                                        </form> 
+
+                                        <form id="Extra_Smearing_Form" name="Extra_Smearing_Form">
+                                            <p font="450px" id="Extra Smearing">Select Smearing:</p>
+                                            <select onchange="change_picture_fit_richcap();" id="Extra_Smearing" name="Extra_Smearing" />
+                                                <option value=".png">Normal Reconstruction</option>
+                                                <option value="_Smeared.png">Smearing</option>
+                                            </select><br/><br/>
+                                        </form>
+
+                                    </thead>
+                                </table>
+                            </div>
+
+                            <div id="div04" hidden="hidden">
+                                <table>
+                                    <colgroup></colgroup> 
+                                    <colgroup class="slim"></colgroup>
+                                    <thead>
+                                        <br/>
+
+                                        <form id="Multi_Dim_Variable" name="Multi_Dim_Variable">
+                                            <p font="450px" id="Multi Dim Variable">Select Histograms:</p>
+                                            <select onchange="change_picture_fit_richcap();" id="Multi_Dim_Variable" name="Multi_Dim_Variable" />
+                                                <optgroup label="2D Unfolding with Q2 - Not available in most recent version">
+                                                    <option value="Multi_Dim_Histo_Combined_phi_h_Q2_Bayesian">Bayesian Unfolding</option>
+                                                    <option value="Multi_Dim_Histo_Combined_phi_h_Q2_Bin_by_bin">Bin-by-Bin Correction</option>
+                                                    <option value="Multi_Dim_Histo_Combined_phi_h_Q2_rdf">Experimental (Not Unfolded/Smeared)</option>
+                                                    <option value="Multi_Dim_Histo_Combined_phi_h_Q2_mdf">MC REC (Not Unfolded)</option>
+                                                    <option value="Multi_Dim_Histo_Combined_phi_h_Q2_gdf">MC GEN (Not Unfolded/Smeared)</option>
+                                                </optgroup>
+                                                <optgroup label="3D Unfolding with Q2-xB">
+                                                    <option value="Multi_Dim_Histo_Combined_phi_h_Q2_xB_Bin_Bayesian">Bayesian Unfolding</option>
+                                                    <option value="Multi_Dim_Histo_Combined_phi_h_Q2_xB_Bin_Bin_by_bin">Bin-by-Bin Correction</option>
+                                                    <option value="Multi_Dim_Histo_Combined_phi_h_Q2_xB_Bin_rdf">Experimental (Not Unfolded/Smeared)</option>
+                                                    <option value="Multi_Dim_Histo_Combined_phi_h_Q2_xB_Bin_mdf">MC REC (Not Unfolded)</option>
+                                                    <option value="Multi_Dim_Histo_Combined_phi_h_Q2_xB_Bin_gdf">MC GEN (Not Unfolded/Smeared)</option>
+                                                </optgroup>
+                                            </select><br/><br/>
+                                        </form>
+
+                                        <form id="Multi_Dim_Smearing_Form" name="Multi_Dim_Smearing_Form">
+                                            <p font="450px" id="Multi Dim Smearing">Select Smearing:</p>
+                                            <select onchange="change_picture_fit_richcap();" id="Multi_Dim_Smearing" name="Multi_Dim_Smearing" />
+                                                <option value=".png">Normal Reconstruction</option>
+                                                <option value="_smeared.png">Smearing</option>
+                                            </select><br/><br/>
+                                        </form>
+
+                                    </thead>
+                                </table>
+                            </div>
+
+                            <div id="New_Multi_Dim_div" hidden="hidden">
+                                <table>
+                                    <colgroup></colgroup> 
+                                    <colgroup class="slim"></colgroup>
+                                    <thead>
+                                        <br/>
+                                        <form id="Multi_Dim_Variable_New" name="Multi_Dim_Variable_New">
+                                            <p font="450px" id="Multi Dim Variable New">Select Histograms:</p>
+                                            <select onchange="change_picture_fit_richcap();" id="Multi_Dim_Variable_New" name="Multi_Dim_Variable_New" />
+                                                <optgroup label="3D Unfolding with Q2-y">
+                                                    <option value="Multi_Dim_Q2_y_Bin_phi_h/Multi_Dim_Histo_Multi_Dim_Q2_y_Bin_phi_h_Bayesian">Bayesian Unfolding</option>
+                                                    <option value="Multi_Dim_Q2_y_Bin_phi_h/Multi_Dim_Histo_Multi_Dim_Q2_y_Bin_phi_h_Bin_by_bin">Bin-by-Bin Correction</option>
+                                                    <!-- <option value="Multi_Dim_Q2_y_Bin_phi_h/Multi_Dim_Histo_ExREC_Multi_Dim_Q2_y_Bin_phi_h">Reconstructed (Not Unfolded)</option>
+                                                    <option value="Multi_Dim_Q2_y_Bin_phi_h/Multi_Dim_Histo_TrueH_Multi_Dim_Q2_y_Bin_phi_h">True Distributions (Unfolded+GEN)</option> -->
+                                                    <option value="Multi_Dim_Q2_y_Bin_phi_h/Response_Matrix/Response_Matrix_Normal_Multi_Dim_Q2_y_Bin_phi_h">Response Matrix</option>
+                                                    <option value="Multi_Dim_Q2_y_Bin_phi_h/Multi_Dim_Histo_Multi_Dim_Q2_y_Bin_phi_h_rdf">Experimental (Not Unfolded)</option>
+                                                    <option value="Multi_Dim_Q2_y_Bin_phi_h/Multi_Dim_Histo_Multi_Dim_Q2_y_Bin_phi_h_mdf">MC REC (Not Unfolded)</option>
+                                                    <option value="Multi_Dim_Q2_y_Bin_phi_h/Multi_Dim_Histo_Multi_Dim_Q2_y_Bin_phi_h_gdf">MC GEN (Not Unfolded)</option>
+                                                </optgroup>
+                                                <optgroup label="2D Unfolding with z-PT - Only available in most recent version">
+                                                    <!-- <option value="Multi_Dim_z_pT_Bin_phi_h/Multi_Dim_Histo_z_pT_phi_h_Q2_y_Bin_1_rdf">Reconstructed (Not Unfolded - Q2-y Bin 1)</option> -->
+                                                    <!-- <option value="Multi_Dim_z_pT_Bin_phi_h/Multi_Dim_Histo_z_pT_phi_h_Q2_y_Bin_1_gdf">True Distributions (Unfolded+GEN)</option> -->
+                                                    <!-- <option value="Multi_Dim_z_pT_Bin_phi_h/Response_Matrix/Response_Matrix_Normal_Multi_Dim_z_pT_Bin_phi_h">Response Matrix</option> -->
+                                                    <option value="Multi_Dim_z_pT_Bin_phi_h/Multi_Dim_Histo_z_pT_phi_h_Q2_y_Bin_1_Bayesian">Bayesian Unfolding (Q2-y Bin 1)</option>
+                                                    <option value="Multi_Dim_z_pT_Bin_phi_h/Multi_Dim_Histo_z_pT_phi_h_Q2_y_Bin_1_Bin">Bin-by-Bin Correction (Q2-y Bin 1)</option>
+                                                    <option value="Multi_Dim_z_pT_Bin_phi_h/Multi_Dim_Histo_z_pT_phi_h_Q2_y_Bin_1_rdf">Experimental (Not Unfolded - Q2-y Bin 1)</option>
+                                                    <option value="Multi_Dim_z_pT_Bin_phi_h/Multi_Dim_Histo_z_pT_phi_h_Q2_y_Bin_1_mdf">MC REC (Not Unfolded - Q2-y Bin 1)</option>
+                                                    <option value="Multi_Dim_z_pT_Bin_phi_h/Multi_Dim_Histo_z_pT_phi_h_Q2_y_Bin_1_gdf">MC GEN (Not Unfolded - Q2-y Bin 1)</option>
+                                                
+                                                    <option value="Multi_Dim_z_pT_Bin_phi_h/Multi_Dim_Histo_z_pT_phi_h_Q2_y_Bin_2_Bayesian">Bayesian Unfolding (Q2-y Bin 2)</option>
+                                                    <option value="Multi_Dim_z_pT_Bin_phi_h/Multi_Dim_Histo_z_pT_phi_h_Q2_y_Bin_2_Bin">Bin-by-Bin Correction (Q2-y Bin 2)</option>
+                                                    <option value="Multi_Dim_z_pT_Bin_phi_h/Multi_Dim_Histo_z_pT_phi_h_Q2_y_Bin_2_rdf">Experimental (Not Unfolded - Q2-y Bin 2)</option>
+                                                    <option value="Multi_Dim_z_pT_Bin_phi_h/Multi_Dim_Histo_z_pT_phi_h_Q2_y_Bin_2_mdf">MC REC (Not Unfolded - Q2-y Bin 2)</option>
+                                                    <option value="Multi_Dim_z_pT_Bin_phi_h/Multi_Dim_Histo_z_pT_phi_h_Q2_y_Bin_2_gdf">MC GEN (Not Unfolded - Q2-y Bin 2)</option>
+
+                                                    <option value="Multi_Dim_z_pT_Bin_phi_h/Multi_Dim_Histo_z_pT_phi_h_Q2_y_Bin_3_Bayesian">Bayesian Unfolding (Q2-y Bin 3)</option>
+                                                    <option value="Multi_Dim_z_pT_Bin_phi_h/Multi_Dim_Histo_z_pT_phi_h_Q2_y_Bin_3_Bin">Bin-by-Bin Correction (Q2-y Bin 3)</option>
+                                                    <option value="Multi_Dim_z_pT_Bin_phi_h/Multi_Dim_Histo_z_pT_phi_h_Q2_y_Bin_3_rdf">Experimental (Not Unfolded - Q2-y Bin 3)</option>
+                                                    <option value="Multi_Dim_z_pT_Bin_phi_h/Multi_Dim_Histo_z_pT_phi_h_Q2_y_Bin_3_mdf">MC REC (Not Unfolded - Q2-y Bin 3)</option>
+                                                    <option value="Multi_Dim_z_pT_Bin_phi_h/Multi_Dim_Histo_z_pT_phi_h_Q2_y_Bin_3_gdf">MC GEN (Not Unfolded - Q2-y Bin 3)</option>
+
+                                                    <option value="Multi_Dim_z_pT_Bin_phi_h/Multi_Dim_Histo_z_pT_phi_h_Q2_y_Bin_4_Bayesian">Bayesian Unfolding (Q2-y Bin 4)</option>
+                                                    <option value="Multi_Dim_z_pT_Bin_phi_h/Multi_Dim_Histo_z_pT_phi_h_Q2_y_Bin_4_Bin">Bin-by-Bin Correction (Q2-y Bin 4)</option>
+                                                    <option value="Multi_Dim_z_pT_Bin_phi_h/Multi_Dim_Histo_z_pT_phi_h_Q2_y_Bin_4_rdf">Experimental (Not Unfolded - Q2-y Bin 4)</option>
+                                                    <option value="Multi_Dim_z_pT_Bin_phi_h/Multi_Dim_Histo_z_pT_phi_h_Q2_y_Bin_4_mdf">MC REC (Not Unfolded - Q2-y Bin 4)</option>
+                                                    <option value="Multi_Dim_z_pT_Bin_phi_h/Multi_Dim_Histo_z_pT_phi_h_Q2_y_Bin_4_gdf">MC GEN (Not Unfolded - Q2-y Bin 4)</option>
+
+                                                    <option value="Multi_Dim_z_pT_Bin_phi_h/Multi_Dim_Histo_z_pT_phi_h_Q2_y_Bin_5_Bayesian">Bayesian Unfolding (Q2-y Bin 5)</option>
+                                                    <option value="Multi_Dim_z_pT_Bin_phi_h/Multi_Dim_Histo_z_pT_phi_h_Q2_y_Bin_5_Bin">Bin-by-Bin Correction (Q2-y Bin 5)</option>
+                                                    <option value="Multi_Dim_z_pT_Bin_phi_h/Multi_Dim_Histo_z_pT_phi_h_Q2_y_Bin_5_rdf">Experimental (Not Unfolded - Q2-y Bin 5)</option>
+                                                    <option value="Multi_Dim_z_pT_Bin_phi_h/Multi_Dim_Histo_z_pT_phi_h_Q2_y_Bin_5_mdf">MC REC (Not Unfolded - Q2-y Bin 5)</option>
+                                                    <option value="Multi_Dim_z_pT_Bin_phi_h/Multi_Dim_Histo_z_pT_phi_h_Q2_y_Bin_5_gdf">MC GEN (Not Unfolded - Q2-y Bin 5)</option>
+
+                                                    <option value="Multi_Dim_z_pT_Bin_phi_h/Multi_Dim_Histo_z_pT_phi_h_Q2_y_Bin_6_Bayesian">Bayesian Unfolding (Q2-y Bin 6)</option>
+                                                    <option value="Multi_Dim_z_pT_Bin_phi_h/Multi_Dim_Histo_z_pT_phi_h_Q2_y_Bin_6_Bin">Bin-by-Bin Correction (Q2-y Bin 6)</option>
+                                                    <option value="Multi_Dim_z_pT_Bin_phi_h/Multi_Dim_Histo_z_pT_phi_h_Q2_y_Bin_6_rdf">Experimental (Not Unfolded - Q2-y Bin 6)</option>
+                                                    <option value="Multi_Dim_z_pT_Bin_phi_h/Multi_Dim_Histo_z_pT_phi_h_Q2_y_Bin_6_mdf">MC REC (Not Unfolded - Q2-y Bin 6)</option>
+                                                    <option value="Multi_Dim_z_pT_Bin_phi_h/Multi_Dim_Histo_z_pT_phi_h_Q2_y_Bin_6_gdf">MC GEN (Not Unfolded - Q2-y Bin 6)</option>
+                                                
+                                                    <option value="Multi_Dim_z_pT_Bin_phi_h/Multi_Dim_Histo_z_pT_phi_h_Q2_y_Bin_7_Bayesian">Bayesian Unfolding (Q2-y Bin 7)</option>
+                                                    <option value="Multi_Dim_z_pT_Bin_phi_h/Multi_Dim_Histo_z_pT_phi_h_Q2_y_Bin_7_Bin">Bin-by-Bin Correction (Q2-y Bin 7)</option>
+                                                    <option value="Multi_Dim_z_pT_Bin_phi_h/Multi_Dim_Histo_z_pT_phi_h_Q2_y_Bin_7_rdf">Experimental (Not Unfolded - Q2-y Bin 7)</option>
+                                                    <option value="Multi_Dim_z_pT_Bin_phi_h/Multi_Dim_Histo_z_pT_phi_h_Q2_y_Bin_7_mdf">MC REC (Not Unfolded - Q2-y Bin 7)</option>
+                                                    <option value="Multi_Dim_z_pT_Bin_phi_h/Multi_Dim_Histo_z_pT_phi_h_Q2_y_Bin_7_gdf">MC GEN (Not Unfolded - Q2-y Bin 7)</option>
+
+                                                    <option value="Multi_Dim_z_pT_Bin_phi_h/Multi_Dim_Histo_z_pT_phi_h_Q2_y_Bin_8_Bayesian">Bayesian Unfolding (Q2-y Bin 8)</option>
+                                                    <option value="Multi_Dim_z_pT_Bin_phi_h/Multi_Dim_Histo_z_pT_phi_h_Q2_y_Bin_8_Bin">Bin-by-Bin Correction (Q2-y Bin 8)</option>
+                                                    <option value="Multi_Dim_z_pT_Bin_phi_h/Multi_Dim_Histo_z_pT_phi_h_Q2_y_Bin_8_rdf">Experimental (Not Unfolded - Q2-y Bin 8)</option>
+                                                    <option value="Multi_Dim_z_pT_Bin_phi_h/Multi_Dim_Histo_z_pT_phi_h_Q2_y_Bin_8_mdf">MC REC (Not Unfolded - Q2-y Bin 8)</option>
+                                                    <option value="Multi_Dim_z_pT_Bin_phi_h/Multi_Dim_Histo_z_pT_phi_h_Q2_y_Bin_8_gdf">MC GEN (Not Unfolded - Q2-y Bin 8)</option>
+
+                                                    <option value="Multi_Dim_z_pT_Bin_phi_h/Multi_Dim_Histo_z_pT_phi_h_Q2_y_Bin_9_Bayesian">Bayesian Unfolding (Q2-y Bin 9)</option>
+                                                    <option value="Multi_Dim_z_pT_Bin_phi_h/Multi_Dim_Histo_z_pT_phi_h_Q2_y_Bin_9_Bin">Bin-by-Bin Correction (Q2-y Bin 9)</option>
+                                                    <option value="Multi_Dim_z_pT_Bin_phi_h/Multi_Dim_Histo_z_pT_phi_h_Q2_y_Bin_9_rdf">Experimental (Not Unfolded - Q2-y Bin 9)</option>
+                                                    <option value="Multi_Dim_z_pT_Bin_phi_h/Multi_Dim_Histo_z_pT_phi_h_Q2_y_Bin_9_mdf">MC REC (Not Unfolded - Q2-y Bin 9)</option>
+                                                    <option value="Multi_Dim_z_pT_Bin_phi_h/Multi_Dim_Histo_z_pT_phi_h_Q2_y_Bin_9_gdf">MC GEN (Not Unfolded - Q2-y Bin 9)</option>
+
+                                                    <option value="Multi_Dim_z_pT_Bin_phi_h/Multi_Dim_Histo_z_pT_phi_h_Q2_y_Bin_10_Bayesian">Bayesian Unfolding (Q2-y Bin 10)</option>
+                                                    <option value="Multi_Dim_z_pT_Bin_phi_h/Multi_Dim_Histo_z_pT_phi_h_Q2_y_Bin_10_Bin">Bin-by-Bin Correction (Q2-y Bin 10)</option>
+                                                    <option value="Multi_Dim_z_pT_Bin_phi_h/Multi_Dim_Histo_z_pT_phi_h_Q2_y_Bin_10_rdf">Experimental (Not Unfolded - Q2-y Bin 10)</option>
+                                                    <option value="Multi_Dim_z_pT_Bin_phi_h/Multi_Dim_Histo_z_pT_phi_h_Q2_y_Bin_10_mdf">MC REC (Not Unfolded - Q2-y Bin 10)</option>
+                                                    <option value="Multi_Dim_z_pT_Bin_phi_h/Multi_Dim_Histo_z_pT_phi_h_Q2_y_Bin_10_gdf">MC GEN (Not Unfolded - Q2-y Bin 10)</option>
+
+                                                    <option value="Multi_Dim_z_pT_Bin_phi_h/Multi_Dim_Histo_z_pT_phi_h_Q2_y_Bin_11_Bayesian">Bayesian Unfolding (Q2-y Bin 11)</option>
+                                                    <option value="Multi_Dim_z_pT_Bin_phi_h/Multi_Dim_Histo_z_pT_phi_h_Q2_y_Bin_11_Bin">Bin-by-Bin Correction (Q2-y Bin 11)</option>
+                                                    <option value="Multi_Dim_z_pT_Bin_phi_h/Multi_Dim_Histo_z_pT_phi_h_Q2_y_Bin_11_rdf">Experimental (Not Unfolded - Q2-y Bin 11)</option>
+                                                    <option value="Multi_Dim_z_pT_Bin_phi_h/Multi_Dim_Histo_z_pT_phi_h_Q2_y_Bin_11_mdf">MC REC (Not Unfolded - Q2-y Bin 11)</option>
+                                                    <option value="Multi_Dim_z_pT_Bin_phi_h/Multi_Dim_Histo_z_pT_phi_h_Q2_y_Bin_11_gdf">MC GEN (Not Unfolded - Q2-y Bin 11)</option>
+                                                
+                                                    <option value="Multi_Dim_z_pT_Bin_phi_h/Multi_Dim_Histo_z_pT_phi_h_Q2_y_Bin_12_Bayesian">Bayesian Unfolding (Q2-y Bin 12)</option>
+                                                    <option value="Multi_Dim_z_pT_Bin_phi_h/Multi_Dim_Histo_z_pT_phi_h_Q2_y_Bin_12_Bin">Bin-by-Bin Correction (Q2-y Bin 12)</option>
+                                                    <option value="Multi_Dim_z_pT_Bin_phi_h/Multi_Dim_Histo_z_pT_phi_h_Q2_y_Bin_12_rdf">Experimental (Not Unfolded - Q2-y Bin 12)</option>
+                                                    <option value="Multi_Dim_z_pT_Bin_phi_h/Multi_Dim_Histo_z_pT_phi_h_Q2_y_Bin_12_mdf">MC REC (Not Unfolded - Q2-y Bin 12)</option>
+                                                    <option value="Multi_Dim_z_pT_Bin_phi_h/Multi_Dim_Histo_z_pT_phi_h_Q2_y_Bin_12_gdf">MC GEN (Not Unfolded - Q2-y Bin 12)</option>
+
+                                                    <option value="Multi_Dim_z_pT_Bin_phi_h/Multi_Dim_Histo_z_pT_phi_h_Q2_y_Bin_13_Bayesian">Bayesian Unfolding (Q2-y Bin 13)</option>
+                                                    <option value="Multi_Dim_z_pT_Bin_phi_h/Multi_Dim_Histo_z_pT_phi_h_Q2_y_Bin_13_Bin">Bin-by-Bin Correction (Q2-y Bin 13)</option>
+                                                    <option value="Multi_Dim_z_pT_Bin_phi_h/Multi_Dim_Histo_z_pT_phi_h_Q2_y_Bin_13_rdf">Experimental (Not Unfolded - Q2-y Bin 13)</option>
+                                                    <option value="Multi_Dim_z_pT_Bin_phi_h/Multi_Dim_Histo_z_pT_phi_h_Q2_y_Bin_13_mdf">MC REC (Not Unfolded - Q2-y Bin 13)</option>
+                                                    <option value="Multi_Dim_z_pT_Bin_phi_h/Multi_Dim_Histo_z_pT_phi_h_Q2_y_Bin_13_gdf">MC GEN (Not Unfolded - Q2-y Bin 13)</option>
+
+                                                    <option value="Multi_Dim_z_pT_Bin_phi_h/Multi_Dim_Histo_z_pT_phi_h_Q2_y_Bin_14_Bayesian">Bayesian Unfolding (Q2-y Bin 14)</option>
+                                                    <option value="Multi_Dim_z_pT_Bin_phi_h/Multi_Dim_Histo_z_pT_phi_h_Q2_y_Bin_14_Bin">Bin-by-Bin Correction (Q2-y Bin 14)</option>
+                                                    <option value="Multi_Dim_z_pT_Bin_phi_h/Multi_Dim_Histo_z_pT_phi_h_Q2_y_Bin_14_rdf">Experimental (Not Unfolded - Q2-y Bin 14)</option>
+                                                    <option value="Multi_Dim_z_pT_Bin_phi_h/Multi_Dim_Histo_z_pT_phi_h_Q2_y_Bin_14_mdf">MC REC (Not Unfolded - Q2-y Bin 14)</option>
+                                                    <option value="Multi_Dim_z_pT_Bin_phi_h/Multi_Dim_Histo_z_pT_phi_h_Q2_y_Bin_14_gdf">MC GEN (Not Unfolded - Q2-y Bin 14)</option>
+
+                                                    <option value="Multi_Dim_z_pT_Bin_phi_h/Multi_Dim_Histo_z_pT_phi_h_Q2_y_Bin_15_Bayesian">Bayesian Unfolding (Q2-y Bin 15)</option>
+                                                    <option value="Multi_Dim_z_pT_Bin_phi_h/Multi_Dim_Histo_z_pT_phi_h_Q2_y_Bin_15_Bin">Bin-by-Bin Correction (Q2-y Bin 15)</option>
+                                                    <option value="Multi_Dim_z_pT_Bin_phi_h/Multi_Dim_Histo_z_pT_phi_h_Q2_y_Bin_15_rdf">Experimental (Not Unfolded - Q2-y Bin 15)</option>
+                                                    <option value="Multi_Dim_z_pT_Bin_phi_h/Multi_Dim_Histo_z_pT_phi_h_Q2_y_Bin_15_mdf">MC REC (Not Unfolded - Q2-y Bin 15)</option>
+                                                    <option value="Multi_Dim_z_pT_Bin_phi_h/Multi_Dim_Histo_z_pT_phi_h_Q2_y_Bin_15_gdf">MC GEN (Not Unfolded - Q2-y Bin 15)</option>
+
+                                                    <option value="Multi_Dim_z_pT_Bin_phi_h/Multi_Dim_Histo_z_pT_phi_h_Q2_y_Bin_16_Bayesian">Bayesian Unfolding (Q2-y Bin 16)</option>
+                                                    <option value="Multi_Dim_z_pT_Bin_phi_h/Multi_Dim_Histo_z_pT_phi_h_Q2_y_Bin_16_Bin">Bin-by-Bin Correction (Q2-y Bin 16)</option>
+                                                    <option value="Multi_Dim_z_pT_Bin_phi_h/Multi_Dim_Histo_z_pT_phi_h_Q2_y_Bin_16_rdf">Experimental (Not Unfolded - Q2-y Bin 16)</option>
+                                                    <option value="Multi_Dim_z_pT_Bin_phi_h/Multi_Dim_Histo_z_pT_phi_h_Q2_y_Bin_16_mdf">MC REC (Not Unfolded - Q2-y Bin 16)</option>
+                                                    <option value="Multi_Dim_z_pT_Bin_phi_h/Multi_Dim_Histo_z_pT_phi_h_Q2_y_Bin_16_gdf">MC GEN (Not Unfolded - Q2-y Bin 16)</option>
+
+                                                    <option value="Multi_Dim_z_pT_Bin_phi_h/Multi_Dim_Histo_z_pT_phi_h_Q2_y_Bin_17_Bayesian">Bayesian Unfolding (Q2-y Bin 17)</option>
+                                                    <option value="Multi_Dim_z_pT_Bin_phi_h/Multi_Dim_Histo_z_pT_phi_h_Q2_y_Bin_17_Bin">Bin-by-Bin Correction (Q2-y Bin 17)</option>
+                                                    <option value="Multi_Dim_z_pT_Bin_phi_h/Multi_Dim_Histo_z_pT_phi_h_Q2_y_Bin_17_rdf">Experimental (Not Unfolded - Q2-y Bin 17)</option>
+                                                    <option value="Multi_Dim_z_pT_Bin_phi_h/Multi_Dim_Histo_z_pT_phi_h_Q2_y_Bin_17_mdf">MC REC (Not Unfolded - Q2-y Bin 17)</option>
+                                                    <option value="Multi_Dim_z_pT_Bin_phi_h/Multi_Dim_Histo_z_pT_phi_h_Q2_y_Bin_17_gdf">MC GEN (Not Unfolded - Q2-y Bin 17)</option>
+                                                </optgroup>
+                                                <optgroup label="2D Unfolding with Q2 - Not available in most recent version">
+                                                    <option value="Multi_Dim_Q2_phi_h/Multi_Dim_Histo_Multi_Dim_Q2_phi_h_Bayesian">Bayesian Unfolding</option>
+                                                    <option value="Multi_Dim_Q2_phi_h/Multi_Dim_Histo_Multi_Dim_Q2_phi_h_Bin_by_bin">Bin-by-Bin Correction</option>
+                                                    <option value="Multi_Dim_Q2_phi_h/Multi_Dim_Histo_ExREC_Multi_Dim_Q2_phi_h">Reconstructed (Not Unfolded)</option>
+                                                    <option value="Multi_Dim_Q2_phi_h/Multi_Dim_Histo_TrueH_Multi_Dim_Q2_phi_h">True Distributions (Unfolded+GEN)</option>
+                                                    <option value="Multi_Dim_Q2_phi_h/Response_Matrix/Response_Matrix_Normal_Multi_Dim_Q2_phi_h">Response Matrix</option>
+                                                    <option value="Multi_Dim_Q2_phi_h/Multi_Dim_Histo_Multi_Dim_Q2_phi_h_rdf">Experimental (Not Unfolded)</option>
+                                                    <option value="Multi_Dim_Q2_phi_h/Multi_Dim_Histo_Multi_Dim_Q2_phi_h_mdf">MC REC (Not Unfolded)</option>
+                                                    <option value="Multi_Dim_Q2_phi_h/Multi_Dim_Histo_Multi_Dim_Q2_phi_h_gdf">MC GEN (Not Unfolded)</option>
+                                                </optgroup>
+                                            </select><br/><br/>
+                                        </form>
+
+                                        <!-- <form id="Multi_Dim_Smearing_Form" name="Multi_Dim_Smearing_Form">
+                                            <p font="450px" id="Multi Dim Smearing">Select Smearing:</p>
+                                            <select onchange="change_picture_fit_richcap();" id="Multi_Dim_Smearing" name="Multi_Dim_Smearing" />
+                                                <option value=".png">Normal Reconstruction</option>
+                                                <option value="_smeared.png">Smearing</option>
+                                            </select><br/><br/>
+                                        </form> -->
+
+                                    </thead>
+                                </table>
+                            </div>
+
+                            <div id="divE" hidden="hidden">
+                                <!-- <img src="All_Images/Unfolding_Images/z_pT_Bin_Individual/Q2_xB_Bin_1/Response_Matrix_Normal__Q2_xB_Bin_1__z_pT_Bin_1_Unfolded_Histos.png" name="pic2" width="600px" height="550px"> -->
+                                <!-- <img src="All_Images/SIDIS_python_Images_From_Analysis_Note_Update_V4_2_21_2023/Unfolding_Images/z_pT_Bin_Individual/Q2_xB_Bin_1/Response_Matrix_Normal_Q2_xB_Bin_1_z_pT_Bin_1_Unfolded_Histos.png" name="pic2" width="600px" height="550px" ondblclick="PicturePopUp_click(this);"> -->
+                                <img src="All_Images/SIDIS_python_Images_From_Multi_Dimension_Unfold_V3_3_14_2023/Unfolding_Images/z_pT_Bin_Individual/Q2_xB_Bin_1/Response_Matrix_Normal_Q2_xB_Bin_1_z_pT_Bin_1_Unfolded_Histos.png" name="pic2" width="600px" height="550px" ondblclick="PicturePopUp_click(this);">
+                                <!-- <img src="All_Images/SIDIS_python_Images_From_Unfolding_Tests_V13_2_14_2023/Unfolding_Images/z_pT_Bin_Individual/Q2_xB_Bin_1/Response_Matrix_Normal__Q2_xB_Bin_1__z_pT_Bin_1_Unfolded_Histos.png" name="pic2" width="600px" height="550px"> -->
+                            </div>
+                            
+                            <div id="div1" hidden="hidden">
+                                <table src="Table_script.js"></table> 
+                                <table value="Unselected" class="tb" id="mytable" style="text-align: center"> 
+                                    <colgroup></colgroup> 
+                                    <colgroup class="slim"></colgroup> 
+                                    <colgroup class="slim"></colgroup> 
+                                    <colgroup class="slim"></colgroup> 
+                                    <colgroup class="slim"></colgroup> 
+                                    <colgroup class="slim"></colgroup>
+                                    <colgroup class="slim"></colgroup>
+                                    <thead> 
+                                        <tr> 
+                                            <th>z↓ P<sub>T</sub>→ </th> 
+                                            <!-- <th id="col_1">0.05 - 0.2</th>
+                                            <th id="col_2">0.2 - 0.3</th>
+                                            <th id="col_3">0.3 - 0.4</th>
+                                            <th id="col_4">0.4 - 0.5</th>
+                                            <th id="col_5">0.5 - 0.6</th>
+                                            <th id="col_6">0.6 - 0.75</th>
+                                            <th id="col_7">0.75 - 1.0</th> -->
+                                            <th id="col_1">column 1</th>
+                                            <th id="col_2">column 2</th>
+                                            <th id="col_3">column 3</th>
+                                            <th id="col_4">column 4</th>
+                                            <th id="col_5">column 5</th>
+                                            <th id="col_6">column 6</th>
+                                            <th id="col_7">column 7</th>
+                                        </tr> 
+                                    </thead> 
+                                    <tbody> 
+                                        <tr> 
+                                            <!-- <th id="row_1">0.55 - 0.7</th> -->
+                                            <th id="row_1">row 1</th>
+                                            <td onmouseleave="bin_box_numbers(1, 1, this, 'update');" onmouseover="bin_box_numbers(1, 1, this, 'over');" ondblclick="bin_box_numbers(1, 1, this, 'dblclick');" onclick="bin_box_numbers(1, 1, this, 'click');"></td>
+                                            <td onmouseleave="bin_box_numbers(1, 2, this, 'update');" onmouseover="bin_box_numbers(1, 2, this, 'over');" ondblclick="bin_box_numbers(1, 2, this, 'dblclick');" onclick="bin_box_numbers(1, 2, this, 'click');"></td>
+                                            <td onmouseleave="bin_box_numbers(1, 3, this, 'update');" onmouseover="bin_box_numbers(1, 3, this, 'over');" ondblclick="bin_box_numbers(1, 3, this, 'dblclick');" onclick="bin_box_numbers(1, 3, this, 'click');"></td>
+                                            <td onmouseleave="bin_box_numbers(1, 4, this, 'update');" onmouseover="bin_box_numbers(1, 4, this, 'over');" ondblclick="bin_box_numbers(1, 4, this, 'dblclick');" onclick="bin_box_numbers(1, 4, this, 'click');"></td>
+                                            <td onmouseleave="bin_box_numbers(1, 5, this, 'update');" onmouseover="bin_box_numbers(1, 5, this, 'over');" ondblclick="bin_box_numbers(1, 5, this, 'dblclick');" onclick="bin_box_numbers(1, 5, this, 'click');"></td>
+                                            <td onmouseleave="bin_box_numbers(1, 6, this, 'update');" onmouseover="bin_box_numbers(1, 6, this, 'over');" ondblclick="bin_box_numbers(1, 6, this, 'dblclick');" onclick="bin_box_numbers(1, 6, this, 'click');"></td>
+                                            <td onmouseleave="bin_box_numbers(1, 7, this, 'update');" onmouseover="bin_box_numbers(1, 7, this, 'over');" ondblclick="bin_box_numbers(1, 7, this, 'dblclick');" onclick="bin_box_numbers(1, 7, this, 'click');"></td>
+                                        </tr> 
+                                        <tr> 
+                                            <!-- <th id="row_2">0.445 - 0.55</th> -->
+                                            <th id="row_2">row 2</th>
+                                            <td onmouseleave="bin_box_numbers(2, 1, this, 'update');" onmouseover="bin_box_numbers(2, 1, this, 'over');" ondblclick="bin_box_numbers(2, 1, this, 'dblclick');" onclick="bin_box_numbers(2, 1, this, 'click');"></td>
+                                            <td onmouseleave="bin_box_numbers(2, 2, this, 'update');" onmouseover="bin_box_numbers(2, 2, this, 'over');" ondblclick="bin_box_numbers(2, 2, this, 'dblclick');" onclick="bin_box_numbers(2, 2, this, 'click');"></td>
+                                            <td onmouseleave="bin_box_numbers(2, 3, this, 'update');" onmouseover="bin_box_numbers(2, 3, this, 'over');" ondblclick="bin_box_numbers(2, 3, this, 'dblclick');" onclick="bin_box_numbers(2, 3, this, 'click');"></td>
+                                            <td onmouseleave="bin_box_numbers(2, 4, this, 'update');" onmouseover="bin_box_numbers(2, 4, this, 'over');" ondblclick="bin_box_numbers(2, 4, this, 'dblclick');" onclick="bin_box_numbers(2, 4, this, 'click');"></td>
+                                            <td onmouseleave="bin_box_numbers(2, 5, this, 'update');" onmouseover="bin_box_numbers(2, 5, this, 'over');" ondblclick="bin_box_numbers(2, 5, this, 'dblclick');" onclick="bin_box_numbers(2, 5, this, 'click');"></td>
+                                            <td onmouseleave="bin_box_numbers(2, 6, this, 'update');" onmouseover="bin_box_numbers(2, 6, this, 'over');" ondblclick="bin_box_numbers(2, 6, this, 'dblclick');" onclick="bin_box_numbers(2, 6, this, 'click');"></td>
+                                            <td onmouseleave="bin_box_numbers(2, 7, this, 'update');" onmouseover="bin_box_numbers(2, 7, this, 'over');" ondblclick="bin_box_numbers(2, 7, this, 'dblclick');" onclick="bin_box_numbers(2, 7, this, 'click');"></td>
+                                        </tr> 
+                                        <tr> 
+                                            <!-- <th id="row_3">0.36 - 0.445</th> -->
+                                            <th id="row_3">row 3</th>
+                                            <td onmouseleave="bin_box_numbers(3, 1, this, 'update');" onmouseover="bin_box_numbers(3, 1, this, 'over');" ondblclick="bin_box_numbers(3, 1, this, 'dblclick');" onclick="bin_box_numbers(3, 1, this, 'click');"></td>
+                                            <td onmouseleave="bin_box_numbers(3, 2, this, 'update');" onmouseover="bin_box_numbers(3, 2, this, 'over');" ondblclick="bin_box_numbers(3, 2, this, 'dblclick');" onclick="bin_box_numbers(3, 2, this, 'click');"></td>
+                                            <td onmouseleave="bin_box_numbers(3, 3, this, 'update');" onmouseover="bin_box_numbers(3, 3, this, 'over');" ondblclick="bin_box_numbers(3, 3, this, 'dblclick');" onclick="bin_box_numbers(3, 3, this, 'click');"></td>
+                                            <td onmouseleave="bin_box_numbers(3, 4, this, 'update');" onmouseover="bin_box_numbers(3, 4, this, 'over');" ondblclick="bin_box_numbers(3, 4, this, 'dblclick');" onclick="bin_box_numbers(3, 4, this, 'click');"></td>
+                                            <td onmouseleave="bin_box_numbers(3, 5, this, 'update');" onmouseover="bin_box_numbers(3, 5, this, 'over');" ondblclick="bin_box_numbers(3, 5, this, 'dblclick');" onclick="bin_box_numbers(3, 5, this, 'click');"></td>
+                                            <td onmouseleave="bin_box_numbers(3, 6, this, 'update');" onmouseover="bin_box_numbers(3, 6, this, 'over');" ondblclick="bin_box_numbers(3, 6, this, 'dblclick');" onclick="bin_box_numbers(3, 6, this, 'click');"></td>
+                                            <td onmouseleave="bin_box_numbers(3, 7, this, 'update');" onmouseover="bin_box_numbers(3, 7, this, 'over');" ondblclick="bin_box_numbers(3, 7, this, 'dblclick');" onclick="bin_box_numbers(3, 7, this, 'click');"></td>
+                                            
+                                        </tr>
+                                        <tr> 
+                                            <!-- <th id="row_4">0.29 - 0.36</th> -->
+                                            <th id="row_4">row 4</th>
+                                            <td onmouseleave="bin_box_numbers(4, 1, this, 'update');" onmouseover="bin_box_numbers(4, 1, this, 'over');" ondblclick="bin_box_numbers(4, 1, this, 'dblclick');" onclick="bin_box_numbers(4, 1, this, 'click');"></td>
+                                            <td onmouseleave="bin_box_numbers(4, 2, this, 'update');" onmouseover="bin_box_numbers(4, 2, this, 'over');" ondblclick="bin_box_numbers(4, 2, this, 'dblclick');" onclick="bin_box_numbers(4, 2, this, 'click');"></td>
+                                            <td onmouseleave="bin_box_numbers(4, 3, this, 'update');" onmouseover="bin_box_numbers(4, 3, this, 'over');" ondblclick="bin_box_numbers(4, 3, this, 'dblclick');" onclick="bin_box_numbers(4, 3, this, 'click');"></td>
+                                            <td onmouseleave="bin_box_numbers(4, 4, this, 'update');" onmouseover="bin_box_numbers(4, 4, this, 'over');" ondblclick="bin_box_numbers(4, 4, this, 'dblclick');" onclick="bin_box_numbers(4, 4, this, 'click');"></td>
+                                            <td onmouseleave="bin_box_numbers(4, 5, this, 'update');" onmouseover="bin_box_numbers(4, 5, this, 'over');" ondblclick="bin_box_numbers(4, 5, this, 'dblclick');" onclick="bin_box_numbers(4, 5, this, 'click');"></td>
+                                            <td onmouseleave="bin_box_numbers(4, 6, this, 'update');" onmouseover="bin_box_numbers(4, 6, this, 'over');" ondblclick="bin_box_numbers(4, 6, this, 'dblclick');" onclick="bin_box_numbers(4, 6, this, 'click');"></td>
+                                            <td onmouseleave="bin_box_numbers(4, 7, this, 'update');" onmouseover="bin_box_numbers(4, 7, this, 'over');" ondblclick="bin_box_numbers(4, 7, this, 'dblclick');" onclick="bin_box_numbers(4, 7, this, 'click');"></td>
+                                        </tr>
+                                        <tr> 
+                                            <!-- <th id="row_5">0.24 - 0.29</th> -->
+                                            <th id="row_5">row 5</th>
+                                            <td onmouseleave="bin_box_numbers(5, 1, this, 'update');" onmouseover="bin_box_numbers(5, 1, this, 'over');" ondblclick="bin_box_numbers(5, 1, this, 'dblclick');" onclick="bin_box_numbers(5, 1, this, 'click');"></td>
+                                            <td onmouseleave="bin_box_numbers(5, 2, this, 'update');" onmouseover="bin_box_numbers(5, 2, this, 'over');" ondblclick="bin_box_numbers(5, 2, this, 'dblclick');" onclick="bin_box_numbers(5, 2, this, 'click');"></td>
+                                            <td onmouseleave="bin_box_numbers(5, 3, this, 'update');" onmouseover="bin_box_numbers(5, 3, this, 'over');" ondblclick="bin_box_numbers(5, 3, this, 'dblclick');" onclick="bin_box_numbers(5, 3, this, 'click');"></td>
+                                            <td onmouseleave="bin_box_numbers(5, 4, this, 'update');" onmouseover="bin_box_numbers(5, 4, this, 'over');" ondblclick="bin_box_numbers(5, 4, this, 'dblclick');" onclick="bin_box_numbers(5, 4, this, 'click');"></td>
+                                            <td onmouseleave="bin_box_numbers(5, 5, this, 'update');" onmouseover="bin_box_numbers(5, 5, this, 'over');" ondblclick="bin_box_numbers(5, 5, this, 'dblclick');" onclick="bin_box_numbers(5, 5, this, 'click');"></td>
+                                            <td onmouseleave="bin_box_numbers(5, 6, this, 'update');" onmouseover="bin_box_numbers(5, 6, this, 'over');" ondblclick="bin_box_numbers(5, 6, this, 'dblclick');" onclick="bin_box_numbers(5, 6, this, 'click');"></td>
+                                            <td onmouseleave="bin_box_numbers(5, 7, this, 'update');" onmouseover="bin_box_numbers(5, 7, this, 'over');" ondblclick="bin_box_numbers(5, 7, this, 'dblclick');" onclick="bin_box_numbers(5, 7, this, 'click');"></td>
+                                        </tr>
+                                        <tr> 
+                                            <!-- <th id="row_6">0.2 - 0.24</th> -->
+                                            <th id="row_6">row 6</th>
+                                            <td onmouseleave="bin_box_numbers(6, 1, this, 'update');" onmouseover="bin_box_numbers(6, 1, this, 'over');" ondblclick="bin_box_numbers(6, 1, this, 'dblclick');" onclick="bin_box_numbers(6, 1, this, 'click');"></td>
+                                            <td onmouseleave="bin_box_numbers(6, 2, this, 'update');" onmouseover="bin_box_numbers(6, 2, this, 'over');" ondblclick="bin_box_numbers(6, 2, this, 'dblclick');" onclick="bin_box_numbers(6, 2, this, 'click');"></td>
+                                            <td onmouseleave="bin_box_numbers(6, 3, this, 'update');" onmouseover="bin_box_numbers(6, 3, this, 'over');" ondblclick="bin_box_numbers(6, 3, this, 'dblclick');" onclick="bin_box_numbers(6, 3, this, 'click');"></td>
+                                            <td onmouseleave="bin_box_numbers(6, 4, this, 'update');" onmouseover="bin_box_numbers(6, 4, this, 'over');" ondblclick="bin_box_numbers(6, 4, this, 'dblclick');" onclick="bin_box_numbers(6, 4, this, 'click');"></td>
+                                            <td onmouseleave="bin_box_numbers(6, 5, this, 'update');" onmouseover="bin_box_numbers(6, 5, this, 'over');" ondblclick="bin_box_numbers(6, 5, this, 'dblclick');" onclick="bin_box_numbers(6, 5, this, 'click');"></td>
+                                            <td onmouseleave="bin_box_numbers(6, 6, this, 'update');" onmouseover="bin_box_numbers(6, 6, this, 'over');" ondblclick="bin_box_numbers(6, 6, this, 'dblclick');" onclick="bin_box_numbers(6, 6, this, 'click');"></td>
+                                            <td onmouseleave="bin_box_numbers(6, 7, this, 'update');" onmouseover="bin_box_numbers(6, 7, this, 'over');" ondblclick="bin_box_numbers(6, 7, this, 'dblclick');" onclick="bin_box_numbers(6, 7, this, 'click');"></td>
+                                        </tr>
+                                        <tr> 
+                                            <!-- <th id="row_7">0.15 - 0.2</th> -->
+                                            <th id="row_7">row 7</th>
+                                            <td onmouseleave="bin_box_numbers(7, 1, this, 'update');" onmouseover="bin_box_numbers(7, 1, this, 'over');" ondblclick="bin_box_numbers(7, 1, this, 'dblclick');" onclick="bin_box_numbers(7, 1, this, 'click');"></td>
+                                            <td onmouseleave="bin_box_numbers(7, 2, this, 'update');" onmouseover="bin_box_numbers(7, 2, this, 'over');" ondblclick="bin_box_numbers(7, 2, this, 'dblclick');" onclick="bin_box_numbers(7, 2, this, 'click');"></td>
+                                            <td onmouseleave="bin_box_numbers(7, 3, this, 'update');" onmouseover="bin_box_numbers(7, 3, this, 'over');" ondblclick="bin_box_numbers(7, 3, this, 'dblclick');" onclick="bin_box_numbers(7, 3, this, 'click');"></td>
+                                            <td onmouseleave="bin_box_numbers(7, 4, this, 'update');" onmouseover="bin_box_numbers(7, 4, this, 'over');" ondblclick="bin_box_numbers(7, 4, this, 'dblclick');" onclick="bin_box_numbers(7, 4, this, 'click');"></td>
+                                            <td onmouseleave="bin_box_numbers(7, 5, this, 'update');" onmouseover="bin_box_numbers(7, 5, this, 'over');" ondblclick="bin_box_numbers(7, 5, this, 'dblclick');" onclick="bin_box_numbers(7, 5, this, 'click');"></td>
+                                            <td onmouseleave="bin_box_numbers(7, 6, this, 'update');" onmouseover="bin_box_numbers(7, 6, this, 'over');" ondblclick="bin_box_numbers(7, 6, this, 'dblclick');" onclick="bin_box_numbers(7, 6, this, 'click');"></td>
+                                            <td onmouseleave="bin_box_numbers(7, 7, this, 'update');" onmouseover="bin_box_numbers(7, 7, this, 'over');" ondblclick="bin_box_numbers(7, 7, this, 'dblclick');" onclick="bin_box_numbers(7, 7, this, 'click');"></td>
+                                        </tr>
+                                         
+                                    </tbody> 
+                                </table>
+                            </div>
+
+                            <div id="divtable2" hidden="hidden">
+                                <table src="Table_script.js"></table> 
+                                <table style="text-align: center"> 
+                                    <colgroup></colgroup> 
+                                    <colgroup class="slim"></colgroup> 
+                                    <colgroup class="slim"></colgroup> 
+                                    <colgroup class="slim"></colgroup> 
+                                    <colgroup class="slim"></colgroup> 
+                                    <colgroup class="slim"></colgroup>
+                                    <colgroup class="slim"></colgroup>
+                                    <thead> 
+                                        <tr> 
+                                            <th>P<sub>T</sub>↓ z→ </th> 
+                                            <!-- <th id="row_1_2">0.15 - 0.2</th>
+                                            <th id="row_2_2">0.2 - 0.24</th>
+                                            <th id="row_3_2">0.24 - 0.29</th>
+                                            <th id="row_4_2">0.29 - 0.36</th>
+                                            <th id="row_5_2">0.36 - 0.445</th>
+                                            <th id="row_6_2">0.445 - 0.55</th>
+                                            <th id="row_7_2">0.55 - 0.7</th> -->
+                                            <th id="row_1_2">row 1</th>
+                                            <th id="row_2_2">row 2</th>
+                                            <th id="row_3_2">row 3</th>
+                                            <th id="row_4_2">row 4</th>
+                                            <th id="row_5_2">row 5</th>
+                                            <th id="row_6_2">row 6</th>
+                                            <th id="row_7_2">row 7</th>
+                                        </tr> 
+                                    </thead> 
+                                    <tbody> 
+                                        <tr> 
+                                            <!-- <th id="col_1_2">0.05 - 0.2</th> -->
+                                            <th id="col_1_2">column 1</th>
+                                            <td onmouseleave="bin_box_numbers(1, 1, this, 'update');" onmouseover="bin_box_numbers(1, 1, this, 'over');"></td>
+                                            <td onmouseleave="bin_box_numbers(2, 1, this, 'update');" onmouseover="bin_box_numbers(2, 1, this, 'over');"></td>
+                                            <td onmouseleave="bin_box_numbers(3, 1, this, 'update');" onmouseover="bin_box_numbers(3, 1, this, 'over');"></td>
+                                            <td onmouseleave="bin_box_numbers(4, 1, this, 'update');" onmouseover="bin_box_numbers(4, 1, this, 'over');"></td>
+                                            <td onmouseleave="bin_box_numbers(5, 1, this, 'update');" onmouseover="bin_box_numbers(5, 1, this, 'over');"></td>
+                                            <td onmouseleave="bin_box_numbers(6, 1, this, 'update');" onmouseover="bin_box_numbers(6, 1, this, 'over');"></td>
+                                            <td onmouseleave="bin_box_numbers(7, 1, this, 'update');" onmouseover="bin_box_numbers(7, 1, this, 'over');"></td>
+                                        </tr> 
+                                        <tr> 
+                                            <!-- <th id="col_2_2">0.2 - 0.3</th> -->
+                                            <th id="col_2_2">column 2</th>
+                                            <td onmouseleave="bin_box_numbers(1, 2, this, 'update');" onmouseover="bin_box_numbers(1, 2, this, 'over');"></td>
+                                            <td onmouseleave="bin_box_numbers(2, 2, this, 'update');" onmouseover="bin_box_numbers(2, 2, this, 'over');"></td>
+                                            <td onmouseleave="bin_box_numbers(3, 2, this, 'update');" onmouseover="bin_box_numbers(3, 2, this, 'over');"></td>
+                                            <td onmouseleave="bin_box_numbers(4, 2, this, 'update');" onmouseover="bin_box_numbers(4, 2, this, 'over');"></td>
+                                            <td onmouseleave="bin_box_numbers(5, 2, this, 'update');" onmouseover="bin_box_numbers(5, 2, this, 'over');"></td>
+                                            <td onmouseleave="bin_box_numbers(6, 2, this, 'update');" onmouseover="bin_box_numbers(6, 2, this, 'over');"></td>
+                                            <td onmouseleave="bin_box_numbers(7, 2, this, 'update');" onmouseover="bin_box_numbers(7, 2, this, 'over');"></td>
+                                        </tr> 
+                                        <tr> 
+                                            <!-- <th id="col_3_2">0.3 - 0.4</th> -->
+                                            <th id="col_3_2">column 3</th>
+                                            <td onmouseleave="bin_box_numbers(1, 3, this, 'update');" onmouseover="bin_box_numbers(1, 3, this, 'over');"></td>
+                                            <td onmouseleave="bin_box_numbers(2, 3, this, 'update');" onmouseover="bin_box_numbers(2, 3, this, 'over');"></td>
+                                            <td onmouseleave="bin_box_numbers(3, 3, this, 'update');" onmouseover="bin_box_numbers(3, 3, this, 'over');"></td>
+                                            <td onmouseleave="bin_box_numbers(4, 3, this, 'update');" onmouseover="bin_box_numbers(4, 3, this, 'over');"></td>
+                                            <td onmouseleave="bin_box_numbers(5, 3, this, 'update');" onmouseover="bin_box_numbers(5, 3, this, 'over');"></td>
+                                            <td onmouseleave="bin_box_numbers(6, 3, this, 'update');" onmouseover="bin_box_numbers(6, 3, this, 'over');"></td>
+                                            <td onmouseleave="bin_box_numbers(7, 3, this, 'update');" onmouseover="bin_box_numbers(7, 3, this, 'over');"></td>
+                                            
+                                        </tr>
+                                        <tr> 
+                                            <!-- <th id="col_4_2">0.4 - 0.5</th> -->
+                                            <th id="col_4_2">column 4</th>
+                                            <td onmouseleave="bin_box_numbers(1, 4, this, 'update');" onmouseover="bin_box_numbers(1, 4, this, 'over');"></td>
+                                            <td onmouseleave="bin_box_numbers(2, 4, this, 'update');" onmouseover="bin_box_numbers(2, 4, this, 'over');"></td>
+                                            <td onmouseleave="bin_box_numbers(3, 4, this, 'update');" onmouseover="bin_box_numbers(3, 4, this, 'over');"></td>
+                                            <td onmouseleave="bin_box_numbers(4, 4, this, 'update');" onmouseover="bin_box_numbers(4, 4, this, 'over');"></td>
+                                            <td onmouseleave="bin_box_numbers(5, 4, this, 'update');" onmouseover="bin_box_numbers(5, 4, this, 'over');"></td>
+                                            <td onmouseleave="bin_box_numbers(6, 4, this, 'update');" onmouseover="bin_box_numbers(6, 4, this, 'over');"></td>
+                                            <td onmouseleave="bin_box_numbers(7, 4, this, 'update');" onmouseover="bin_box_numbers(7, 4, this, 'over');"></td>
+                                        </tr>
+                                        <tr> 
+                                            <!-- <th id="col_5_2">0.5 - 0.6</th> -->
+                                            <th id="col_5_2">column 5</th>
+                                            <td onmouseleave="bin_box_numbers(1, 5, this, 'update');" onmouseover="bin_box_numbers(1, 5, this, 'over');"></td>
+                                            <td onmouseleave="bin_box_numbers(2, 5, this, 'update');" onmouseover="bin_box_numbers(2, 5, this, 'over');"></td>
+                                            <td onmouseleave="bin_box_numbers(3, 5, this, 'update');" onmouseover="bin_box_numbers(3, 5, this, 'over');"></td>
+                                            <td onmouseleave="bin_box_numbers(4, 5, this, 'update');" onmouseover="bin_box_numbers(4, 5, this, 'over');"></td>
+                                            <td onmouseleave="bin_box_numbers(5, 5, this, 'update');" onmouseover="bin_box_numbers(5, 5, this, 'over');"></td>
+                                            <td onmouseleave="bin_box_numbers(6, 5, this, 'update');" onmouseover="bin_box_numbers(6, 5, this, 'over');"></td>
+                                            <td onmouseleave="bin_box_numbers(7, 5, this, 'update');" onmouseover="bin_box_numbers(7, 5, this, 'over');"></td>
+                                        </tr>
+                                        <tr> 
+                                            <!-- <th id="col_6_2">0.6 - 0.75</th> -->
+                                            <th id="col_6_2">column 6</th>
+                                            <td onmouseleave="bin_box_numbers(1, 6, this, 'update');" onmouseover="bin_box_numbers(1, 6, this, 'over');"></td>
+                                            <td onmouseleave="bin_box_numbers(2, 6, this, 'update');" onmouseover="bin_box_numbers(2, 6, this, 'over');"></td>
+                                            <td onmouseleave="bin_box_numbers(3, 6, this, 'update');" onmouseover="bin_box_numbers(3, 6, this, 'over');"></td>
+                                            <td onmouseleave="bin_box_numbers(4, 6, this, 'update');" onmouseover="bin_box_numbers(4, 6, this, 'over');"></td>
+                                            <td onmouseleave="bin_box_numbers(5, 6, this, 'update');" onmouseover="bin_box_numbers(5, 6, this, 'over');"></td>
+                                            <td onmouseleave="bin_box_numbers(6, 6, this, 'update');" onmouseover="bin_box_numbers(6, 6, this, 'over');"></td>
+                                            <td onmouseleave="bin_box_numbers(7, 6, this, 'update');" onmouseover="bin_box_numbers(7, 6, this, 'over');"></td>
+                                        </tr>
+                                        <tr> 
+                                            <!-- <th id="col_7_2">0.75 - 1.0</th> -->
+                                            <th id="col_7_2">column 7</th>
+                                            <td onmouseleave="bin_box_numbers(1, 7, this, 'update');" onmouseover="bin_box_numbers(1, 7, this, 'over');"></td>
+                                            <td onmouseleave="bin_box_numbers(2, 7, this, 'update');" onmouseover="bin_box_numbers(2, 7, this, 'over');"></td>
+                                            <td onmouseleave="bin_box_numbers(3, 7, this, 'update');" onmouseover="bin_box_numbers(3, 7, this, 'over');"></td>
+                                            <td onmouseleave="bin_box_numbers(4, 7, this, 'update');" onmouseover="bin_box_numbers(4, 7, this, 'over');"></td>
+                                            <td onmouseleave="bin_box_numbers(5, 7, this, 'update');" onmouseover="bin_box_numbers(5, 7, this, 'over');"></td>
+                                            <td onmouseleave="bin_box_numbers(6, 7, this, 'update');" onmouseover="bin_box_numbers(6, 7, this, 'over');"></td>
+                                            <td onmouseleave="bin_box_numbers(7, 7, this, 'update');" onmouseover="bin_box_numbers(7, 7, this, 'over');"></td>
+                                        </tr>
+                                         
+                                    </tbody> 
+                                </table>
+                            </div>
+                                
+                            <div id="div2">
+                                <!-- <img src="All_Images/Unfolding_Images/z_pT_Bin_All/Q2_xB_Bin_1/Unfolded_Histos_Q2_xB_Bin_1_SVD.png" name="pic1" width="1300px"> -->
+                                <!-- <img src="All_Images/SIDIS_python_Images_From_Analysis_Note_Update_V4_2_21_2023/Unfolding_Images/z_pT_Bin_All/Q2_xB_Bin_1/Unfolded_Histos_Q2_xB_Bin_1_RooUnfold_bayes_smear.png" name="pic1" width="1300px" ondblclick="PicturePopUp_click(this);"> -->
+                                <!-- <img src="All_Images/SIDIS_python_Images_From_Multi_Dimension_Unfold_V3_3_14_2023/Unfolding_Images/Smeared/z_pT_Bin_All/Q2_xB_Bin_1/Unfolded_Histos_Q2_xB_Bin_1_RooUnfold_bayes_smear.png" name="pic1" width="1300px" ondblclick="PicturePopUp_click(this);"> -->
+                                <img src="All_Images/SIDIS_python_Images_From_Gen_Cuts_V6_7_19_2023/Unfolding_Images/z_pT_Bin_All/Q2_y_Bin_1/Unfolded_Histos_Q2_y_Bin_1_Bayesian.png" name="pic1" width="1300px" ondblclick="PicturePopUp_click(this);">
+                                <!-- <img src="All_Images/SIDIS_python_Images_From_New_Binning_Schemes_V8_6_16_2023/Unfolding_Images/z_pT_Bin_All/Q2_y_Bin_1/Unfolded_Histos_Q2_y_Bin_1_RooUnfold_bayes.png" name="pic1" width="1300px" ondblclick="PicturePopUp_click(this);"> -->
+                                <!-- <img src="All_Images/SIDIS_python_Images_From_Unfolding_Tests_V13_2_14_2023/Unfolding_Images/z_pT_Bin_Individual/Q2_xB_Bin_1/Response_Matrix_Normal__Q2_xB_Bin_1__z_pT_Bin_1_Unfolded_Histos.png" name="pic2" width="600px" height="550px"> -->
+                            </div>
+
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+
+
+</html>

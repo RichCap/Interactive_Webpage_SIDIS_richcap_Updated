@@ -1,0 +1,6 @@
+*.ipynb_checkpoints*
+*Test_Code*
+*.DS_Store
+.DS_Store
+All_Images/.DS_Store
+
