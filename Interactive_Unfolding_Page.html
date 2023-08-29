@@ -200,6 +200,10 @@
                 }
             }
 
+            if(! currentFolderVersion.includes("../../")){
+                currentFolderVersion = "../../" + currentFolderVersion;
+            }
+
             return currentFolderVersion;
         }
 
@@ -475,7 +479,7 @@
                 }
             }
 
-            var currentFolderVersion = "All_Images/Unfolding_Images/";
+            var currentFolderVersion = "../../All_Images/Unfolding_Images/";
             if(Image_Version.includes("Old")){
                 alert("The versions of the images currently shown are from a previous iteration of this analysis.\n\nThe 'Current Version' was last added on 3-14-2023 while the 'Latest (y-bin) Version' was added on 6-7-2023.")
             }
@@ -530,7 +534,7 @@
             else{
                 if(Image_Type.includes("Electron") || Image_Type.includes("Pip")){
                     alert("OLD TEST");
-                    currentName = "All_Images/Smearing_Images/" + Image_Type + ".png";
+                    currentName = "../../All_Images/Smearing_Images/" + Image_Type + ".png";
                 }
                 else{
                     var Delta_Type       = document.getElementById("Delta Type");
@@ -585,10 +589,10 @@
                                 Vs_Mom_hide.removeAttribute("hidden");
                                 dTheta_hide.removeAttribute("hidden");
                                 if(Image_Type.includes("Compare")){
-                                    currentName = "All_Images/Smearing_Images/" + Histo_Type_3.value + "/" + Image_Type + "/Modified_" + Delta_Type.value + "_" + Particle_Type.value + "_Histograms_Smear_Compare.png";
+                                    currentName = "../../All_Images/Smearing_Images/" + Histo_Type_3.value + "/" + Image_Type + "/Modified_" + Delta_Type.value + "_" + Particle_Type.value + "_Histograms_Smear_Compare.png";
                                 }
                                 else{
-                                    currentName = "All_Images/Smearing_Images/" + Histo_Type_3.value + "/" + Image_Type + "/Modified_" + Delta_Type.value + "_" + Particle_Type.value + "_Histograms.png";
+                                    currentName = "../../All_Images/Smearing_Images/" + Histo_Type_3.value + "/" + Image_Type + "/Modified_" + Delta_Type.value + "_" + Particle_Type.value + "_Histograms.png";
                                 }
                             }
                         }
@@ -596,10 +600,10 @@
                         Vs_Mom_hide.setAttribute("hidden", "hidden");
                         dTheta_hide.setAttribute("hidden", "hidden");
                         if(Image_Type.includes("Compare")){
-                            currentName = "All_Images/Smearing_Images/" + Histo_Type_3.value + "/" + Image_Type + "/" + Delta_Type.value + "_" + Particle_Type.value + "_Histograms_Smear_Compare.png";
+                            currentName = "../../All_Images/Smearing_Images/" + Histo_Type_3.value + "/" + Image_Type + "/" + Delta_Type.value + "_" + Particle_Type.value + "_Histograms_Smear_Compare.png";
                         }
                         else{
-                            currentName = "All_Images/Smearing_Images/" + Histo_Type_3.value + "/" + Image_Type + "/" + Delta_Type.value + "_" + Particle_Type.value + "_Histograms.png";
+                            currentName = "../../All_Images/Smearing_Images/" + Histo_Type_3.value + "/" + Image_Type + "/" + Delta_Type.value + "_" + Particle_Type.value + "_Histograms.png";
                         }
                     }
                 }
@@ -656,7 +660,7 @@
 
             var Image_Version_Input  = document.getElementById("Image_Version");
             var Image_Version        = Image_Version_Input.value;
-            var currentFolderVersion = "All_Images/Unfolding_Images/";
+            var currentFolderVersion = "../../All_Images/Unfolding_Images/";
 
             if(Image_Type.includes("Smearing_Histos")){
                 Image_Type           = Correction_Options_Select.value;
@@ -697,7 +701,7 @@
                                 Multi_Dim_New_Options.setAttribute("hidden", "hidden");
                                 Bin_Title.setAttribute("hidden", "hidden");
 
-                                currentName = "All_Images/Multi_Dim_Histo_Combined/" + Variable_Multi_Dim.value + Smearing_Multi_Dim.value;
+                                currentName = "../../All_Images/Multi_Dim_Histo_Combined/" + Variable_Multi_Dim.value + Smearing_Multi_Dim.value;
                             }
                             else{
                                 if(Image_Type.includes("Multi_Dim")){
@@ -718,7 +722,7 @@
                                     currentName = currentFolderVersion + "Response_Matrix_Normal_All_Events_" + Variable_Extra.value + Smearing_Extra.value;
                                     // alert(currentName);
                                     if((Variable_Extra.value).includes("Multi_Dim")){
-                                        currentName = "All_Images/SIDIS_python_Images_From_New_Binning_Schemes_V7_6_7_2023/Unfolding_Images/Response_Matrix_Normal_All_Events_" + Variable_Extra.value + ".png";
+                                        currentName = "../../All_Images/SIDIS_python_Images_From_New_Binning_Schemes_V7_6_7_2023/Unfolding_Images/Response_Matrix_Normal_All_Events_" + Variable_Extra.value + ".png";
                                     }
                                 }
                             }
@@ -805,7 +809,7 @@
                 }
 
                 if(Image_Type.includes("Response_Matrix_Normal_Q2_y_Bin_All_z_pT_Bin_All_1D_MM") || Image_Type.includes("Response_Matrix_Normal_Q2_y_Bin_All_z_pT_Bin_All_1D_W")){
-                    document.images.pic1.src = "All_Images/SIDIS_python_Images_From_New_Binning_Schemes_V5_6_5_2023/" + Image_Type + ".png"
+                    document.images.pic1.src = "../../All_Images/SIDIS_python_Images_From_New_Binning_Schemes_V5_6_5_2023/" + Image_Type + ".png"
                 }
 
             }
@@ -828,7 +832,7 @@
             var z_pT_Bin_Number_Name = "z_pT_Bin_" + z_pT_Bin.value;
             var Image_Version_Input  = document.getElementById("Image_Version");
             var Image_Version        = Image_Version_Input.value;
-            var currentFolderVersion = "All_Images/Smearing_Images_New/";
+            var currentFolderVersion = "../../All_Images/Smearing_Images_New/";
             currentFolderVersion     = Current_Version_Name(Image_Version, z_pT_Bin_Number_Name, Image_Type);
             // alert(currentFolderVersion);
 
@@ -905,7 +909,7 @@
             var Image_Version_Input = document.getElementById("Image_Version");
             var Image_Version       = Image_Version_Input.value;
 
-            var currentFolderVersion = "All_Images/Unfolding_Images/";
+            var currentFolderVersion = "../../All_Images/Unfolding_Images/";
             currentFolderVersion     = Current_Version_Name(Image_Version, z_pT_Bin_Number_Name, Histo_Type_Input_Name);
 
             var currentName  = currentFolderVersion + "z_pT_Bin_Individual/" + BinNumber_Name + "/Response_Matrix_Normal_" +  BinNumber_Name + "_" + z_pT_Bin_Number_Name + ".png";
@@ -962,7 +966,7 @@
 
             var Image_Version_Input  = document.getElementById("Image_Version");
             var Image_Version        = Image_Version_Input.value;
-            var currentFolderVersion = "All_Images/Unfolding_Images/";
+            var currentFolderVersion = "../../All_Images/Unfolding_Images/";
             currentFolderVersion     = Current_Version_Name(Image_Version, z_pT_Bin_Number_Name, Histo_Type_Input_Name);
 
             var currentName  = currentFolderVersion + "z_pT_Bin_Individual/" + BinNumber_Name + "/Response_Matrix_Normal_" +  BinNumber_Name + "_" + z_pT_Bin_Number_Name + ".png";
@@ -2301,7 +2305,7 @@
                             <div id="divE" hidden="hidden">
                                 <!-- <img src="All_Images/Unfolding_Images/z_pT_Bin_Individual/Q2_xB_Bin_1/Response_Matrix_Normal__Q2_xB_Bin_1__z_pT_Bin_1_Unfolded_Histos.png" name="pic2" width="600px" height="550px"> -->
                                 <!-- <img src="All_Images/SIDIS_python_Images_From_Analysis_Note_Update_V4_2_21_2023/Unfolding_Images/z_pT_Bin_Individual/Q2_xB_Bin_1/Response_Matrix_Normal_Q2_xB_Bin_1_z_pT_Bin_1_Unfolded_Histos.png" name="pic2" width="600px" height="550px" ondblclick="PicturePopUp_click(this);"> -->
-                                <img src="All_Images/SIDIS_python_Images_From_Multi_Dimension_Unfold_V3_3_14_2023/Unfolding_Images/z_pT_Bin_Individual/Q2_xB_Bin_1/Response_Matrix_Normal_Q2_xB_Bin_1_z_pT_Bin_1_Unfolded_Histos.png" name="pic2" width="600px" height="550px" ondblclick="PicturePopUp_click(this);">
+                                <img src="../../All_Images/SIDIS_python_Images_From_Multi_Dimension_Unfold_V3_3_14_2023/Unfolding_Images/z_pT_Bin_Individual/Q2_xB_Bin_1/Response_Matrix_Normal_Q2_xB_Bin_1_z_pT_Bin_1_Unfolded_Histos.png" name="pic2" width="600px" height="550px" ondblclick="PicturePopUp_click(this);">
                                 <!-- <img src="All_Images/SIDIS_python_Images_From_Unfolding_Tests_V13_2_14_2023/Unfolding_Images/z_pT_Bin_Individual/Q2_xB_Bin_1/Response_Matrix_Normal__Q2_xB_Bin_1__z_pT_Bin_1_Unfolded_Histos.png" name="pic2" width="600px" height="550px"> -->
                             </div>
                             
@@ -2535,7 +2539,7 @@
                                 <!-- <img src="All_Images/Unfolding_Images/z_pT_Bin_All/Q2_xB_Bin_1/Unfolded_Histos_Q2_xB_Bin_1_SVD.png" name="pic1" width="1300px"> -->
                                 <!-- <img src="All_Images/SIDIS_python_Images_From_Analysis_Note_Update_V4_2_21_2023/Unfolding_Images/z_pT_Bin_All/Q2_xB_Bin_1/Unfolded_Histos_Q2_xB_Bin_1_RooUnfold_bayes_smear.png" name="pic1" width="1300px" ondblclick="PicturePopUp_click(this);"> -->
                                 <!-- <img src="All_Images/SIDIS_python_Images_From_Multi_Dimension_Unfold_V3_3_14_2023/Unfolding_Images/Smeared/z_pT_Bin_All/Q2_xB_Bin_1/Unfolded_Histos_Q2_xB_Bin_1_RooUnfold_bayes_smear.png" name="pic1" width="1300px" ondblclick="PicturePopUp_click(this);"> -->
-                                <img src="All_Images/SIDIS_python_Images_From_Gen_Cuts_V6_7_19_2023/Unfolding_Images/z_pT_Bin_All/Q2_y_Bin_1/Unfolded_Histos_Q2_y_Bin_1_Bayesian.png" name="pic1" width="1300px" ondblclick="PicturePopUp_click(this);">
+                                <img src="../../All_Images/SIDIS_python_Images_From_Gen_Cuts_V6_7_19_2023/Unfolding_Images/z_pT_Bin_All/Q2_y_Bin_1/Unfolded_Histos_Q2_y_Bin_1_Bayesian.png" name="pic1" width="1300px" ondblclick="PicturePopUp_click(this);">
                                 <!-- <img src="All_Images/SIDIS_python_Images_From_New_Binning_Schemes_V8_6_16_2023/Unfolding_Images/z_pT_Bin_All/Q2_y_Bin_1/Unfolded_Histos_Q2_y_Bin_1_RooUnfold_bayes.png" name="pic1" width="1300px" ondblclick="PicturePopUp_click(this);"> -->
                                 <!-- <img src="All_Images/SIDIS_python_Images_From_Unfolding_Tests_V13_2_14_2023/Unfolding_Images/z_pT_Bin_Individual/Q2_xB_Bin_1/Response_Matrix_Normal__Q2_xB_Bin_1__z_pT_Bin_1_Unfolded_Histos.png" name="pic2" width="600px" height="550px"> -->
                             </div>
