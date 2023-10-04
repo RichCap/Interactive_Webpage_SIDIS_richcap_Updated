@@ -27,7 +27,9 @@
                 }
             }
             if(Image_Version.includes("Current")){
-                currentFolderVersion = "All_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Gen_Cuts_V7_8_25_2023/Unfolding_Images/";
+                currentFolderVersion = "All_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Gen_Cuts_V7_8_30_2023/Unfolding_Images/";
+                currentFolderVersion = "All_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Gen_Cuts_V8_9_7_2023/Unfolding_Images/";
+                currentFolderVersion = "All_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Gen_Cuts_V8_10_3_2023/Unfolding_Images/";
             }
             if(Image_Version.includes("Old_V4")){
                 currentFolderVersion = "All_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Gen_Cuts_V2_Fixed_6_21_2023/Unfolding_Images/";
@@ -697,7 +699,7 @@
                 currentName     = currentName.replace("Kinematic_Comparison_Response_Matrix_Normal", "Kinematic_Comparison");
                 currentName     = currentName.replace("Only_Kinematic", "Kinematic")
 
-                if(currentFolderVersion.includes("SIDIS_python_Images_From_Gen_Cuts_V7") || currentFolderVersion.includes("SIDIS_python_Images_From_Gen_Cuts_V7_8_11_2023") || currentFolderVersion.includes("SIDIS_python_Images_From_Gen_Cuts_V6_7_19_2023") || currentFolderVersion.includes("SIDIS_python_Images_From_Gen_Cuts_V6_8_2_2023")){
+                if(currentFolderVersion.includes("SIDIS_python_Images_From_Gen_Cuts_V8") || currentFolderVersion.includes("SIDIS_python_Images_From_Gen_Cuts_V7") || currentFolderVersion.includes("SIDIS_python_Images_From_Gen_Cuts_V7_8_11_2023") || currentFolderVersion.includes("SIDIS_python_Images_From_Gen_Cuts_V6_7_19_2023") || currentFolderVersion.includes("SIDIS_python_Images_From_Gen_Cuts_V6_8_2_2023")){
                     currentName = currentName.replace("RooUnfold_bayes", "Bayesian")
                     currentName = currentName.replace("RooUnfold_svd",   "SVD")
                     currentName = currentName.replace("_smear",          "_Smeared")
@@ -1408,23 +1410,29 @@
                                             <psmall id="psmall" font="5px">Update Version:  </psmall>
                                             <select onchange="change_picture_fit_richcap();" id="Image_Version" name="Image_Version">
                                                 <optgroup label="Current Version">
-                                                    <option value="Current" title="Last Updated on 8-28-2023">Latest Version</option>
+                                                    <option value="Current" title="Last Updated on 9-7-2023">Latest Version</option>
                                                     <!-- <option value="Current_gen_cut">Latest (gen cut) Version</option> -->
                                                     <!-- <option value="Current_y_bin_Extra">Extra Parameter Version</option> -->
                                                 </optgroup>
-                                                <!-- <optgroup label="Unfolding Closure Tests" Title="Unfolding Simulation was last updated prior to the creation of this new page"> -->
-                                                <optgroup label="Unfolding Closure Tests"></optgroup>
-                                                    <!-- <option value="All_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Gen_Cuts_V7_Modulated_8_14_2023/Unfolding_Images/"     title="Modulated the MC GEN and REC data with estimated cosine moments to test the unfolding procedures with a 'different' simulation. The Response Matrices are the plots which include the modulations while the Experimental data is still being used as the dataset to be unfolded">Modulated Simulation</option> -->
-                                                    <!-- <option value="Sim_y_bin"                                                                                 title="Using MC REC in place of Experimental data to test the unfolding procedures">Unfolding Simulation</option> -->
-                                                    <option value="All_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Gen_Cuts_V7_Sim_8_28_2023/Unfolding_Images/"           title="Using MC REC in place of Experimental data to test the unfolding procedures">Unfolding Simulation</option>
+                                                <optgroup label="Unfolding Closure Tests" title="Last Updated on 9-8-2023">
+                                                    <option value="All_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Gen_Cuts_V8_Sim_9_8_2023/Unfolding_Images/"          title="Using MC REC in place of Experimental data to test the unfolding procedures. The simulation is unchanged before being unfolded by itself.">Unfolding Simulation</option>
+                                                    <option value="All_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Gen_Cuts_V8_Closure_9_8_2023/Unfolding_Images/"       title="Using a modulated version of MC REC in place of Experimental data to test the unfolding procedures. MC TRUE is considered to be the modulated generated distribution that should be returned by the unfolding procedures while the Response Matrices do not include any of the modulations added by this test">Unfolding (Mod) Simulation</option>
                                                     <!-- <option value="All_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Gen_Cuts_V7_Sim_Modulated_8_17_2023/Unfolding_Images/" title="This is a combination of the other two closure tests">Unfolding (Mod) Simulation</option> -->
-                                                    <option value="All_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Gen_Cuts_V7_Closure_8_28_2023/Unfolding_Images/" title="Using a modulated version of MC REC in place of Experimental data to test the unfolding procedures. MC TRUE is considered to be the modulated generated distribution that should be returned by the unfolding procedures while the Response Matrices do not include any of the modulations added by this test">Unfolding (Mod) Simulation</option>
+                                                    <!-- <option value="All_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Gen_Cuts_V7_Modulated_8_14_2023/Unfolding_Images/"     title="Modulated the MC GEN and REC data with estimated cosine moments to test the unfolding procedures with a 'different' simulation. The Response Matrices are the plots which include the modulations while the Experimental data is still being used as the dataset to be unfolded">Modulated Simulation</option> -->
+                                                    <!-- <option value="Sim_y_bin"                                                                                                                   title="Using MC REC in place of Experimental data to test the unfolding procedures">Unfolding Simulation</option> -->
                                                     <!-- <option value="Sim_y_bin_Extra">Unfolding Test (Extra Pars)</option> -->
                                                 </optgroup>
                                                 <optgroup label="Older Versions">
-                                                    <option value="All_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Gen_Cuts_V6_8_2_2023/Unfolding_Images/">As of 8-8-2023</option>
+                                                    <option value="All_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Gen_Cuts_V8_9_7_2023/Unfolding_Images/" >As of 10-2-2023</option>
+                                                    <option value="All_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Gen_Cuts_V7_8_30_2023/Unfolding_Images/">As of 9-5-2023</option>
+                                                    <option value="All_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Gen_Cuts_V6_8_2_2023/Unfolding_Images/" >As of 8-8-2023</option>
                                                     <option value="All_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Gen_Cuts_V6_7_19_2023/Unfolding_Images/">As of 8-3-2023</option>
                                                     <!-- <option value="All_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Gen_Cuts_V2_Fixed_6_21_2023/Unfolding_Images/">As of 7-19-2023</option> -->
+                                                </optgroup>
+                                                <optgroup label="Older Closure Tests">
+                                                    <option value="All_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Gen_Cuts_V6_Sim_9_5_2023/Unfolding_Images/"      title="Newer version of 'Unfolding Simulation' but made with older files. Does not have the same issue as the earlier versions of these closure tests">Unfold Sim (9-6-2023)</option>
+                                                    <option value="All_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Gen_Cuts_V7_Sim_8_29_2023/Unfolding_Images/"     title="Uses a version of the unmodulated simulated plots which do not work properly with the multidimensional unfolding procedures"                   >Unfold Sim (9-5-2023)</option>
+                                                    <option value="All_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Gen_Cuts_V7_Closure_8_31_2023/Unfolding_Images/" title="Uses a version of the modulated simulated plots which do not work properly with the multidimensional unfolding procedures"                     >Unfold Mod Sim (9-5-2023)</option>
                                                 </optgroup>
                                             </select><br/><br/>
                                         </form>
@@ -1591,18 +1599,18 @@
                                         <form id="Unfolding Option Form" name="Unfolding_Option_form">
                                             <p font="450px" id="Unfolding_Type">Select Unfolding Option:</p>
                                             <select onchange="change_picture_fit_richcap();table_bin_numbers();" id="Unfolding Option" name="Unfolding_Option" />
+                                                <option value="Data"              Title="Shows plots the pre-unfolded/acceptance corrected plots including the experimental data and the Monte Carlo Generated and Reconstructed distributions (All normalized to be plotted together)">Data Histograms</option>
+                                                <option value="Unfold"            Title="Shows all of the unfolded histograms together in the same image. May not be available in some older versions.">All Unfolded Together</option>
                                                 <option value="RooUnfold_bayes"   Title="Shows plots which were produced after applying the Bayesian Unfolding method included in the RooUnfold library">RooUnfold Bayesian</option>
                                                 <option value="Bin"               Title="Shows plots which were produced after applying bin-by-bin acceptance corrections">Bin-By-Bin Correction</option>
-                                                <option value="Data"              Title="Shows plots the pre-unfolded/acceptance corrected plots including the experimental data and the Monte Carlo Generated and Reconstructed distributions (All normalized to be plotted together)">Data Histograms</option>
-                                                <!-- <option value="Unfold"            Title="Shows all of the unfolded histograms together in the same image. May not be available in some older versions.">All Unfolded Together</option> -->
-                                                <!-- <option value="mdf"               Title="May not be available in some older versions.">Reconstructed MC Only</option>
+                                                <option value="mdf"               Title="May not be available in some older versions.">Reconstructed MC Only</option>
                                                 <optgroup label="Not Available with smearing">
                                                     <option value="rdf"           Title="May not be available in some older versions.">Experimental Data Only</option>
                                                     <option value="gdf"           Title="May not be available in some older versions.">Generated MC Only</option>
                                                 </optgroup>
                                                 <optgroup label="Only Available with Closure Tests - Without smearing">
                                                     <option value="tdf" title="The 'true' distribution refers to the generated distribution which originally produced the reconstructed data which was unfolded">True MC Only</option>
-                                                </optgroup> -->
+                                                </optgroup>
                                                 <optgroup label="Not Available with Multi-Dimensional Unfolding">
                                                     <option value="Response">Response Matrix</option>
                                                     <option value="RooUnfold_svd" Title="Shows plots which were produced after applying the SVD Unfolding method included in the RooUnfold library">RooUnfold SVD</option>
@@ -1611,11 +1619,15 @@
                                         </form>
                                         
                                         <form id="z-pT Axis Choice" name="z_pT_axis_choice">
-                                            <p font="450px" id="z-pT Axis Choice Title">z vs. P<sub>T</sub> or P<sub>T</sub> vs. z:</p>
+                                            <p font="450px" id="z-pT Axis Choice Title">Cuts and z vs. P<sub>T</sub> or P<sub>T</sub> vs. z:</p>
                                             <select onchange="change_picture_fit_richcap();" id="z-pT Axis" name="z_pT_axis" />
-                                                <optgroup label="Select 'Default' for (some) older versions">
+                                                <optgroup label="Normal Cuts - May need to select 'Default' for some versions">
                                                     <option value="">Default</option>
                                                     <option value="_Flipped">Flipped</option>
+                                                </optgroup>
+                                                <optgroup label="Uncut 2D plots - Only select for Unfolding Options 'Data Histograms', 'REC MC Only', and 'Experimental Data Only'" title="Does not effect unfolding">
+                                                    <option value="_UnCut"         title="Does not effect unfolding">Default uncut</option>
+                                                    <option value="_Flipped_UnCut" title="Does not effect unfolding">Flipped uncut</option>
                                                 </optgroup>
                                             </select><br/><br/><br/><br/><br/>
                                         </form>
@@ -2057,7 +2069,7 @@
                             </div>
 
                             <div id="divE" hidden="hidden">
-                                <img src="../../All_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Gen_Cuts_V7_8_25_2023/Unfolding_Images/z_pT_Bin_Individual/Q2_xB_Bin_1/Response_Matrix_Normal_Q2_xB_Bin_1_z_pT_Bin_1_Unfolded_Histos.png" name="pic2" width="600px" height="550px" ondblclick="PicturePopUp_click(this);">
+                                <img src="../../All_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Gen_Cuts_V8_10_3_2023/Unfolding_Images/z_pT_Bin_Individual/Q2_xB_Bin_1/Response_Matrix_Normal_Q2_xB_Bin_1_z_pT_Bin_1_Unfolded_Histos.png" name="pic2" width="600px" height="550px" ondblclick="PicturePopUp_click(this);">
                                 <!-- <img src="All_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Gen_Cuts_V7_8_11_2023/Unfolding_Images/z_pT_Bin_Individual/Q2_xB_Bin_1/Response_Matrix_Normal_Q2_xB_Bin_1_z_pT_Bin_1_Unfolded_Histos.png" name="pic2" width="600px" height="550px" ondblclick="PicturePopUp_click(this);"> -->
                             </div>
                             
@@ -2277,7 +2289,8 @@
                                 
                             <div id="div2">
                                 <!-- <img src="All_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Gen_Cuts_V7_8_11_2023/Unfolding_Images/z_pT_Bin_All/Q2_y_Bin_1/Unfolded_Histos_Q2_y_Bin_1_Bayesian.png" name="pic1" width="1300px" ondblclick="PicturePopUp_click(this);"> -->
-                                <img src="../../All_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Gen_Cuts_V7_8_25_2023/Unfolding_Images/z_pT_Bin_All/Q2_y_Bin_1/Unfolded_Histos_Q2_y_Bin_1_Bayesian.png" name="pic1" width="1300px" ondblclick="PicturePopUp_click(this);">
+                                <!-- <img src="../../All_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Gen_Cuts_V7_8_30_2023/Unfolding_Images/z_pT_Bin_All/Q2_y_Bin_1/Unfolded_Histos_Q2_y_Bin_1_Bayesian.png" name="pic1" width="1300px" ondblclick="PicturePopUp_click(this);"> -->
+                                <img src="../../All_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Gen_Cuts_V8_10_3_2023/Unfolding_Images/z_pT_Bin_All/Q2_y_Bin_1/Unfolded_Histos_Q2_y_Bin_1_Data.png" name="pic1" width="1300px" ondblclick="PicturePopUp_click(this);">
                             </div>
 
                         </form>
