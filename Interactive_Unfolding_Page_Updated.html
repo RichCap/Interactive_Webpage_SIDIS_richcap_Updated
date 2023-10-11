@@ -15,7 +15,8 @@
     <script language="JavaScript">
 
         function Current_Version_Name(Image_Version, z_pT_Bin_Number_Name, Image_Type){
-            var currentFolderVersion = "../../All_Images_Interactive_Webpage_SIDIS_richcap/Unfolding_Images/";
+            document.images.pic3.hidden = true
+            var currentFolderVersion = "All_Images_Interactive_Webpage_SIDIS_richcap/Unfolding_Images/";
             var Variable_Extra       = document.getElementById("Extra_Variable");
             var Variable_Extra_Value = Variable_Extra.value;
 
@@ -48,8 +49,8 @@
                 // }
             }
 
-            if(! currentFolderVersion.includes("../../")){
-                currentFolderVersion = "../../" + currentFolderVersion;
+            if(! currentFolderVersion.includes("")){
+                currentFolderVersion = "" + currentFolderVersion;
             }
 
             return currentFolderVersion;
@@ -148,6 +149,30 @@
             else{
                 var Pars_Controls_Hide = document.getElementById("Pars_Controls");
                 Pars_Controls_Hide.setAttribute("hidden", "hidden");
+            }
+            if(Image_Type.includes("Histo_2D_Test")){
+                Bin.setAttribute("hidden", "hidden");
+                Bin_Title.setAttribute("hidden", "hidden");
+                z_pT_Bin.setAttribute("hidden", "hidden");
+                z_pT_Bin_Title.setAttribute("hidden", "hidden");
+                Select_Table_Title.setAttribute("hidden", "hidden");
+                Select_Table_Title_2.setAttribute("hidden", "hidden");
+                Divide_Extra.setAttribute("hidden", "hidden");
+                Parameter_Options.setAttribute("hidden", "hidden");
+                Unfolding_Options.setAttribute("hidden", "hidden");
+                Delta_Options.setAttribute("hidden", "hidden");
+                New_Smearing_div.setAttribute("hidden", "hidden");
+                New_Smearing_div_2.setAttribute("hidden", "hidden");
+                Multi_Dim_Options.setAttribute("hidden", "hidden");
+                Multi_Dim_New_Options.setAttribute("hidden", "hidden");
+                Pars_Controls_Hide.setAttribute("hidden", "hidden");
+
+                var Testing_2D_Schemes_Hide = document.getElementById("Testing_2D_Schemes");
+                Testing_2D_Schemes_Hide.removeAttribute("hidden");
+            }
+            else{
+                var Testing_2D_Schemes_Hide = document.getElementById("Testing_2D_Schemes");
+                Testing_2D_Schemes_Hide.setAttribute("hidden", "hidden");
             }
 
         }
@@ -297,7 +322,9 @@
         }
 
         function Older_Page_Version_Link(){
-            var currentName = "Interactive_Unfolding_Page.html"
+            // var currentName = "Interactive_Unfolding_Page.html"
+            alert("Due to some size limitations, not all images can be uploaded from this page to the host server.\n\nMore images/updates can be saved to the GitHub page for this analysis, so this link is meant to direct you there.\n\nIf you are unable to access certain images on this page, or are interested in updates not yet uploaded here, you may be able to find the information you are looking for on this page.")
+            var currentName = "https://github.com/RichCap/Interactive_Webpage_SIDIS_richcap_Updated"
             aaa = window.open(currentName, currentName, 'height=6, width=600, scrollbars=yes, resizable=no');
         }
 
@@ -318,7 +345,7 @@
             else{
                 if(Image_Type.includes("Electron") || Image_Type.includes("Pip")){
                     alert("OLD TEST");
-                    currentName = "../../All_Images_Interactive_Webpage_SIDIS_richcap/Smearing_Images/" + Image_Type + ".png";
+                    currentName = "All_Images_Interactive_Webpage_SIDIS_richcap/Smearing_Images/" + Image_Type + ".png";
                 }
                 else{
                     var Delta_Type       = document.getElementById("Delta Type");
@@ -373,10 +400,10 @@
                                 Vs_Mom_hide.removeAttribute("hidden");
                                 dTheta_hide.removeAttribute("hidden");
                                 if(Image_Type.includes("Compare")){
-                                    currentName = "../../All_Images_Interactive_Webpage_SIDIS_richcap/Smearing_Images/" + Histo_Type_3.value + "/" + Image_Type + "/Modified_" + Delta_Type.value + "_" + Particle_Type.value + "_Histograms_Smear_Compare.png";
+                                    currentName = "All_Images_Interactive_Webpage_SIDIS_richcap/Smearing_Images/" + Histo_Type_3.value + "/" + Image_Type + "/Modified_" + Delta_Type.value + "_" + Particle_Type.value + "_Histograms_Smear_Compare.png";
                                 }
                                 else{
-                                    currentName = "../../All_Images_Interactive_Webpage_SIDIS_richcap/Smearing_Images/" + Histo_Type_3.value + "/" + Image_Type + "/Modified_" + Delta_Type.value + "_" + Particle_Type.value + "_Histograms.png";
+                                    currentName = "All_Images_Interactive_Webpage_SIDIS_richcap/Smearing_Images/" + Histo_Type_3.value + "/" + Image_Type + "/Modified_" + Delta_Type.value + "_" + Particle_Type.value + "_Histograms.png";
                                 }
                             }
                         }
@@ -384,10 +411,10 @@
                         Vs_Mom_hide.setAttribute("hidden", "hidden");
                         dTheta_hide.setAttribute("hidden", "hidden");
                         if(Image_Type.includes("Compare")){
-                            currentName = "../../All_Images_Interactive_Webpage_SIDIS_richcap/Smearing_Images/" + Histo_Type_3.value + "/" + Image_Type + "/" + Delta_Type.value + "_" + Particle_Type.value + "_Histograms_Smear_Compare.png";
+                            currentName = "All_Images_Interactive_Webpage_SIDIS_richcap/Smearing_Images/" + Histo_Type_3.value + "/" + Image_Type + "/" + Delta_Type.value + "_" + Particle_Type.value + "_Histograms_Smear_Compare.png";
                         }
                         else{
-                            currentName = "../../All_Images_Interactive_Webpage_SIDIS_richcap/Smearing_Images/" + Histo_Type_3.value + "/" + Image_Type + "/" + Delta_Type.value + "_" + Particle_Type.value + "_Histograms.png";
+                            currentName = "All_Images_Interactive_Webpage_SIDIS_richcap/Smearing_Images/" + Histo_Type_3.value + "/" + Image_Type + "/" + Delta_Type.value + "_" + Particle_Type.value + "_Histograms.png";
                         }
                     }
                 }
@@ -429,6 +456,43 @@
 
             currentName = currentFolderVersion.replace("Unfolding_Images", "Fit_Pars") + "/Fit_Par_" + Fit_Par_Element.value + "/Q2_y_Bin_" + Fit_Par_Q2_y_Bin.value + "/Fit_Par_" + Fit_Par_Element.value + "_" + Parameter_Method.value + Parameter_Smear.value + "_Q2_y_Bin_" + Fit_Par_Q2_y_Bin.value + Par_z_pT_Bin + Parameter_VS.value + ".png"
             
+            return currentName;
+        }
+
+        function change_picture_New_Binning_Tests(currentFolderVersion){
+            document.images.pic1.width  = 1070;
+            document.images.pic1.height = 409;
+
+            document.images.pic3.width  = 1070;
+            document.images.pic3.height = 409;
+            document.images.pic3.hidden = false
+
+            var Testing_2D_Schemes_Hide = document.getElementById("Testing_2D_Schemes");
+            Testing_2D_Schemes_Hide.removeAttribute("hidden");
+
+            var Histo_2D_Element     = document.getElementById("Histo_2D");
+            var Histo_2D_Q2_y_Bin    = document.getElementById("Histo_2D_Q2_y_Bin");
+            var Histo_2D_z_pT_Bin    = document.getElementById("Histo_2D_z_pT_Bin");
+
+            var Histo_2D_Method    = document.getElementById("Histo_2D_Method");
+            var Histo_2D_Smear     = document.getElementById("Histo_2D_Smear");
+            
+            var Histo_2D_Cut = "cut_Complete_SIDIS"
+            if((Histo_2D_Method.value).includes("gdf")){
+                Histo_2D_Cut = "no_cut";
+            }
+
+            currentName = currentFolderVersion.replace("Unfolding_Images", "Histo_2D_Binning_Tests") + "/Histo_2D_" + Histo_2D_Method.value + "_" + Histo_2D_Cut + Histo_2D_Smear.value + Histo_2D_Element.value + Histo_2D_Q2_y_Bin.value + ".png"
+            currentName = currentName.replace("Smeared", "smear")
+            currentName = currentName.replace("//", "/")
+
+            currentName_z_pT = currentFolderVersion.replace("Unfolding_Images", "Histo_2D_Binning_Tests") + "/Q2_y_Bin_" + Histo_2D_Q2_y_Bin.value + "/Histo_2D_" + Histo_2D_Method.value + "_" + Histo_2D_Cut + Histo_2D_Smear.value + "_Q2_y_Bin_" + Histo_2D_Q2_y_Bin.value + "_z_vs_pT_New_Bin_" + Histo_2D_z_pT_Bin.value + ".png"
+            currentName_z_pT = currentName_z_pT.replace("Smeared", "smear")
+            currentName_z_pT = currentName_z_pT.replace("//", "/")
+            currentName_z_pT = currentName_z_pT.replace("__", "_")
+
+            document.images.pic3.src = currentName_z_pT;
+
             return currentName;
         }
 
@@ -549,7 +613,7 @@
 
             var Image_Version_Input  = document.getElementById("Image_Version");
             var Image_Version        = Image_Version_Input.value;
-            var currentFolderVersion = "../../All_Images_Interactive_Webpage_SIDIS_richcap/Unfolding_Images/";
+            var currentFolderVersion = "All_Images_Interactive_Webpage_SIDIS_richcap/Unfolding_Images/";
 
             if(Image_Type.includes("Smearing_Histos")){
                 Image_Type           = Correction_Options_Select.value;
@@ -584,86 +648,92 @@
                 else{
                     if(Image_Type.includes("Fit_Par")){
                         currentName = change_picture_Fit_Pars(currentFolderVersion);
+
                     }
                     else{
-                        if(! Image_Type.includes("New_Smearing")){
-                            if(Image_Type.includes("All_Events") || Image_Type.includes("Multi_Dim")){
-                                if(Image_Type.includes("Multi_Dim_Histo_Combined")){
-                                    Multi_Dim_Options.removeAttribute("hidden");
-                                    Extra_Options.setAttribute("hidden", "hidden");
-                                    Multi_Dim_New_Options.setAttribute("hidden", "hidden");
-                                    Bin_Title.setAttribute("hidden", "hidden");
-
-                                    currentName = "../../All_Images_Interactive_Webpage_SIDIS_richcap/Multi_Dim_Histo_Combined/" + Variable_Multi_Dim.value + Smearing_Multi_Dim.value;
-                                }
-                                else{
-                                    if(Image_Type.includes("Multi_Dim")){
-                                        Multi_Dim_New_Options.removeAttribute("hidden");
+                        if(Image_Type.includes("Histo_2D_Test")){
+                            currentName = change_picture_New_Binning_Tests(currentFolderVersion);
+                        }
+                        else{
+                            if(! Image_Type.includes("New_Smearing")){
+                                if(Image_Type.includes("All_Events") || Image_Type.includes("Multi_Dim")){
+                                    if(Image_Type.includes("Multi_Dim_Histo_Combined")){
+                                        Multi_Dim_Options.removeAttribute("hidden");
                                         Extra_Options.setAttribute("hidden", "hidden");
-                                        Multi_Dim_Options.setAttribute("hidden", "hidden");
+                                        Multi_Dim_New_Options.setAttribute("hidden", "hidden");
                                         Bin_Title.setAttribute("hidden", "hidden");
 
-                                        currentName = currentFolderVersion.replace("Unfolding_Images", "Multi_Dim_Histo")  + Variable_Multi_Dim_New.value + ".png";
-                                        // alert(currentName)
+                                        currentName = "All_Images_Interactive_Webpage_SIDIS_richcap/Multi_Dim_Histo_Combined/" + Variable_Multi_Dim.value + Smearing_Multi_Dim.value;
                                     }
                                     else{
-                                        Extra_Options.removeAttribute("hidden");
-                                        Bin_Title.setAttribute("hidden", "hidden");
-                                        Multi_Dim_New_Options.setAttribute("hidden", "hidden");
-                                        Multi_Dim_Options.setAttribute("hidden", "hidden");
+                                        if(Image_Type.includes("Multi_Dim")){
+                                            Multi_Dim_New_Options.removeAttribute("hidden");
+                                            Extra_Options.setAttribute("hidden", "hidden");
+                                            Multi_Dim_Options.setAttribute("hidden", "hidden");
+                                            Bin_Title.setAttribute("hidden", "hidden");
 
-                                        currentName = currentFolderVersion + "Response_Matrix_Normal_All_Events_" + Variable_Extra.value + Smearing_Extra.value;
-                                        // alert(currentName);
-                                        if((Variable_Extra.value).includes("Multi_Dim")){
-                                            currentName = "../../All_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_New_Binning_Schemes_V7_6_7_2023/Unfolding_Images/Response_Matrix_Normal_All_Events_" + Variable_Extra.value + ".png";
+                                            currentName = currentFolderVersion.replace("Unfolding_Images", "Multi_Dim_Histo")  + Variable_Multi_Dim_New.value + ".png";
+                                            // alert(currentName)
+                                        }
+                                        else{
+                                            Extra_Options.removeAttribute("hidden");
+                                            Bin_Title.setAttribute("hidden", "hidden");
+                                            Multi_Dim_New_Options.setAttribute("hidden", "hidden");
+                                            Multi_Dim_Options.setAttribute("hidden", "hidden");
+
+                                            currentName = currentFolderVersion + "Response_Matrix_Normal_All_Events_" + Variable_Extra.value + Smearing_Extra.value;
+                                            // alert(currentName);
+                                            if((Variable_Extra.value).includes("Multi_Dim")){
+                                                currentName = "All_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_New_Binning_Schemes_V7_6_7_2023/Unfolding_Images/Response_Matrix_Normal_All_Events_" + Variable_Extra.value + ".png";
+                                            }
                                         }
                                     }
                                 }
-                            }
-                            else{
-                                // alert("Showing Unfolding Plots");
-                                if(z_pT_Bin_Number_Name.includes("All")){
-                                    // alert("Showing all z-pT Bins");
-                                    if(Image_Type.includes("_Smeared")){
-                                        alert("NOTE: Currently, the option to show the smeared unfolded plots together for every z-pT bin is unavailable.\n\nPlease select the individual z-pT option to view the unfolded histograms with the smearing function applied (to the simulation)")
-                                        // currentFolderVersion = currentFolderVersion + "Smeared/";
-                                    }
-                                    document.images.pic1.width = 1300;
-                                    document.images.pic1.height = 725;
-                                    Bin.removeAttribute("hidden");
-                                    Bin_Title.removeAttribute("hidden");
-                                    z_pT_Bin.removeAttribute("hidden");
-                                    z_pT_Bin_Title.removeAttribute("hidden");
-                                    Select_Table_Title.setAttribute("hidden", "hidden");
-                                    Select_Table_Title_2.setAttribute("hidden", "hidden");
-                                    Divide_Extra.setAttribute("hidden", "hidden");
-                                    currentName = currentFolderVersion + z_pT_Bin_Number_Name + "/" + BinNumber_Name + "/Unfolded_Histos_" + BinNumber_Name + "_" + Image_Type + ".png";
-                                    if(Image_Type.includes("Smeared") || Image_Type.includes("smear")){
-                                        currentName = currentFolderVersion + "Smeared/" + z_pT_Bin_Number_Name + "/" + BinNumber_Name + "/Unfolded_Histos_" + BinNumber_Name + "_" + Image_Type + ".png";
-                                    }
-                                }
                                 else{
-                                    // alert("Showing individual z-pT Bins");
-                                    document.images.pic1.width  = 1200;
-                                    document.images.pic1.height = 1200;
-                                    document.images.pic2.width  = 600;
-                                    document.images.pic2.height = 550;
-                                    Bin.removeAttribute("hidden");
-                                    Bin_Title.removeAttribute("hidden");
-                                    z_pT_Bin.removeAttribute("hidden");
-                                    z_pT_Bin_Title.removeAttribute("hidden");
-                                    if(! z_pT_Bin_Number_Name.includes("Flipped")){
-                                        Select_Table_Title.removeAttribute("hidden");
+                                    // alert("Showing Unfolding Plots");
+                                    if(z_pT_Bin_Number_Name.includes("All")){
+                                        // alert("Showing all z-pT Bins");
+                                        if(Image_Type.includes("_Smeared")){
+                                            alert("NOTE: Currently, the option to show the smeared unfolded plots together for every z-pT bin is unavailable.\n\nPlease select the individual z-pT option to view the unfolded histograms with the smearing function applied (to the simulation)")
+                                            // currentFolderVersion = currentFolderVersion + "Smeared/";
+                                        }
+                                        document.images.pic1.width = 1300;
+                                        document.images.pic1.height = 725;
+                                        Bin.removeAttribute("hidden");
+                                        Bin_Title.removeAttribute("hidden");
+                                        z_pT_Bin.removeAttribute("hidden");
+                                        z_pT_Bin_Title.removeAttribute("hidden");
+                                        Select_Table_Title.setAttribute("hidden", "hidden");
                                         Select_Table_Title_2.setAttribute("hidden", "hidden");
+                                        Divide_Extra.setAttribute("hidden", "hidden");
+                                        currentName = currentFolderVersion + z_pT_Bin_Number_Name + "/" + BinNumber_Name + "/Unfolded_Histos_" + BinNumber_Name + "_" + Image_Type + ".png";
+                                        if(Image_Type.includes("Smeared") || Image_Type.includes("smear")){
+                                            currentName = currentFolderVersion + "Smeared/" + z_pT_Bin_Number_Name + "/" + BinNumber_Name + "/Unfolded_Histos_" + BinNumber_Name + "_" + Image_Type + ".png";
+                                        }
                                     }
                                     else{
-                                        Select_Table_Title_2.removeAttribute("hidden");
-                                        Select_Table_Title.setAttribute("hidden", "hidden");
-                                    }
-                                    Divide_Extra.removeAttribute("hidden");
-                                    currentName = currentFolderVersion + "z_pT_Bin_Individual/" + BinNumber_Name + "/Response_Matrix_Normal_" +  BinNumber_Name + "_" + z_pT_Bin_Number_Name + ".png";
-                                    if(Image_Type.includes("Smeared") || Image_Type.includes("smear")){
-                                        currentName = currentFolderVersion + "Smeared/z_pT_Bin_Individual/" + BinNumber_Name + "/Response_Matrix_Normal_" +  BinNumber_Name + "_" + z_pT_Bin_Number_Name + "_Smeared.png";
+                                        // alert("Showing individual z-pT Bins");
+                                        document.images.pic1.width  = 1200;
+                                        document.images.pic1.height = 1200;
+                                        document.images.pic2.width  = 600;
+                                        document.images.pic2.height = 550;
+                                        Bin.removeAttribute("hidden");
+                                        Bin_Title.removeAttribute("hidden");
+                                        z_pT_Bin.removeAttribute("hidden");
+                                        z_pT_Bin_Title.removeAttribute("hidden");
+                                        if(! z_pT_Bin_Number_Name.includes("Flipped")){
+                                            Select_Table_Title.removeAttribute("hidden");
+                                            Select_Table_Title_2.setAttribute("hidden", "hidden");
+                                        }
+                                        else{
+                                            Select_Table_Title_2.removeAttribute("hidden");
+                                            Select_Table_Title.setAttribute("hidden", "hidden");
+                                        }
+                                        Divide_Extra.removeAttribute("hidden");
+                                        currentName = currentFolderVersion + "z_pT_Bin_Individual/" + BinNumber_Name + "/Response_Matrix_Normal_" +  BinNumber_Name + "_" + z_pT_Bin_Number_Name + ".png";
+                                        if(Image_Type.includes("Smeared") || Image_Type.includes("smear")){
+                                            currentName = currentFolderVersion + "Smeared/z_pT_Bin_Individual/" + BinNumber_Name + "/Response_Matrix_Normal_" +  BinNumber_Name + "_" + z_pT_Bin_Number_Name + "_Smeared.png";
+                                        }
                                     }
                                 }
                             }
@@ -702,7 +772,9 @@
                 if(currentFolderVersion.includes("SIDIS_python_Images_From_Gen_Cuts_V8") || currentFolderVersion.includes("SIDIS_python_Images_From_Gen_Cuts_V7") || currentFolderVersion.includes("SIDIS_python_Images_From_Gen_Cuts_V7_8_11_2023") || currentFolderVersion.includes("SIDIS_python_Images_From_Gen_Cuts_V6_7_19_2023") || currentFolderVersion.includes("SIDIS_python_Images_From_Gen_Cuts_V6_8_2_2023")){
                     currentName = currentName.replace("RooUnfold_bayes", "Bayesian")
                     currentName = currentName.replace("RooUnfold_svd",   "SVD")
-                    currentName = currentName.replace("_smear",          "_Smeared")
+                    if(! currentName.includes("Histo_2D_Binning_Tests")){
+                        currentName = currentName.replace("_smear",      "_Smeared")
+                    }
                 }
 
                 if(Multi_Unfold.includes("Kinematic_Comparison") && currentName.includes("z_pT_Bin_All/Q2_y_Bin")){
@@ -725,7 +797,7 @@
                 }
 
                 if(Image_Type.includes("Response_Matrix_Normal_Q2_y_Bin_All_z_pT_Bin_All_1D_MM") || Image_Type.includes("Response_Matrix_Normal_Q2_y_Bin_All_z_pT_Bin_All_1D_W")){
-                    document.images.pic1.src = "../../All_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_New_Binning_Schemes_V5_6_5_2023/" + Image_Type + ".png"
+                    document.images.pic1.src = "All_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_New_Binning_Schemes_V5_6_5_2023/" + Image_Type + ".png"
                 }
 
             }
@@ -749,7 +821,7 @@
             var Image_Version_Input  = document.getElementById("Image_Version");
             var Image_Version        = Image_Version_Input.value;
             Image_Version            = Image_Version.replace("Unfolding_Images", "Smearing_Images");
-            var currentFolderVersion = "../../All_Images_Interactive_Webpage_SIDIS_richcap/Smearing_Images_New/";
+            var currentFolderVersion = "All_Images_Interactive_Webpage_SIDIS_richcap/Smearing_Images_New/";
             currentFolderVersion     = Current_Version_Name(Image_Version, z_pT_Bin_Number_Name, Image_Type);
             // alert(currentFolderVersion);
 
@@ -827,7 +899,7 @@
             var Image_Version_Input = document.getElementById("Image_Version");
             var Image_Version       = Image_Version_Input.value;
 
-            var currentFolderVersion = "../../All_Images_Interactive_Webpage_SIDIS_richcap/Unfolding_Images/";
+            var currentFolderVersion = "All_Images_Interactive_Webpage_SIDIS_richcap/Unfolding_Images/";
             currentFolderVersion     = Current_Version_Name(Image_Version, z_pT_Bin_Number_Name, Histo_Type_Input_Name);
 
             var currentName  = currentFolderVersion + "z_pT_Bin_Individual/" + BinNumber_Name + "/Response_Matrix_Normal_" +  BinNumber_Name + "_" + z_pT_Bin_Number_Name + ".png";
@@ -889,7 +961,7 @@
 
             var Image_Version_Input  = document.getElementById("Image_Version");
             var Image_Version        = Image_Version_Input.value;
-            var currentFolderVersion = "../../All_Images_Interactive_Webpage_SIDIS_richcap/Unfolding_Images/";
+            var currentFolderVersion = "All_Images_Interactive_Webpage_SIDIS_richcap/Unfolding_Images/";
             currentFolderVersion     = Current_Version_Name(Image_Version, z_pT_Bin_Number_Name, Histo_Type_Input_Name);
 
             var currentName  = currentFolderVersion + "z_pT_Bin_Individual/" + BinNumber_Name + "/Response_Matrix_Normal_" +  BinNumber_Name + "_" + z_pT_Bin_Number_Name + ".png";
@@ -1387,6 +1459,8 @@
                                                     <option value="Unfold_smear" id="Unfold_smear_select" title="These images apply a momentum smearing function to the MC REC distributions (See 'Smearing/Correction Histos' for more info)">Smeared Unfolded</option>
                                                     <!-- <option value="Pars_smear"   id="Pars_smear_select">Smeared Fits of φ<sub>h</sub></option> -->
                                                     <option value="Fit_Par" id="Fit_Par_select" title="These images show how the fit parameters from the phi_h plots appear as functions of z and pT">Fit Pars</option>
+                                                    <option value="Histo_2D_Test" id="Histo_2D_Test_select" title="These images are used to help develop new 2D Binning schemes (Preliminary)">Testing New Bins</option>
+
                                                 </optgroup>
                                                 <optgroup label="Extra Image Types">
                                                     <option value="New_Smearing"    title="These images show the plots related to momentum corrections/smearing">Smearing/Correction Histos</option>
@@ -1442,7 +1516,8 @@
                                 
                                 <button onclick="README_Update_Link();"><span title="Link to the README.md file which contains update notes for this page">Update Notes</span></button>
                                 <button onclick="Analysis_Note_Link();"       id="Analysis_Note_Button"       name="Analysis_Note_Button"><span       title="Link to the currently released Analysis Note">Analysis Note</span></button>
-                                <button onclick="Older_Page_Version_Link();"  id="Link_to_Old_Webpage_Button" name="Link_to_Old_Webpage_Button"><span title="This is a link to an older version of this webpage">Older Images</span></button>
+                                <!-- <button onclick="Older_Page_Version_Link();"  id="Link_to_Old_Webpage_Button" name="Link_to_Old_Webpage_Button"><span title="This is a link to an older version of this webpage">Older Images</span></button> -->
+                                <button onclick="Older_Page_Version_Link();"  id="Link_to_Old_Webpage_Button" name="Link_to_Old_Webpage_Button"><span title="This is a link to the GitHub repository of this webpage (for more images/recent updates that may not appear here)">GitHub Page</span></button>
                                 
                             </div>
 
@@ -1518,32 +1593,52 @@
 
                             </div>
 
-                            <!-- <div id="Pars_Controls_Individual_VS_Z" hidden="hidden">
-                                <form id="Par_Bin_Select_Form_VS_Z" name="Par_Bin_Select_Form_VS_Z">
-                                    <p font="450px">Select Bin:</p>
-                                    <select onchange="change_picture_fit_richcap();" id="Par_Bin_Select_VS_Z" name="Par_Bin_Select_VS_Z" />
-                                    <option value="" title="Plots all bins together based on the option selected for Variable/Dimension">Plot Together</option>
-                                        <optgroup label="Plot Individual Bins:">
-                                            <option value="A" title="Refers to the Multiplicity term">A</option>
-                                            <option value="B" title="Refers to the Cos(phi) Moment" selected>B</option>
-                                            <option value="C" title="Refers to the Cos(2*phi) Moment">C</option>
+                            <div id="Testing_2D_Schemes" hidden="hidden">
+                                <form id="Histo_2D_Select_Form" name="Histo_2D_Select_Form">
+                                    <p font="450px">Select Variables:</p>
+                                    <select onchange="change_picture_fit_richcap();" id="Histo_2D" name="Histo_2D" />
+                                        <optgroup label="Select which variables to plot:">
+                                            <option value="_Q2_vs_y_New_Bin_">Q2 vs y (New Test Bins)</option>
                                         </optgroup>
                                     </select><br/><br/>
+                                </form> 
+
+                                <form id="Histo_2D_Smear_Select_Form" name="Histo_2D_Smear_Select_Form">
+                                    <p font="450px">Select Smearing:</p>
+                                    <select onchange="change_picture_fit_richcap();" id="Histo_2D_Smear" name="Histo_2D_Smear" />
+                                        <optgroup label="Select whether the smeared plots are to be used:">
+                                            <option value="_no_smear_"       title="Not applying Smearing Function">Unsmeared</option>
+                                            <!-- <option value="_Smear" title="Applying Smearing Function">Smeared</option> -->
+                                        </optgroup>
+                                    </select><br/><br/>
+                                </form> 
+
+                                <form id="Histo_2D_Method_Select_Form" name="Histo_2D_Method_Select_Form">
+                                    <p font="450px">Select Data-Type:</p>
+                                    <select onchange="change_picture_fit_richcap();" id="Histo_2D_Method" name="Histo_2D_Method" />
+                                        <optgroup label="Select the data type used to make the plots:">
+                                            <option value="rdf" title="Experimental Data  (before corrections)">Experimental</option>
+                                            <option value="mdf" title="Reconstructed Monte Carlo">MC REC</option>
+                                            <option value="gdf" title="Generated Monte Carlo">MC GEN</option>
+                                            <option value="adf" title="Uses a Bin-by-Bin Acceptance Correction on the 2D plots to determine the distributions">Acceptance Corrected</option>
+                                        </optgroup>
+                                    </select><br/><br/>
+                                </form> 
+
+                                <form id="Histo_2D_Q2_y_Bin_Form" name="Histo_2D_Q2_y_Bin_Form">
+                                    <p font="450px">Q<sup>2</sup>-y Bin: <span id="sliderValue_4">1</span></p>
+                                    <input type="range" min="1" max="39" value="1" onchange="change_picture_fit_richcap(); handleSliderChange(event);" id="Histo_2D_Q2_y_Bin" name="Histo_2D_Q2_y_Bin">
                                 </form>
+
+
+                                <form id="Histo_2D_z_pT_Bin_Form" name="Histo_2D_z_pT_Bin_Form">
+                                    <p font="450px">z-P<sub>T</sub> Bin: <span id="sliderValue_5">1</span></p>
+                                    <input type="range" min="1" max="42" value="1" onchange="change_picture_fit_richcap(); handleSliderChange_z_pT(event);" id="Histo_2D_z_pT_Bin" name="Histo_2D_z_pT_Bin">
+                                </form>
+                                <br/>
+
                             </div>
-                            <div id="Pars_Controls_Individual_VS_PT" hidden="hidden">
-                                <form id="Par_Bin_Select_Form_VS_PT" name="Par_Bin_Select_Form_VS_PT">
-                                    <p font="450px">Select Bin:</p>
-                                    <select onchange="change_picture_fit_richcap();" id="Par_Bin_Select_VS_PT" name="Par_Bin_Select_VS_PT" />
-                                    <option value="" title="Plots all bins together based on the option selected for Variable/Dimension">Plot Together</option>
-                                        <optgroup label="Plot Individual Bins:">
-                                            <option value="A" title="Refers to the Multiplicity term">A</option>
-                                            <option value="B" title="Refers to the Cos(phi) Moment" selected>B</option>
-                                            <option value="C" title="Refers to the Cos(2*phi) Moment">C</option>
-                                        </optgroup>
-                                    </select><br/><br/>
-                                </form>
-                            </div> -->
+
 
                             <div id="div01">
                                 <table>
@@ -1678,16 +1773,26 @@
                                 const sliderValue   = document.getElementById("sliderValue");
                                 const sliderValue_2 = document.getElementById("sliderValue_2");
                                 const sliderValue_3 = document.getElementById("sliderValue_3");
+                                const sliderValue_4 = document.getElementById("sliderValue_4");
                                 function handleSliderChange(event){
                                     const newValue          = event.target.value;
                                     sliderValue.innerText   = newValue;
                                     sliderValue_2.innerText = newValue;
                                     sliderValue_3.innerText = newValue;
+                                    sliderValue_4.innerText = newValue;
                                     // Do something with the new value, such as updating some other parts of the page
+                                }
+                                const sliderValue_5 = document.getElementById("sliderValue_5");
+                                function handleSliderChange_z_pT(event){
+                                    const newValue          = event.target.value;
+                                    sliderValue_5.innerText = newValue;
                                 }
                                 slider.addEventListener("input",   handleSliderChange);
                                 slider_2.addEventListener("input", handleSliderChange);
                                 slider_3.addEventListener("input", handleSliderChange);
+                                slider_4.addEventListener("input", handleSliderChange);
+                                slider_5.addEventListener("input", handleSliderChange_z_pT);
+
                             </script>
 
 
@@ -2069,7 +2174,7 @@
                             </div>
 
                             <div id="divE" hidden="hidden">
-                                <img src="../../All_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Gen_Cuts_V8_10_3_2023/Unfolding_Images/z_pT_Bin_Individual/Q2_xB_Bin_1/Response_Matrix_Normal_Q2_xB_Bin_1_z_pT_Bin_1_Unfolded_Histos.png" name="pic2" width="600px" height="550px" ondblclick="PicturePopUp_click(this);">
+                                <img src="All_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Gen_Cuts_V8_10_3_2023/Unfolding_Images/z_pT_Bin_Individual/Q2_xB_Bin_1/Response_Matrix_Normal_Q2_xB_Bin_1_z_pT_Bin_1_Unfolded_Histos.png" name="pic2" width="600px" height="550px" ondblclick="PicturePopUp_click(this);">
                                 <!-- <img src="All_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Gen_Cuts_V7_8_11_2023/Unfolding_Images/z_pT_Bin_Individual/Q2_xB_Bin_1/Response_Matrix_Normal_Q2_xB_Bin_1_z_pT_Bin_1_Unfolded_Histos.png" name="pic2" width="600px" height="550px" ondblclick="PicturePopUp_click(this);"> -->
                             </div>
                             
@@ -2289,8 +2394,9 @@
                                 
                             <div id="div2">
                                 <!-- <img src="All_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Gen_Cuts_V7_8_11_2023/Unfolding_Images/z_pT_Bin_All/Q2_y_Bin_1/Unfolded_Histos_Q2_y_Bin_1_Bayesian.png" name="pic1" width="1300px" ondblclick="PicturePopUp_click(this);"> -->
-                                <!-- <img src="../../All_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Gen_Cuts_V7_8_30_2023/Unfolding_Images/z_pT_Bin_All/Q2_y_Bin_1/Unfolded_Histos_Q2_y_Bin_1_Bayesian.png" name="pic1" width="1300px" ondblclick="PicturePopUp_click(this);"> -->
-                                <img src="../../All_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Gen_Cuts_V8_10_3_2023/Unfolding_Images/z_pT_Bin_All/Q2_y_Bin_1/Unfolded_Histos_Q2_y_Bin_1_Data.png" name="pic1" width="1300px" ondblclick="PicturePopUp_click(this);">
+                                <!-- <img src="All_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Gen_Cuts_V7_8_30_2023/Unfolding_Images/z_pT_Bin_All/Q2_y_Bin_1/Unfolded_Histos_Q2_y_Bin_1_Bayesian.png" name="pic1" width="1300px" ondblclick="PicturePopUp_click(this);"> -->
+                                <img src="All_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Gen_Cuts_V8_10_3_2023/Unfolding_Images/z_pT_Bin_All/Q2_y_Bin_1/Unfolded_Histos_Q2_y_Bin_1_Data.png" name="pic1" width="1300px" ondblclick="PicturePopUp_click(this);">
+                                <img src="All_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Gen_Cuts_V8_10_3_2023/Unfolding_Images/z_pT_Bin_All/Q2_y_Bin_1/Unfolded_Histos_Q2_y_Bin_1_Data.png" name="pic3" width="1300px" ondblclick="PicturePopUp_click(this);" hidden="hidden">
                             </div>
 
                         </form>

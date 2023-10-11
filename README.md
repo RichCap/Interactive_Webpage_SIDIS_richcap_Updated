@@ -1,12 +1,20 @@
 # Interactive Web page for Richard Capobianco's Multidimensional SIDIS Analysis of CLAS12 data
 
-This README.md file contains update notes and links related to the work shown in the following web page: https://userweb.jlab.org/~richcap/Interactive_Webpage_SIDIS_richcap/Interactive_Unfolding_Page.html
+This README.md file contains update notes and links related to the work shown in the following web page: https://userweb.jlab.org/~richcap/Interactive_Webpage_SIDIS_richcap/Interactive_Unfolding_Page_Updated.html
 
 ## Links
 * Link to the files/images used in the web page linked above: https://userweb.jlab.org/~richcap/
 * Link to main analysis code (Github): https://github.com/RichCap/SIDIS_Analysis_CLAS12_RichCap/tree/master
+* Link to this webpage's Github page: https://github.com/RichCap/Interactive_Webpage_SIDIS_richcap_Updated
 
 ## Updates/Notes
+* On 10-11-2023:
+    * Added the image folder(s) back to the GitHub repository
+    * Added link to this repository on the webpage (replaced link to older version of the page which is still in this repository)
+    * Many updates since previous note (not all changes might be listed below)
+        * Updated all pages in some way (except the momentum correction/smearing pages which are largely the same)
+        * Added new image folders for testing new Q2-y-z-pT bins (in-progress)
+
 * On 8-28-2023:
     * Updated main webpage with new closure tests including the unfolding of modulated and unmodulated Monte Carlo datasets (treated in the same way as the experimental data set)
         * The modulated Monte Carlo results demonstrate our ability to use a Monte Carlo Response matrix that does not have modulations to unfold a dataset that does have modulations in the phi_h distribution
