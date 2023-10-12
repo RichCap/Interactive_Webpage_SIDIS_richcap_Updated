@@ -3,4 +3,6 @@
 *.DS_Store
 .DS_Store
 All_Images/.DS_Store
+*.txt
+*/Text_Files/*
 
