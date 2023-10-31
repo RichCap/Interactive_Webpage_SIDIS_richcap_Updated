@@ -8,6 +8,13 @@ This README.md file contains update notes and links related to the work shown in
 * Link to this webpage's Github page: https://github.com/RichCap/Interactive_Webpage_SIDIS_richcap_Updated
 
 ## Updates/Notes
+* On 10-30-2023:
+    * Added new versions of images
+        * Improved fits for more reliable Parameter plots (mainly in Q2-y bins 1, 2, 5, and 17)
+        * Some images with particularly bad fits (when shown with the "Plot All Bins Together" option) will be highlighted in red
+            * Meant to help identify plots that need help to improve the fits in future versions (work-in-progress)
+
+
 * On 10-11-2023:
     * Added the image folder(s) back to the GitHub repository
     * Added link to this repository on the webpage (replaced link to older version of the page which is still in this repository)
