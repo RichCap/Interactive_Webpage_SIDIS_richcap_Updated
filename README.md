@@ -8,6 +8,11 @@ This README.md file contains update notes and links related to the work shown in
 * Link to this webpage's Github page: https://github.com/RichCap/Interactive_Webpage_SIDIS_richcap_Updated
 
 ## Updates/Notes
+* On 12-5-2023:
+    * Updated the Analysis Note (updated for DNP-JPS 2023 Release)
+    * Updating the images to be in more agreement with the new Analysis Note
+        * Not done updating with this version (will be rerunning the code together to get the final DNP-JPS release images)
+
 * On 10-30-2023:
     * Added new versions of images
         * Improved fits for more reliable Parameter plots (mainly in Q2-y bins 1, 2, 5, and 17)

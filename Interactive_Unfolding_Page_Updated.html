@@ -28,7 +28,7 @@
                 }
             }
             if(Image_Version.includes("Current")){
-                currentFolderVersion = "All_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Gen_Cuts_V8_10_30_2023/Unfolding_Images/";
+                currentFolderVersion = "All_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Gen_Cuts_V8_11_16_2023/Unfolding_Images/";
             }
             if(Image_Version.includes("Old_V4")){
                 currentFolderVersion = "All_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Gen_Cuts_V2_Fixed_6_21_2023/Unfolding_Images/";
@@ -310,7 +310,9 @@
         }
 
         function Analysis_Note_Link(){
-            var currentName = "Measurement_of_Cosphi_and_Cos2phi_Moments_of_the_Unpolarized_SIDIS_pi+_Cross-section_at_CLAS12-APS_Release.pdf"
+            // var currentName = "Measurement_of_Cosphi_and_Cos2phi_Moments_of_the_Unpolarized_SIDIS_pi+_Cross-section_at_CLAS12-APS_Release.pdf"
+            var currentName = "Measurement_of_Cosphi_and_Cos2phi_Moments_of_the_Unpolarized_SIDIS_pi+_Cross-section_at_CLAS12-DNP-JPS_Release.pdf"
+            
             aaa = window.open(currentName, currentName, 'height=6, width=600, scrollbars=yes, resizable=yes');
         }
 
@@ -1505,19 +1507,20 @@
                                             <psmall id="psmall" font="5px">Update Version:  </psmall>
                                             <select onchange="change_picture_fit_richcap();" id="Image_Version" name="Image_Version">
                                                 <optgroup label="Current Version">
-                                                    <option value="Current" title="Last Updated on 10-30-2023">Latest Version</option>
+                                                    <option value="Current" title="Last Updated on 12-5-2023">Latest Version</option>
                                                     <!-- <option value="Current_gen_cut">Latest (gen cut) Version</option> -->
                                                     <!-- <option value="Current_y_bin_Extra">Extra Parameter Version</option> -->
                                                 </optgroup>
-                                                <optgroup label="Unfolding Closure Tests" title="Last Updated on 9-8-2023">
+                                                <optgroup label="Unfolding Closure Tests" title="Last Updated Modulated Simulation on 12-5-2023 (other Simulation was last updated on 9-8-2023)">
                                                     <option value="All_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Gen_Cuts_V8_Sim_9_8_2023/Unfolding_Images/"          title="Using MC REC in place of Experimental data to test the unfolding procedures. The simulation is unchanged before being unfolded by itself.">Unfolding Simulation</option>
-                                                    <option value="All_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Gen_Cuts_V8_Closure_9_8_2023/Unfolding_Images/"       title="Using a modulated version of MC REC in place of Experimental data to test the unfolding procedures. MC TRUE is considered to be the modulated generated distribution that should be returned by the unfolding procedures while the Response Matrices do not include any of the modulations added by this test">Unfolding (Mod) Simulation</option>
+                                                    <option value="All_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Gen_Cuts_V8_Closure_11_7_2023/Unfolding_Images/"      title="Using a modulated version of MC REC in place of Experimental data to test the unfolding procedures. MC TRUE is considered to be the modulated generated distribution that should be returned by the unfolding procedures while the Response Matrices do not include any of the modulations added by this test">Unfolding (Mod) Simulation</option>
                                                     <!-- <option value="All_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Gen_Cuts_V7_Sim_Modulated_8_17_2023/Unfolding_Images/" title="This is a combination of the other two closure tests">Unfolding (Mod) Simulation</option> -->
                                                     <!-- <option value="All_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Gen_Cuts_V7_Modulated_8_14_2023/Unfolding_Images/"     title="Modulated the MC GEN and REC data with estimated cosine moments to test the unfolding procedures with a 'different' simulation. The Response Matrices are the plots which include the modulations while the Experimental data is still being used as the dataset to be unfolded">Modulated Simulation</option> -->
                                                     <!-- <option value="Sim_y_bin"                                                                                                                   title="Using MC REC in place of Experimental data to test the unfolding procedures">Unfolding Simulation</option> -->
                                                     <!-- <option value="Sim_y_bin_Extra">Unfolding Test (Extra Pars)</option> -->
                                                 </optgroup>
                                                 <optgroup label="Older Versions">
+                                                    <option value="All_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Gen_Cuts_V8_10_30_2023/Unfolding_Images/">As of 12-5-2023</option>
                                                     <option value="All_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Gen_Cuts_V8_10_11_2023/Unfolding_Images/">As of 10-30-2023</option>
                                                     <option value="All_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Gen_Cuts_V8_10_3_2023/Unfolding_Images/">As of 10-10-2023</option>
                                                     <option value="All_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Gen_Cuts_V8_9_7_2023/Unfolding_Images/" >As of 10-2-2023</option>
@@ -1527,6 +1530,8 @@
                                                     <!-- <option value="All_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Gen_Cuts_V2_Fixed_6_21_2023/Unfolding_Images/">As of 7-19-2023</option> -->
                                                 </optgroup>
                                                 <optgroup label="Older Closure Tests">
+                                                    <!-- <option value="All_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Gen_Cuts_V8_Sim_9_8_2023/Unfolding_Images/"      >Unfold Sim ()</option> -->
+                                                    <option value="All_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Gen_Cuts_V8_Closure_9_8_2023/Unfolding_Images/"  >Unfold Mod Sim (9-8-2023)</option>
                                                     <option value="All_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Gen_Cuts_V6_Sim_9_5_2023/Unfolding_Images/"      title="Newer version of 'Unfolding Simulation' but made with older files. Does not have the same issue as the earlier versions of these closure tests">Unfold Sim (9-6-2023)</option>
                                                     <option value="All_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Gen_Cuts_V7_Sim_8_29_2023/Unfolding_Images/"     title="Uses a version of the unmodulated simulated plots which do not work properly with the multidimensional unfolding procedures"                   >Unfold Sim (9-5-2023)</option>
                                                     <option value="All_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Gen_Cuts_V7_Closure_8_31_2023/Unfolding_Images/" title="Uses a version of the modulated simulated plots which do not work properly with the multidimensional unfolding procedures"                     >Unfold Mod Sim (9-5-2023)</option>
@@ -1561,10 +1566,10 @@
                                     <!-- <select onchange="change_z_pT_Fit_Center_Select(); change_picture_fit_richcap();" id="Parameter_VS" name="Parameter_VS" /> -->
                                     <select onchange="change_picture_fit_richcap();" id="Parameter_VS" name="Parameter_VS" />
                                         <optgroup label="Select which variable/dimension to plot the parameters against:">
-                                            <option value="_phi_t_VS_PT" title="These images use the 1D (unfolded) plots">Plot vs pT (1D)</option>
                                             <option value="_phi_t_VS_Z"  title="These images use the 1D (unfolded) plots">Plot vs z (1D)</option>
-                                            <option value="_Multi_Dim_z_pT_Bin_y_bin_phi_t_VS_PT" title="These images use the plots created for the multidimensional unfolding procedures">Plot vs pT (Multi-Dim)</option>
+                                            <option value="_phi_t_VS_PT" title="These images use the 1D (unfolded) plots">Plot vs pT (1D)</option>
                                             <option value="_Multi_Dim_z_pT_Bin_y_bin_phi_t_VS_Z"  title="These images use the plots created for the multidimensional unfolding procedures">Plot vs z (Multi-Dim)</option>
+                                            <option value="_Multi_Dim_z_pT_Bin_y_bin_phi_t_VS_PT" title="These images use the plots created for the multidimensional unfolding procedures">Plot vs pT (Multi-Dim)</option>
                                         </optgroup>
                                     </select><br/><br/>
                                 </form> 
@@ -2198,7 +2203,7 @@
                             </div>
 
                             <div id="divE" hidden="hidden">
-                                <img src="All_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Gen_Cuts_V8_10_11_2023/Unfolding_Images/z_pT_Bin_Individual/Q2_xB_Bin_1/Response_Matrix_Normal_Q2_xB_Bin_1_z_pT_Bin_1_Unfolded_Histos.png" name="pic2" width="600px" height="550px" ondblclick="PicturePopUp_click(this);">
+                                <img src="All_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Gen_Cuts_V8_11_16_2023/Unfolding_Images/z_pT_Bin_Individual/Q2_xB_Bin_1/Response_Matrix_Normal_Q2_xB_Bin_1_z_pT_Bin_1_Unfolded_Histos.png" name="pic2" width="600px" height="550px" ondblclick="PicturePopUp_click(this);">
                                 <!-- <img src="All_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Gen_Cuts_V7_8_11_2023/Unfolding_Images/z_pT_Bin_Individual/Q2_xB_Bin_1/Response_Matrix_Normal_Q2_xB_Bin_1_z_pT_Bin_1_Unfolded_Histos.png" name="pic2" width="600px" height="550px" ondblclick="PicturePopUp_click(this);"> -->
                             </div>
                             
@@ -2419,8 +2424,8 @@
                             <div id="div2">
                                 <!-- <img src="All_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Gen_Cuts_V7_8_11_2023/Unfolding_Images/z_pT_Bin_All/Q2_y_Bin_1/Unfolded_Histos_Q2_y_Bin_1_Bayesian.png" name="pic1" width="1300px" ondblclick="PicturePopUp_click(this);"> -->
                                 <!-- <img src="All_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Gen_Cuts_V7_8_30_2023/Unfolding_Images/z_pT_Bin_All/Q2_y_Bin_1/Unfolded_Histos_Q2_y_Bin_1_Bayesian.png" name="pic1" width="1300px" ondblclick="PicturePopUp_click(this);"> -->
-                                <img src="All_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Gen_Cuts_V8_10_11_2023/Unfolding_Images/z_pT_Bin_All/Q2_y_Bin_1/Unfolded_Histos_Q2_y_Bin_1_Data.png" name="pic1" width="1300px" ondblclick="PicturePopUp_click(this);">
-                                <img src="All_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Gen_Cuts_V8_10_11_2023/Unfolding_Images/z_pT_Bin_All/Q2_y_Bin_1/Unfolded_Histos_Q2_y_Bin_1_Data.png" name="pic3" width="1300px" ondblclick="PicturePopUp_click(this);" hidden="hidden">
+                                <img src="All_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Gen_Cuts_V8_11_16_2023/Unfolding_Images/z_pT_Bin_All/Q2_y_Bin_1/Unfolded_Histos_Q2_y_Bin_1_Data.png" name="pic1" width="1300px" ondblclick="PicturePopUp_click(this);">
+                                <img src="All_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Gen_Cuts_V8_11_16_2023/Unfolding_Images/z_pT_Bin_All/Q2_y_Bin_1/Unfolded_Histos_Q2_y_Bin_1_Data.png" name="pic3" width="1300px" ondblclick="PicturePopUp_click(this);" hidden="hidden">
                             </div>
 
                         </form>
