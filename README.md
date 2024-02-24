@@ -8,6 +8,20 @@ This README.md file contains update notes and links related to the work shown in
 * Link to this webpage's Github page: https://github.com/RichCap/Interactive_Webpage_SIDIS_richcap_Updated
 
 ## Updates/Notes
+* On 2-23-2024:
+    * Updated the webpage to feature fewer image options (save space on the server)
+        * For full/older versions of the available plots, see the GitHub Page for relevant files
+    * Added new preliminary versions of the Q2-y/z-pT bins being tested (see "Testing New Bins")
+        * Does not impact other images shown
+    * Added a text file to show the values of the Fit Parameters in different Q2-y/z-pT Bins
+        * See the button in Image Type: "Fit Parameters"
+    * Added information regarding the statistics in each Kinematic Bin
+        * For this information, see the individual 'Unfolding Options' with the menu option "Select the z-PT Bin:" being set to "Plot All Bins Together"
+            * Individual 'Unfolding Options' means anything in the "Select Unfolding Option:" menu other than "Data Histograms" and "All Unfolded Together"
+        * May update this further shortly to be included in other plots
+    * Temporarily removed some options like Smearing and 3D unfolding while making this update (will likely restore these options in the next update)
+
+
 * On 12-5-2023:
     * Updated the Analysis Note (updated for DNP-JPS 2023 Release)
     * Updating the images to be in more agreement with the new Analysis Note
