@@ -21,7 +21,19 @@
             var Variable_Extra_Value = Variable_Extra.value;
 
             if(Image_Version.includes("Web_Only")){
-                currentFolderVersion = "Web_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Gen_Cuts_V8_2_23_2024/Unfolding_Images/"
+                // currentFolderVersion = "Web_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Gen_Cuts_V8_2_25_2024/Unfolding_Images/"
+                currentFolderVersion = "Web_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Gen_Cuts_V8_2_29_2024/Unfolding_Images/"
+                if(Image_Version == "Web_Only_Background"){
+                    currentFolderVersion = "Web_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_CrossCheck_V3_2_27_2024/Unfolding_Images/"
+                }
+                if(Image_Version == "Web_Only_New"){
+                    // currentFolderVersion = "Web_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_New_Q2_Y_Bins_V2_2_28_2024/Unfolding_Images/"
+                    currentFolderVersion = "Web_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_New_Q2_Y_Bins_V2_3_3_2024/Unfolding_Images/"
+                }
+                if(Image_Version == "Web_Only_Pass_2_New"){
+                    // currentFolderVersion = "Web_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Pass_2_New_Q2_Y_Bins_V2_2_28_2024/Unfolding_Images/"
+                    currentFolderVersion = "Web_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Pass_2_New_Q2_Y_Bins_V2_3_6_2024/Unfolding_Images/"
+                }
                 if(Image_Type.includes("New_Smearing")){
                     currentFolderVersion = "Web_Images_Interactive_Webpage_SIDIS_richcap/Smearing_Images_New/";
                 }
@@ -334,9 +346,42 @@
         }
 
         function Fit_Parameter_txt_File(){
+            // alert("Running Fit_Parameter_txt_File(...)")
+            var Image_Version_Input = document.getElementById("Image_Version");
+            var Image_Version       = Image_Version_Input.value;
+            var currentDirectoryName = Current_Version_Name(Image_Version, "N/A", "N/A");
+            // var currentDirectoryName = Current_Version_Name("Web_Only", "N/A", "N/A");
+            var Text_File_Version = currentDirectoryName.replace("Web_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_", "")
+            Text_File_Version = Text_File_Version.replace("/Unfolding_Images/", "")
+            var Text_File_Name = "Parameters_" + Text_File_Version + "_Q2_y_Bins_Combined.txt"
+
+            var currentName = currentDirectoryName.replace("Unfolding_Images/", "") + Text_File_Name;
+            aaa = window.open(currentName, currentName, 'height=6, width=600, scrollbars=yes, resizable=no');
+            // alert("Done")
+        }
+
+        function Statistics_txt_File(){
+            // alert("Running Statistics_txt_File(...)")
+            var Image_Version_Input = document.getElementById("Image_Version");
+            var Image_Version       = Image_Version_Input.value;
+            var currentDirectoryName = Current_Version_Name(Image_Version, "N/A", "N/A");
+            // var currentDirectoryName = Current_Version_Name("Web_Only", "N/A", "N/A");
+            var Text_File_Version = currentDirectoryName.replace("Web_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_", "")
+            Text_File_Version = Text_File_Version.replace("/Unfolding_Images/", "")
+            var Text_File_Name = "Statistics_" + Text_File_Version + "_Q2_y_Bins_Combined.txt"
+
+            var currentName = currentDirectoryName.replace("Unfolding_Images/", "") + Text_File_Name;
+            aaa = window.open(currentName, currentName, 'height=6, width=600, scrollbars=yes, resizable=no');
+            // alert("Done")
+        }
+
+        function Bin_Statistics_txt_File(){
             var currentDirectoryName = Current_Version_Name("Web_Only", "N/A", "N/A");
 
-            var Text_File_Name = "Parameters_Gen_Cuts_V8_2_23_2024_Q2_y_Bins_Combined.txt"
+            var Text_File_Version = currentDirectoryName.replace("Web_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_", "")
+            Text_File_Version = Text_File_Version.replace("/Unfolding_Images/", "")
+
+            var Text_File_Name = "Statistics_" + str(Text_File_Version) + "_Q2_y_Bins_Combined.txt"
 
             var currentName = currentDirectoryName.replace("Unfolding_Images/", "") + Text_File_Name;
             aaa = window.open(currentName, currentName, 'height=6, width=600, scrollbars=yes, resizable=no');
@@ -512,6 +557,7 @@
                 currentName_z_pT = currentName_z_pT.replace("Smeared", "smear")
                 currentName_z_pT = currentName_z_pT.replace("//", "/")
                 currentName_z_pT = currentName_z_pT.replace("__", "_")
+                currentName_z_pT = currentName_z_pT.replace("_Flipped", "")
 
                 document.images.pic3.src = currentName_z_pT;
             }
@@ -635,6 +681,10 @@
             var z_pT_Bin_Title            = document.getElementById("z-pT Bin Title");
             var z_pT_Axis_Title           = document.getElementById("z-pT Axis");
             var z_pT_Axis_Title_text      = z_pT_Axis_Title.value;
+            if((! Image_Type.includes("Unfold")) && z_pT_Axis_Title_text != ""){
+                alert("Must set axis option to 'default' instead of 'Flipped'")
+                z_pT_Axis_Title_text = ""
+            }
             var Multi_Unfold_doc          = document.getElementById("Multi_Unfold");
             var Multi_Unfold              = Multi_Unfold_doc.value;
             var Divide_Extra              = document.getElementById("divE");
@@ -813,7 +863,7 @@
                 currentName     = currentName.replace("Kinematic_Comparison_Response_Matrix_Normal", "Kinematic_Comparison");
                 currentName     = currentName.replace("Only_Kinematic", "Kinematic")
 
-                if(currentFolderVersion.includes("CrossCheck") || currentFolderVersion.includes("SIDIS_python_Images_From_New_Bin_Tests_V5") || currentFolderVersion.includes("SIDIS_python_Images_From_Gen_Cuts_V8") || currentFolderVersion.includes("SIDIS_python_Images_From_Gen_Cuts_V7") || currentFolderVersion.includes("SIDIS_python_Images_From_Gen_Cuts_V7_8_11_2023") || currentFolderVersion.includes("SIDIS_python_Images_From_Gen_Cuts_V6_7_19_2023") || currentFolderVersion.includes("SIDIS_python_Images_From_Gen_Cuts_V6_8_2_2023")){
+                if(currentFolderVersion.includes("Q2_Y_Bins") || currentFolderVersion.includes("CrossCheck") || currentFolderVersion.includes("SIDIS_python_Images_From_New_Bin_Tests_V5") || currentFolderVersion.includes("SIDIS_python_Images_From_Gen_Cuts_V8") || currentFolderVersion.includes("SIDIS_python_Images_From_Gen_Cuts_V7") || currentFolderVersion.includes("SIDIS_python_Images_From_Gen_Cuts_V7_8_11_2023") || currentFolderVersion.includes("SIDIS_python_Images_From_Gen_Cuts_V6_7_19_2023") || currentFolderVersion.includes("SIDIS_python_Images_From_Gen_Cuts_V6_8_2_2023")){
                     currentName = currentName.replace("RooUnfold_bayes", "Bayesian")
                     currentName = currentName.replace("RooUnfold_svd",   "SVD")
                     if(! currentName.includes("Histo_2D_Binning_Tests") && ! currentName.includes("Histo_2D_Sector_Tests")){
@@ -1506,7 +1556,7 @@
                                             <select onchange="change_picture_fit_richcap();" id="Image_Type" name="Image_Type" />
                                                 <optgroup label="Standard Unfolding Images">
                                                     <option value="Unfold" id="Unfold_select" title="These images do not apply any additional momentum smearing to the MC REC distributions" selected>Unfolded</option>
-                                                    <!-- <option value="Unfold_smear" id="Unfold_smear_select" title="These images apply a momentum smearing function to the MC REC distributions (See 'Smearing/Correction Histos' for more info)">Smeared Unfolded</option> -->
+                                                    <option value="Unfold_smear" id="Unfold_smear_select" title="These images apply a momentum smearing function to the MC REC distributions (See 'Smearing/Correction Histos' for more info)">Smeared Unfolded</option>
                                                     <option value="Fit_Par" id="Fit_Par_select" title="These images show how the fit parameters from the phi_h plots appear as functions of z and pT">Fit Parameters</option>
                                                     <option value="Histo_2D_Test" id="Histo_2D_Test_select" title="These images are used to help develop new 2D Binning schemes (Preliminary)">Testing New Bins</option>
                                                     <option value="New_Smearing"    title="These images show the plots related to momentum corrections/smearing">Smearing/Correction Histos</option>
@@ -1518,11 +1568,31 @@
                                         <br/><br/>
 
                                         <form"> <!-- Image Version -->
-                                            <!-- <psmall id="psmall" font="5px">Update Version: </psmall> -->
-                                            <psmall id="psmall" font="5px">Last Updated: 2/23/2024</psmall>
+                                            <psmall id="psmall" font="5px">Update Version: </psmall>
+                                            <!-- <psmall id="psmall" font="5px">Last Updated: 2/25/2024</psmall> -->
+                                            <!-- <select onchange="change_picture_fit_richcap();" id="Image_Version" name="Image_Version" class="__web-inspector-hide-shortcut__"> -->
+                                            <select onchange="change_picture_fit_richcap();" id="Image_Version" name="Image_Version">
+                                                <optgroup label="Old Binning">
+                                                    <option value="Web_Only"            title="Last Updated on 2-29-2023 - Without Background Subtraction">Pass 1 - W/out BG Subtraction</option>
+                                                    <option value="Web_Only_Background" title="Last Updated on 2-27-2023 - With Background Subtraction">Pass 1 - W/ BG Subtraction</option>
+                                                    <option value="Web_Only_Pass_2"     title="Last Updated on 2-26-2023 - With Background Subtraction">Pass 2 - W/ BG Subtraction</option>
+                                                <optgroup label="New (Test) Binning">
+                                                    <option value="Web_Only_New"        title="Last Updated on 3-3-2023 - With Background Subtraction">Pass 1 - W/ BG Subtraction</option>
+                                                    <option value="Web_Only_Pass_2_New" title="Last Updated on 2-28-2023 - With Background Subtraction">Pass 2 - W/ BG Subtraction</option>
+                                                    <!-- <option value="All_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Pass_2_CrossCheck_V3_2_22_2024/Unfolding_Images/" title="Updated on 2-22-2024">Pass 2</option> -->
+                                                </optgroup>
+                                                <optgroup label="Unfolding Closure Tests/Older Versions - See GitHub" title="Not currently available on this page">
+                                                    <!-- <option onclick="Older_Page_Version_Link();">See GitHub</option> -->
+                                                    <!-- <option value="Current" title="Last Updated on 2-20-2023">Latest Version</option> -->
+                                                </optgroup>
+                                            </select><br/><br/>
+                                        </form>
+                                        
+                                        <!-- <form">
+                                            <psmall id="psmall" font="5px">Last Updated: 2/25/2024</psmall>
                                             <select onchange="change_picture_fit_richcap();" id="Image_Version" name="Image_Version" class="__web-inspector-hide-shortcut__">
                                                 <optgroup label="Current Version">
-                                                    <option value="Web_Only" title="Last Updated on 2-23-2023">Webpage Only Version</option>
+                                                    <option value="Web_Only" title="Last Updated on 2-25-2023">Webpage Only Version</option>
                                                     <option value="Current" title="Last Updated on 2-20-2023">Latest Version</option>
                                                     <option value="All_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Pass_2_CrossCheck_V3_2_22_2024/Unfolding_Images/" title="Updated on 2-22-2024">Pass 2</option>
                                                 </optgroup>
@@ -1534,7 +1604,7 @@
                                                     <option value="All_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Gen_Cuts_V8_11_16_2023/Unfolding_Images/">As of 2-4-2024</option>
                                                 </optgroup>
                                             </select><br/><br/>
-                                        </form>
+                                        </form> -->
 
                                     </thead>
                                 </table>
@@ -1712,8 +1782,9 @@
                                                 <option value="RooUnfold_bayes"   Title="Shows plots which were produced after applying the Bayesian Unfolding method included in the RooUnfold library">RooUnfold Bayesian</option>
                                                 <option value="Bin"               Title="Shows plots which were produced after applying bin-by-bin acceptance corrections">Bin-By-Bin Correction</option>
                                                 <option value="mdf"               Title="">Reconstructed MC Only</option>
+                                                <option value="Acceptance"        Title="">MC Acceptance</option>
                                                 <optgroup label="Not Available with smearing">
-                                                    <option value="rdf"           Title="Fall 2018 Inbending Pass 1">Experimental Data Only</option>
+                                                    <option value="rdf"           Title="Fall 2018 Inbending Pass 1 (or 2 - depending on 'Update Version')">Experimental Data Only</option>
                                                     <option value="gdf"           Title="">Generated MC Only</option>
                                                 </optgroup>
                                                 <optgroup label="Only Available with Closure Tests - Without smearing">
@@ -1728,14 +1799,19 @@
                                         
                                         <form id="z-pT Axis Choice" name="z_pT_axis_choice">
                                             <!-- <p font="450px" id="z-pT Axis Choice Title">Cuts and z vs. P<sub>T</sub> or P<sub>T</sub> vs. z (Disabled):</p> -->
-                                            <p font="450px" id="z-pT Axis Choice Title">Cuts/Flipped Axes (Disabled):</p>
+                                            <!-- <p font="450px" id="z-pT Axis Choice Title">Cuts/Flipped Axes (Disabled):</p> -->
+                                            <p font="450px" id="z-pT Axis Choice Title">Cuts/Flipped Axes:</p>
                                             <select onchange="change_picture_fit_richcap();" id="z-pT Axis" name="z_pT_axis" />
-                                                <!-- <optgroup label="Normal Cuts - May need to select 'Default' for some versions"> -->
-                                                <optgroup label="Disabled as of 2/23/2024 (See GitHub Link for other versions)">
+                                                <optgroup label="Normal Cuts - May need to select 'Default' for some versions">
+                                                <!-- <optgroup label="Disabled as of 2/23/2024 (See GitHub Link for other versions)"> -->
                                                     <option value="">Default</option>
-                                                    <!-- <option value="_Flipped">Flipped</option> -->
+                                                    <option value="_Flipped">Flipped</option>
                                                 </optgroup>
-                                            </select><br/><br/><br/><br/><br/>
+                                            </select><br/>
+                                            
+                                            <br/>
+                                            <button onclick="Statistics_txt_File();"><span title="Link to the txt files which list the statistics of each bin">Statistics Text Files</span></button>
+                                            <br/><br/><br/><br/><br/>
                                         </form>
 
                                     </thead>
@@ -2185,7 +2261,7 @@
                             </div>
 
                             <div id="divE" hidden="hidden">
-                                <img src="Web_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Gen_Cuts_V8_2_23_2024/Unfolding_Images/z_pT_Bin_Individual/Q2_xB_Bin_1/Response_Matrix_Normal_Q2_xB_Bin_1_z_pT_Bin_1_Unfolded_Histos.png" name="pic2" width="600px" height="550px" ondblclick="PicturePopUp_click(this);">
+                                <img src="Web_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Gen_Cuts_V8_2_29_2024/Unfolding_Images/z_pT_Bin_Individual/Q2_xB_Bin_1/Response_Matrix_Normal_Q2_xB_Bin_1_z_pT_Bin_1_Unfolded_Histos.png" name="pic2" width="600px" height="550px" ondblclick="PicturePopUp_click(this);">
                                 <!-- <img src="All_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_CrossCheck_V2_2_21_2024/Unfolding_Images/z_pT_Bin_Individual/Q2_xB_Bin_1/Response_Matrix_Normal_Q2_xB_Bin_1_z_pT_Bin_1_Unfolded_Histos.png" name="pic2" width="600px" height="550px" ondblclick="PicturePopUp_click(this);"> -->
                                 <!-- <img src="All_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Gen_Cuts_V7_8_11_2023/Unfolding_Images/z_pT_Bin_Individual/Q2_xB_Bin_1/Response_Matrix_Normal_Q2_xB_Bin_1_z_pT_Bin_1_Unfolded_Histos.png" name="pic2" width="600px" height="550px" ondblclick="PicturePopUp_click(this);"> -->
                             </div>
@@ -2409,8 +2485,8 @@
                                 <!-- <img src="All_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Gen_Cuts_V7_8_30_2023/Unfolding_Images/z_pT_Bin_All/Q2_y_Bin_1/Unfolded_Histos_Q2_y_Bin_1_Bayesian.png" name="pic1" width="1300px" ondblclick="PicturePopUp_click(this);"> -->
                                 <!-- <img src="All_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_CrossCheck_V2_2_21_2024/Unfolding_Images/z_pT_Bin_All/Q2_y_Bin_1/Unfolded_Histos_Q2_y_Bin_1_Data.png" name="pic1" width="1300px" ondblclick="PicturePopUp_click(this);">
                                 <img src="All_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_CrossCheck_V2_2_21_2024/Unfolding_Images/z_pT_Bin_All/Q2_y_Bin_1/Unfolded_Histos_Q2_y_Bin_1_Data.png" name="pic3" width="1300px" ondblclick="PicturePopUp_click(this);" hidden="hidden"> -->
-                                <img src="Web_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Gen_Cuts_V8_2_23_2024/Unfolding_Images/z_pT_Bin_All/Q2_y_Bin_1/Unfolded_Histos_Q2_y_Bin_1_Data.png" name="pic1" width="1300px" ondblclick="PicturePopUp_click(this);">
-                                <img src="Web_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Gen_Cuts_V8_2_23_2024/Unfolding_Images/z_pT_Bin_All/Q2_y_Bin_1/Unfolded_Histos_Q2_y_Bin_1_Data.png" name="pic3" width="1300px" ondblclick="PicturePopUp_click(this);" hidden="hidden">
+                                <img src="Web_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Gen_Cuts_V8_2_29_2024/Unfolding_Images/z_pT_Bin_All/Q2_y_Bin_1/Unfolded_Histos_Q2_y_Bin_1_Data.png" name="pic1" width="1300px" ondblclick="PicturePopUp_click(this);">
+                                <img src="Web_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Gen_Cuts_V8_2_29_2024/Unfolding_Images/z_pT_Bin_All/Q2_y_Bin_1/Unfolded_Histos_Q2_y_Bin_1_Data.png" name="pic3" width="1300px" ondblclick="PicturePopUp_click(this);" hidden="hidden">
                             </div>
 
                         </form>
