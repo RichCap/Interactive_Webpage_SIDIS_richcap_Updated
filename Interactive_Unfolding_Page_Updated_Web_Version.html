@@ -12,6 +12,8 @@
     <!-- <link rel="stylesheet" type="text/css" href="http://www.jlab.org/Hall-B/secure/e1/markov/2GeV/newDesign/tables/accTable/style.css" />  -->
     <link rel="stylesheet" type="text/css" href="style.css" /> 
    
+    <script src="JavaFunctionScripts.js"></script>
+
     <script language="JavaScript">
 
         function Current_Version_Name(Image_Version, z_pT_Bin_Number_Name, Image_Type){
@@ -28,7 +30,7 @@
                 }
                 if(Image_Version == "Web_Only_New"){
                     // currentFolderVersion = "Web_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_New_Q2_Y_Bins_V2_2_28_2024/Unfolding_Images/"
-                    currentFolderVersion = "Web_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_New_Q2_Y_Bins_V2_3_3_2024/Unfolding_Images/"
+                    currentFolderVersion = "Web_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_New_Q2_Y_Bins_V2_3_6_2024/Unfolding_Images/"
                 }
                 if(Image_Version == "Web_Only_Pass_2_New"){
                     // currentFolderVersion = "Web_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Pass_2_New_Q2_Y_Bins_V2_2_28_2024/Unfolding_Images/"
@@ -197,201 +199,6 @@
                 Testing_2D_Schemes_Hide.setAttribute("hidden", "hidden");
             }
 
-        }
-
-        function toUnicodeVariant(str, variant, flags) {
-            const offsets = {
-                m: [0x1d670, 0x1d7f6],
-                b: [0x1d400, 0x1d7ce],
-                i: [0x1d434, 0x00030],
-                bi: [0x1d468, 0x00030],
-                c: [0x0001d49c, 0x00030],
-                bc: [0x1d4d0, 0x00030],
-                g: [0x1d504, 0x00030],
-                d: [0x1d538, 0x1d7d8],
-                bg: [0x1d56c, 0x00030],
-                s: [0x1d5a0, 0x1d7e2],
-                bs: [0x1d5d4, 0x1d7ec],
-                is: [0x1d608, 0x00030],
-                bis: [0x1d63c, 0x00030],
-                o: [0x24B6, 0x2460],
-                on: [0x0001f150, 0x2460],
-                p: [0x249c, 0x2474],
-                q: [0x1f130, 0x00030],
-                qn: [0x0001F170, 0x00030],
-                w: [0xff21, 0xff10],
-                u: [0x2090, 0xff10]
-            }
-
-            const variantOffsets = {
-                'monospace': 'm',
-                'bold' : 'b',
-                'italic' : 'i',
-                'bold italic' : 'bi',
-                'script': 'c',
-                'bold script': 'bc',
-                'gothic': 'g',
-                'gothic bold': 'bg',
-                'doublestruck': 'd',
-                'sans': 's',
-                'bold sans' : 'bs',
-                'italic sans': 'is',
-                'bold italic sans': 'bis',
-                'parenthesis': 'p',
-                'circled': 'o',
-                'circled negative': 'on',
-                'squared': 'q',
-                'squared negative': 'qn',
-                'fullwidth': 'w'
-            }
-
-            // special characters (absolute values)
-            const special = {
-                m: {
-                    ' ': 0x2000,
-                    '-': 0x2013
-                },
-                i: {
-                    'h': 0x210e
-                },
-                g: {
-                    'C': 0x212d,
-                    'H': 0x210c,
-                    'I': 0x2111,
-                    'R': 0x211c,
-                    'Z': 0x2128
-                },
-                d: {
-                'C': 0x2102,
-                'H': 0x210D,
-                'N': 0x2115,
-                'P': 0x2119,
-                'Q': 0x211A,
-                'R': 0x211D,
-                'Z': 0x2124
-                },
-                o: {
-                    '0': 0x24EA,
-                    '1': 0x2460,
-                    '2': 0x2461,
-                    '3': 0x2462,
-                    '4': 0x2463,
-                    '5': 0x2464,
-                    '6': 0x2465,
-                    '7': 0x2466,
-                    '8': 0x2467,
-                    '9': 0x2468,
-                },
-                on: {},
-                p: {},
-                q: {},
-                qn: {},
-                w: {}
-            }
-            //support for parenthesized latin letters small cases 
-            //support for full width latin letters small cases 
-            //support for circled negative letters small cases 
-            //support for squared letters small cases 
-            //support for squared letters negative small cases 
-            ;['p', 'w', 'on', 'q', 'qn'].forEach(t => {
-                for (var i = 97; i <= 122; i++) {
-                    special[t][String.fromCharCode(i)] = offsets[t][0] + (i-97)
-                }
-            })		
-
-            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
-            const numbers = '0123456789'
-
-            const getType = function(variant) {
-                if (variantOffsets[variant]) return variantOffsets[variant]
-                if (offsets[variant]) return variant
-                return 'm' //monospace as default
-            }
-            const getFlag = function(flag, flags) {
-                if (!flags) return false
-                return flag.split('|').some(f => flags.split(',').indexOf(f) > -1)
-            }
-
-            const type = getType(variant)
-            const underline = getFlag('underline|u', flags)
-            const strike = getFlag('strike|s', flags)
-            let result = ''
-
-            for (let c of str) {
-                let index
-                if (special[type] && special[type][c]) c = String.fromCodePoint(special[type][c])
-                if (type && (index = chars.indexOf(c)) > -1) {
-                    result += String.fromCodePoint(index + offsets[type][0]) 
-                } else if (type && (index = numbers.indexOf(c)) > -1) {
-                    result += String.fromCodePoint(index + offsets[type][1]) 
-                } else {
-                    result += c 
-                }
-                if (underline) result += '\u0332' // add combining underline
-                if (strike) result += '\u0336' // add combining strike
-            }
-            return result
-        }
-
-        function Analysis_Note_Link(){
-            // var currentName = "Measurement_of_Cosphi_and_Cos2phi_Moments_of_the_Unpolarized_SIDIS_pi+_Cross-section_at_CLAS12-APS_Release.pdf"
-            var currentName = "Measurement_of_Cosphi_and_Cos2phi_Moments_of_the_Unpolarized_SIDIS_pi+_Cross-section_at_CLAS12-DNP-JPS_Release.pdf"
-            
-            aaa = window.open(currentName, currentName, 'height=6, width=600, scrollbars=yes, resizable=yes');
-        }
-
-        function README_Update_Link(){
-            var currentName = "README.md"
-            aaa = window.open(currentName, currentName, 'height=6, width=600, scrollbars=yes, resizable=no');
-        }
-
-        function Fit_Parameter_txt_File(){
-            // alert("Running Fit_Parameter_txt_File(...)")
-            var Image_Version_Input = document.getElementById("Image_Version");
-            var Image_Version       = Image_Version_Input.value;
-            var currentDirectoryName = Current_Version_Name(Image_Version, "N/A", "N/A");
-            // var currentDirectoryName = Current_Version_Name("Web_Only", "N/A", "N/A");
-            var Text_File_Version = currentDirectoryName.replace("Web_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_", "")
-            Text_File_Version = Text_File_Version.replace("/Unfolding_Images/", "")
-            var Text_File_Name = "Parameters_" + Text_File_Version + "_Q2_y_Bins_Combined.txt"
-
-            var currentName = currentDirectoryName.replace("Unfolding_Images/", "") + Text_File_Name;
-            aaa = window.open(currentName, currentName, 'height=6, width=600, scrollbars=yes, resizable=no');
-            // alert("Done")
-        }
-
-        function Statistics_txt_File(){
-            // alert("Running Statistics_txt_File(...)")
-            var Image_Version_Input = document.getElementById("Image_Version");
-            var Image_Version       = Image_Version_Input.value;
-            var currentDirectoryName = Current_Version_Name(Image_Version, "N/A", "N/A");
-            // var currentDirectoryName = Current_Version_Name("Web_Only", "N/A", "N/A");
-            var Text_File_Version = currentDirectoryName.replace("Web_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_", "")
-            Text_File_Version = Text_File_Version.replace("/Unfolding_Images/", "")
-            var Text_File_Name = "Statistics_" + Text_File_Version + "_Q2_y_Bins_Combined.txt"
-
-            var currentName = currentDirectoryName.replace("Unfolding_Images/", "") + Text_File_Name;
-            aaa = window.open(currentName, currentName, 'height=6, width=600, scrollbars=yes, resizable=no');
-            // alert("Done")
-        }
-
-        function Bin_Statistics_txt_File(){
-            var currentDirectoryName = Current_Version_Name("Web_Only", "N/A", "N/A");
-
-            var Text_File_Version = currentDirectoryName.replace("Web_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_", "")
-            Text_File_Version = Text_File_Version.replace("/Unfolding_Images/", "")
-
-            var Text_File_Name = "Statistics_" + str(Text_File_Version) + "_Q2_y_Bins_Combined.txt"
-
-            var currentName = currentDirectoryName.replace("Unfolding_Images/", "") + Text_File_Name;
-            aaa = window.open(currentName, currentName, 'height=6, width=600, scrollbars=yes, resizable=no');
-        }
-
-        function Older_Page_Version_Link(){
-            // var currentName = "Interactive_Unfolding_Page.html"
-            alert("Due to some size limitations, not all images can be uploaded from this page to the host server.\n\nMore images/updates can be saved to the GitHub page for this analysis, so this link is meant to direct you there.\n\nIf you are unable to access certain images on this page, or are interested in updates not yet uploaded here, you may be able to find the information you are looking for on this page.")
-            var currentName = "https://github.com/RichCap/Interactive_Webpage_SIDIS_richcap_Updated"
-            aaa = window.open(currentName, currentName, 'height=6, width=600, scrollbars=yes, resizable=no');
         }
 
         function change_picture_Corrections(Image_Type, Image_Version, Bin, z_pT_Bin, Vs_Mom_hide, dTheta_hide, Histo_Type_3, currentFolderVersion){
@@ -584,19 +391,6 @@
             }
 
             return currentName;
-        }
-
-        function formatNumber(number){
-            const formattedNumber = parseFloat(number).toString();
-            const parts = formattedNumber.split('.');
-            
-            if (parts.length === 2) {
-                // Check if the last digit in the decimal part is 0
-                if (parts[1].endsWith('0')) {
-                    return parts[0] + '.' + parts[1].slice(0, -1);
-                }
-            }
-            return formattedNumber;
         }
 
         function change_z_pT_Fit_Center_Select(){
@@ -1025,10 +819,6 @@
             }
 
             // alert("Done (change_picture_fit_table)")
-        }
-
-        function PicturePopUp_click(picture){
-            aaa = window.open(picture.src, picture.src, 'height=6, width=600, scrollbars=yes, resizable=yes');
         }
         
         function changePicturePopUp_richcap(number){
@@ -1464,59 +1254,6 @@
 
         }
 
-        function change_bin_extra_form(){
-            var Bin   = document.getElementById("Q2-xB Bin");
-            var Bin_2 = document.getElementById("Q2-xB Bin 2");
-            Bin.value = Bin_2.value;
-        }
-
-        function change_bin_extra_3_form(){
-            var Bin   = document.getElementById("Q2-xB Bin");
-            var Bin_y = document.getElementById("Q2_y_Bin");
-            Bin.value = Bin_y.value;
-        }
-        
-        function change_bin_type(form){
-            var Bin        = document.getElementById("Q2-xB Bin");
-            var Bin_2      = document.getElementById("Q2-xB Bin 2");
-            // var Bin_Type   = document.getElementById("Q2-xB or Q2-y Bin");
-            // var Bin_Type_2 = document.getElementById("Q2-xB or Q2-y Bin 2");
-            // if(form == "1"){
-            //     Bin_Type_2.value = Bin_Type.value;
-            // }
-            // else{
-            //     Bin_Type.value   = Bin_Type_2.value;
-            // }
-            // var Bin_Type_value   = Bin_Type.value;
-            // var Bin_Type_value_2 = Bin_Type_2.value;
-            var Bin_Type_value   = "Q2_y";
-            var Bin_Type_value_2 = "Q2_y";
-            var sliderValue      = document.getElementById("sliderValue");
-            var sliderValue_2    = document.getElementById("sliderValue_2");
-
-            // alert(Bin_Title_text);
-            // alert(Bin.getAttribute("max"));
-            // alert(sliderValue.textContent);
-            if(Bin_Type_value.includes("y")){
-                // alert("This option is not yet available...")
-                // Bin_Title.textContent = Bin_Title_text.replace("xB", "y")
-                Bin.setAttribute("max", "17");
-                Bin_2.setAttribute("max", "17");
-            }
-            else{
-                if(Bin.value > 8 || Bin_2.value > 8 ){
-                    Bin.value   = 8;
-                    Bin_2.value = 8;
-                    sliderValue.textContent   = 8;
-                    sliderValue_2.textContent = 8;
-                }
-                Bin.setAttribute("max", "8");
-                Bin_2.setAttribute("max", "8");
-                // Bin_Title.textContent = Bin_Title_text.replace("y", "xB")
-            }
-            // alert(sliderValue.textContent);
-        }
-
     </script>
 
     <script src="http://www.google.com/jsapi" type="text/javascript"></script> 
@@ -1558,7 +1295,7 @@
                                                     <option value="Unfold" id="Unfold_select" title="These images do not apply any additional momentum smearing to the MC REC distributions" selected>Unfolded</option>
                                                     <option value="Unfold_smear" id="Unfold_smear_select" title="These images apply a momentum smearing function to the MC REC distributions (See 'Smearing/Correction Histos' for more info)">Smeared Unfolded</option>
                                                     <option value="Fit_Par" id="Fit_Par_select" title="These images show how the fit parameters from the phi_h plots appear as functions of z and pT">Fit Parameters</option>
-                                                    <option value="Histo_2D_Test" id="Histo_2D_Test_select" title="These images are used to help develop new 2D Binning schemes (Preliminary)">Testing New Bins</option>
+                                                    <option value="Histo_2D_Test" id="Histo_2D_Test_select" title="These images show the newly developed 2D Binning Schemes for the Q2-y and z-PT plots (Preliminary Version + Bin Definitions)">New (Test) Bins</option>
                                                     <option value="New_Smearing"    title="These images show the plots related to momentum corrections/smearing">Smearing/Correction Histos</option>
                                                 </optgroup>
                                                 
@@ -1572,14 +1309,14 @@
                                             <!-- <psmall id="psmall" font="5px">Last Updated: 2/25/2024</psmall> -->
                                             <!-- <select onchange="change_picture_fit_richcap();" id="Image_Version" name="Image_Version" class="__web-inspector-hide-shortcut__"> -->
                                             <select onchange="change_picture_fit_richcap();" id="Image_Version" name="Image_Version">
-                                                <optgroup label="Old Binning">
-                                                    <option value="Web_Only"            title="Last Updated on 2-29-2023 - Without Background Subtraction">Pass 1 - W/out BG Subtraction</option>
-                                                    <option value="Web_Only_Background" title="Last Updated on 2-27-2023 - With Background Subtraction">Pass 1 - W/ BG Subtraction</option>
-                                                    <option value="Web_Only_Pass_2"     title="Last Updated on 2-26-2023 - With Background Subtraction">Pass 2 - W/ BG Subtraction</option>
                                                 <optgroup label="New (Test) Binning">
-                                                    <option value="Web_Only_New"        title="Last Updated on 3-3-2023 - With Background Subtraction">Pass 1 - W/ BG Subtraction</option>
-                                                    <option value="Web_Only_Pass_2_New" title="Last Updated on 2-28-2023 - With Background Subtraction">Pass 2 - W/ BG Subtraction</option>
+                                                    <option value="Web_Only_New"        title="Last Updated on 3-6-2023 - Unfolding from Outside (i.e., With Background Subtraction of Generated Missing Mass)">Pass 1 - Unfolding from Outside</option>
+                                                    <option value="Web_Only_Pass_2_New" title="Last Updated on 3-6-2023 - Unfolding from Outside (i.e., With Background Subtraction of Generated Missing Mass)">Pass 2 - Unfolding from Outside</option>
                                                     <!-- <option value="All_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Pass_2_CrossCheck_V3_2_22_2024/Unfolding_Images/" title="Updated on 2-22-2024">Pass 2</option> -->
+                                                <optgroup label="Old Binning">
+                                                    <option value="Web_Only"            title="Last Updated on 2-29-2023 - Without Background Subtraction (i.e., Without cutting on Generated Missing Mass)">(Old) Pass 1 - W/out BG Subtraction</option>
+                                                    <option value="Web_Only_Background" title="Last Updated on 2-27-2023 - Unfolding from Outside (i.e., With Background Subtraction of Generated Missing Mass)">(Old) Pass 1 - Unfolding from Outside</option>
+                                                    <option value="Web_Only_Pass_2"     title="Last Updated on 2-26-2023 - Unfolding from Outside (i.e., With Background Subtraction of Generated Missing Mass)">(Old) Pass 2 - Unfolding from Outside</option>
                                                 </optgroup>
                                                 <optgroup label="Unfolding Closure Tests/Older Versions - See GitHub" title="Not currently available on this page">
                                                     <!-- <option onclick="Older_Page_Version_Link();">See GitHub</option> -->
@@ -1709,11 +1446,18 @@
                                     </select><br/><br/>
                                 </form> 
 
-                                <form id="Histo_2D_Q2_y_Bin_Form" name="Histo_2D_Q2_y_Bin_Form">
+                                <!-- <form id="Histo_2D_Q2_y_Bin_Form" name="Histo_2D_Q2_y_Bin_Form">
                                     <p font="450px">Q<sup>2</sup>-y Bin: <span id="sliderValue_4">1</span></p>
                                     <input type="range" min="1" max="39" value="1" onchange="change_picture_fit_richcap(); handleSliderChange(event);" id="Histo_2D_Q2_y_Bin" name="Histo_2D_Q2_y_Bin">
+                                </form> -->
+                                <form id="Histo_2D_Q2_y_Bin_Form" name="Histo_2D_Q2_y_Bin_Form">
+                                    <p font="450px">Q<sup>2</sup>-y Bin: <span id="sliderValue_4">1</span></p>
+                                    <input type="range" min="1" max="17" value="1" onchange="change_picture_fit_richcap(); handleSliderChange(event);" id="Histo_2D_Q2_y_Bin" name="Histo_2D_Q2_y_Bin">
                                 </form>
 
+                                <br/>
+                                <button onclick="Bin_Borders_txt_File();"><span title="Link to the txt files which list the border definitions of each kinematic bin">Bin Definition Text File</span></button>
+                                <br/>
 
                                 <form hidden="hidden" id="Histo_2D_z_pT_Bin_Form" name="Histo_2D_z_pT_Bin_Form">
                                     <p font="450px">z-P<sub>T</sub> Bin: <span id="sliderValue_5">1</span></p>
@@ -2261,7 +2005,7 @@
                             </div>
 
                             <div id="divE" hidden="hidden">
-                                <img src="Web_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Gen_Cuts_V8_2_29_2024/Unfolding_Images/z_pT_Bin_Individual/Q2_xB_Bin_1/Response_Matrix_Normal_Q2_xB_Bin_1_z_pT_Bin_1_Unfolded_Histos.png" name="pic2" width="600px" height="550px" ondblclick="PicturePopUp_click(this);">
+                                <img src="Web_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_New_Q2_Y_Bins_V2_3_3_2024/Unfolding_Images/z_pT_Bin_Individual/Q2_xB_Bin_1/Response_Matrix_Normal_Q2_xB_Bin_1_z_pT_Bin_1_Unfolded_Histos.png" name="pic2" width="600px" height="550px" ondblclick="PicturePopUp_click(this);">
                                 <!-- <img src="All_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_CrossCheck_V2_2_21_2024/Unfolding_Images/z_pT_Bin_Individual/Q2_xB_Bin_1/Response_Matrix_Normal_Q2_xB_Bin_1_z_pT_Bin_1_Unfolded_Histos.png" name="pic2" width="600px" height="550px" ondblclick="PicturePopUp_click(this);"> -->
                                 <!-- <img src="All_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Gen_Cuts_V7_8_11_2023/Unfolding_Images/z_pT_Bin_Individual/Q2_xB_Bin_1/Response_Matrix_Normal_Q2_xB_Bin_1_z_pT_Bin_1_Unfolded_Histos.png" name="pic2" width="600px" height="550px" ondblclick="PicturePopUp_click(this);"> -->
                             </div>
@@ -2485,8 +2229,8 @@
                                 <!-- <img src="All_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Gen_Cuts_V7_8_30_2023/Unfolding_Images/z_pT_Bin_All/Q2_y_Bin_1/Unfolded_Histos_Q2_y_Bin_1_Bayesian.png" name="pic1" width="1300px" ondblclick="PicturePopUp_click(this);"> -->
                                 <!-- <img src="All_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_CrossCheck_V2_2_21_2024/Unfolding_Images/z_pT_Bin_All/Q2_y_Bin_1/Unfolded_Histos_Q2_y_Bin_1_Data.png" name="pic1" width="1300px" ondblclick="PicturePopUp_click(this);">
                                 <img src="All_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_CrossCheck_V2_2_21_2024/Unfolding_Images/z_pT_Bin_All/Q2_y_Bin_1/Unfolded_Histos_Q2_y_Bin_1_Data.png" name="pic3" width="1300px" ondblclick="PicturePopUp_click(this);" hidden="hidden"> -->
-                                <img src="Web_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Gen_Cuts_V8_2_29_2024/Unfolding_Images/z_pT_Bin_All/Q2_y_Bin_1/Unfolded_Histos_Q2_y_Bin_1_Data.png" name="pic1" width="1300px" ondblclick="PicturePopUp_click(this);">
-                                <img src="Web_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Gen_Cuts_V8_2_29_2024/Unfolding_Images/z_pT_Bin_All/Q2_y_Bin_1/Unfolded_Histos_Q2_y_Bin_1_Data.png" name="pic3" width="1300px" ondblclick="PicturePopUp_click(this);" hidden="hidden">
+                                <img src="Web_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_New_Q2_Y_Bins_V2_3_3_2024/Unfolding_Images/z_pT_Bin_All/Q2_y_Bin_1/Unfolded_Histos_Q2_y_Bin_1_Data.png" name="pic1" width="1300px" ondblclick="PicturePopUp_click(this);">
+                                <img src="Web_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_New_Q2_Y_Bins_V2_3_3_2024/Unfolding_Images/z_pT_Bin_All/Q2_y_Bin_1/Unfolded_Histos_Q2_y_Bin_1_Data.png" name="pic3" width="1300px" ondblclick="PicturePopUp_click(this);" hidden="hidden">
                             </div>
 
                         </form>
