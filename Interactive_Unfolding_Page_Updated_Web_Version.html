@@ -145,7 +145,7 @@
                 Delta_Options.setAttribute("hidden", "hidden");
             }
 
-            if(z_pT_Bin.value == "All" && Image_Type.includes("Unfold")){
+            if(z_pT_Bin.value == "Together" && Image_Type.includes("Unfold")){
                 Unfolding_Options.removeAttribute("hidden");
             }
             else{
@@ -480,6 +480,9 @@
             var z_pT_Bin = document.getElementById("z-pT Bin");
 
             var z_pT_Bin_Number_Name      = "z_pT_Bin_" + z_pT_Bin.value;
+            if(z_pT_Bin_Number_Name.includes("Together")){
+                z_pT_Bin_Number_Name = z_pT_Bin_Number_Name.replace("Together", "All")
+            }
             var Bin_Title                 = document.getElementById("div01");
             var Delta_Options             = document.getElementById("div02");
             var Extra_Options             = document.getElementById("div03");
@@ -959,6 +962,9 @@
             // var BinNumber_Name       = Bin_Type.value + "_Bin_" + Bin.value;
             var BinNumber_Name       = "Q2_y_Bin_" + Bin.value;
             var z_pT_Bin_Number_Name = "z_pT_Bin_" + number;
+            if(z_pT_Bin_Number_Name.includes("Together")){
+                z_pT_Bin_Number_Name = z_pT_Bin_Number_Name.replace("Together", "All")
+            }
             
             var Histo_Type_Main   = "";
 
@@ -1212,7 +1218,7 @@
 
             var z_pT_Bin = document.getElementById("z-pT Bin");
 
-            if(z_pT_Bin.value != "All"){
+            if(z_pT_Bin.value != "Together"){
                 var table = document.getElementById("Main_Table");
                 var rows = table.getElementsByTagName("tr");
                 // Loop through each row of the table
@@ -1636,13 +1642,59 @@
                                             <p font="450px" id="z-pT Bin Title">Select the z-P<sub>T</sub> Bin:</p>
                                             <select onchange="change_picture_fit_richcap(); table_bin_numbers();" id="z-pT Bin" name="z_pT_bin"/>
                                                 <optgroup label="Checking All z-PT Bins">
-                                                    <option value="All">Plot All Bins Together</option>
+                                                    <!-- <option value="All">Plot All Bins Together</option> -->
+                                                    <option value="Together">Plot All Bins Together</option>
                                                 </optgroup>
                                                 <optgroup label="Checking Individual z-PT Bins">
                                                     <option value="1">Plot Bins Individually</option>
+                                                    <option hidden="hidden" value="2">Plotting Bin 2 Individually</option>
+                                                    <option hidden="hidden" value="3">Plotting Bin 3 Individually</option>
+                                                    <option hidden="hidden" value="4">Plotting Bin 4 Individually</option>
+                                                    <option hidden="hidden" value="5">Plotting Bin 5 Individually</option>
+                                                    <option hidden="hidden" value="6">Plotting Bin 6 Individually</option>
+                                                    <option hidden="hidden" value="7">Plotting Bin 7 Individually</option>
+                                                    <option hidden="hidden" value="8">Plotting Bin 8 Individually</option>
+                                                    <option hidden="hidden" value="9">Plotting Bin 9 Individually</option>
+                                                    <option hidden="hidden" value="10">Plotting Bin 10 Individually</option>
+                                                    <option hidden="hidden" value="11">Plotting Bin 11 Individually</option>
+                                                    <option hidden="hidden" value="12">Plotting Bin 12 Individually</option>
+                                                    <option hidden="hidden" value="13">Plotting Bin 13 Individually</option>
+                                                    <option hidden="hidden" value="14">Plotting Bin 14 Individually</option>
+                                                    <option hidden="hidden" value="15">Plotting Bin 15 Individually</option>
+                                                    <option hidden="hidden" value="16">Plotting Bin 16 Individually</option>
+                                                    <option hidden="hidden" value="17">Plotting Bin 17 Individually</option>
+                                                    <option hidden="hidden" value="18">Plotting Bin 18 Individually</option>
+                                                    <option hidden="hidden" value="19">Plotting Bin 19 Individually</option>
+                                                    <option hidden="hidden" value="20">Plotting Bin 20 Individually</option>
+                                                    <option hidden="hidden" value="21">Plotting Bin 21 Individually</option>
+                                                    <option hidden="hidden" value="22">Plotting Bin 22 Individually</option>
+                                                    <option hidden="hidden" value="23">Plotting Bin 23 Individually</option>
+                                                    <option hidden="hidden" value="24">Plotting Bin 24 Individually</option>
+                                                    <option hidden="hidden" value="25">Plotting Bin 25 Individually</option>
+                                                    <option hidden="hidden" value="26">Plotting Bin 26 Individually</option>
+                                                    <option hidden="hidden" value="27">Plotting Bin 27 Individually</option>
+                                                    <option hidden="hidden" value="28">Plotting Bin 28 Individually</option>
+                                                    <option hidden="hidden" value="29">Plotting Bin 29 Individually</option>
+                                                    <option hidden="hidden" value="30">Plotting Bin 30 Individually</option>
+                                                    <option hidden="hidden" value="31">Plotting Bin 31 Individually</option>
+                                                    <option hidden="hidden" value="32">Plotting Bin 32 Individually</option>
+                                                    <option hidden="hidden" value="33">Plotting Bin 33 Individually</option>
+                                                    <option hidden="hidden" value="34">Plotting Bin 34 Individually</option>
+                                                    <option hidden="hidden" value="35">Plotting Bin 35 Individually</option>
+                                                    <option hidden="hidden" value="36">Plotting Bin 36 Individually</option>
+                                                    <option hidden="hidden" value="All">Plotting Bin All Individually</option>
                                                 </optgroup>
                                             </select><br/>
                                         </form> 
+
+                                        <!-- <form hidden="hidden" id="z-pT Bin Form" name="z_pT_bin_form">
+                                            <select hidden="hidden" onchange="change_picture_fit_richcap(); table_bin_numbers();" id="z-pT Bin" name="z_pT_bin"/>
+                                                <optgroup hidden="hidden" label="z-PT Bin Selected">
+                                                    <option hidden="hidden" value="All"></option>
+                                                    <option hidden="hidden" value="1"></option>
+                                                </optgroup>
+                                            </select><br/>
+                                        </form>  -->
 
                                         <form id="Q2-xB Bin Form" name="Q2_xB_bin_form">
                                             <p font="450px" id="Q2-xB Bin Title">Q<sup>2</sup>-y Bin: <span id="sliderValue">1</span></p>
