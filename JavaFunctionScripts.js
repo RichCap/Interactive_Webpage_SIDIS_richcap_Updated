@@ -145,6 +145,11 @@ function README_Update_Link(){
     aaa = window.open(currentName, currentName, 'height=6, width=600, scrollbars=yes, resizable=no');
 }
 
+function Smear_Function_Code_Link(){
+    var currentName = "Text_of_Smearing_Function_and_Momentum_Corrections_Code.txt"
+    aaa = window.open(currentName, currentName, 'height=6, width=600, scrollbars=yes, resizable=no');
+}
+
 function Fit_Parameter_txt_File(){
     // alert("Running Fit_Parameter_txt_File(...)")
     var Image_Version_Input = document.getElementById("Image_Version");

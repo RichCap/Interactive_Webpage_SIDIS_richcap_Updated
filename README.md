@@ -8,6 +8,14 @@ This README.md file contains update notes and links related to the work shown in
 * Link to this webpage's Github page: https://github.com/RichCap/Interactive_Webpage_SIDIS_richcap_Updated
 
 ## Updates/Notes
+* On 5-15-2024:
+    * Starting to update this github page again (many updates between this one and the one made on 2-23-2024 may be missing/unmentioned)
+        * For more updates on the images included on this page, refer to https://github.com/RichCap/SIDIS_Analysis_CLAS12_RichCap/tree/master
+    * Images are not uploaded with this update (available either via the online page or on request)
+        * As of this update, the online version has not been updated - this is a local update
+            * Update will be pushed to the online version at a later time (will be noted here)
+    * Added TableNumbersScripts.js for better organization of javascripts used by this page
+
 * On 2-23-2024:
     * Updated the webpage to feature fewer image options (save space on the server)
         * For full/older versions of the available plots, see the GitHub Page for relevant files

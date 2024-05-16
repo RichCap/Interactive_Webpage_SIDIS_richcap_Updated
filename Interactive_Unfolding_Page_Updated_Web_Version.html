@@ -13,6 +13,7 @@
     <link rel="stylesheet" type="text/css" href="style.css" /> 
    
     <script src="JavaFunctionScripts.js"></script>
+    <script src="TableNumbersScripts.js"></script>
 
     <script language="JavaScript">
 
@@ -33,11 +34,19 @@
                     currentFolderVersion = "Web_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_New_Q2_Y_Bins_V2_3_6_2024/Unfolding_Images/"
                 }
                 if(Image_Version == "Web_Only_Pass_2_New"){
-                    // currentFolderVersion = "Web_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Pass_2_New_Q2_Y_Bins_V2_2_28_2024/Unfolding_Images/"
-                    currentFolderVersion = "Web_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Pass_2_New_Q2_Y_Bins_V2_3_6_2024/Unfolding_Images/"
+                    currentFolderVersion = "Web_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Pass_2_5D_Unfold_Test_V1_5_9_2024/Unfolding_Images/"
                 }
+
+                if(Image_Version == "Web_Only_New_PID"){
+                    currentFolderVersion = "Web_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_5D_Unfold_Test_V5_5_15_2024/Unfolding_Images/"
+                }
+                if(Image_Version == "Web_Only_Pass_2_New_PID"){
+                    currentFolderVersion = "Web_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Pass_2_5D_Unfold_Test_V5_5_15_2024/Unfolding_Images/"
+                }
+
                 if(Image_Type.includes("New_Smearing")){
                     currentFolderVersion = "Web_Images_Interactive_Webpage_SIDIS_richcap/Smearing_Images_New/";
+                    alert("Smearing may be outdated for Pass 2")
                 }
                 if(Image_Type.includes("Histo_2D_Test")){
                     currentFolderVersion = "Web_Images_Interactive_Webpage_SIDIS_richcap/Histo_2D_Binning_Tests/";
@@ -101,7 +110,7 @@
                 }
             }
 
-            if(Image_Type.includes("Delta_") || Image_Type.includes("Missing_Mass_") || Image_Type.includes("Phase_Space") || Image_Type.includes("Smearing_Histos") || Image_Type.includes("New_Smearing") || Image_Type.includes("All_Events") || Image_Type.includes("Multi_Dim")){
+            if(Image_Type.includes("Delta_") || Image_Type.includes("Missing_Mass_") || Image_Type.includes("Phase_Space") || Image_Type.includes("Smearing_Histos") || Image_Type.includes("New_Smearing") || Image_Type.includes("P2_Smearing") || Image_Type.includes("All_Events") || Image_Type.includes("Multi_Dim")){
                 Bin.setAttribute("hidden", "hidden");
                 Bin_Title.setAttribute("hidden", "hidden");
                 z_pT_Bin.setAttribute("hidden", "hidden");
@@ -120,6 +129,13 @@
             else{
                 New_Smearing_div.setAttribute("hidden", "hidden");
                 New_Smearing_div_2.setAttribute("hidden", "hidden");
+            }
+            var New_Smearing_div_3 = document.getElementById("New_Smearing_div_3");
+            if(Image_Type.includes("P2_Smearing")){
+                New_Smearing_div_3.removeAttribute("hidden");
+            }
+            else{
+                New_Smearing_div_3.setAttribute("hidden", "hidden");
             }
 
             if(Image_Type.includes("Delta_") || Image_Type.includes("Missing_Mass_") || Image_Type.includes("Smearing_Histos")){
@@ -144,7 +160,7 @@
                 Parameter_Options.setAttribute("hidden", "hidden");
             }
 
-            if(Image_Type.includes("New_Smearing")){
+            if(Image_Type.includes("New_Smearing") || Image_Type.includes("P2_Smearing")){
                 Bin.setAttribute("hidden", "hidden");
                 Bin_Title.setAttribute("hidden", "hidden");
                 z_pT_Bin.setAttribute("hidden", "hidden");
@@ -485,6 +501,9 @@
             var Select_Table_Title        = document.getElementById("Main_Table");
             var Select_Table_Title_2      = document.getElementById("divtable2");
             var Unfolding_Options_Select  = document.getElementById("Unfolding Option");
+            // var Variable_Options_Select  = document.getElementById("Variable Option");
+            // Variable_Options_Select    = Variable_Options_Select.value;
+            var Variable_Options_Select   = "";
             var Correction_Options_Select = document.getElementById("Correction Histogram Type");
 
             var Smearing_Multi_Dim        = document.getElementById("Multi_Dim_Smearing");
@@ -502,6 +521,7 @@
             var Image_Version_Input  = document.getElementById("Image_Version");
             var Image_Version        = Image_Version_Input.value;
             var currentFolderVersion = "All_Images_Interactive_Webpage_SIDIS_richcap/Unfolding_Images/";
+
 
             if(Image_Type.includes("Smearing_Histos")){
                 Image_Type           = Correction_Options_Select.value;
@@ -526,10 +546,17 @@
             // alert(Unfolding_Options_Select_Val)
 
 
-            if(Image_Type.includes("New_Smearing")){
-                change_picture_smear_richcap();
+            if(Image_Type.includes("New_Smearing") || Image_Type.includes("P2_Smearing")){
+                if(Image_Type.includes("P2_Smearing")){
+                    change_picture_P2_smear_richcap(true);
+                }
+                else{
+                    change_picture_P2_smear_richcap(false);
+                    change_picture_smear_richcap();
+                }
             }
             else{
+                change_picture_P2_smear_richcap(false);
                 if(Image_Type.includes("Delta_") || Image_Type.includes("Missing_Mass_") || Image_Type.includes("Phase_Space")){
                     currentName = change_picture_Corrections(Image_Type, Image_Version, Bin, z_pT_Bin, Vs_Mom_hide, dTheta_hide, Histo_Type_3, currentFolderVersion);
                 }
@@ -543,7 +570,7 @@
                             currentName = change_picture_New_Binning_Tests(currentFolderVersion);
                         }
                         else{
-                            if(! Image_Type.includes("New_Smearing")){
+                            if(! Image_Type.includes("New_Smearing") && ! Image_Type.includes("P2_Smearing") ){
                                 if(Image_Type.includes("All_Events") || Image_Type.includes("Multi_Dim")){
                                     if(Image_Type.includes("Multi_Dim_Histo_Combined")){
                                         Multi_Dim_Options.removeAttribute("hidden");
@@ -657,13 +684,16 @@
                 currentName     = currentName.replace("Kinematic_Comparison_Response_Matrix_Normal", "Kinematic_Comparison");
                 currentName     = currentName.replace("Only_Kinematic", "Kinematic")
 
-                if(currentFolderVersion.includes("Q2_Y_Bins") || currentFolderVersion.includes("CrossCheck") || currentFolderVersion.includes("SIDIS_python_Images_From_New_Bin_Tests_V5") || currentFolderVersion.includes("SIDIS_python_Images_From_Gen_Cuts_V8") || currentFolderVersion.includes("SIDIS_python_Images_From_Gen_Cuts_V7") || currentFolderVersion.includes("SIDIS_python_Images_From_Gen_Cuts_V7_8_11_2023") || currentFolderVersion.includes("SIDIS_python_Images_From_Gen_Cuts_V6_7_19_2023") || currentFolderVersion.includes("SIDIS_python_Images_From_Gen_Cuts_V6_8_2_2023")){
-                    currentName = currentName.replace("RooUnfold_bayes", "Bayesian")
-                    currentName = currentName.replace("RooUnfold_svd",   "SVD")
-                    if(! currentName.includes("Histo_2D_Binning_Tests") && ! currentName.includes("Histo_2D_Sector_Tests")){
-                        currentName = currentName.replace("_smear",      "_Smeared")
-                    }
-                }
+                // if(currentFolderVersion.includes("Q2_Y_Bins") || currentFolderVersion.includes("CrossCheck") || currentFolderVersion.includes("SIDIS_python_Images_From_New_Bin_Tests_V5") || currentFolderVersion.includes("SIDIS_python_Images_From_Gen_Cuts_V8") || currentFolderVersion.includes("SIDIS_python_Images_From_Gen_Cuts_V7") || currentFolderVersion.includes("SIDIS_python_Images_From_Gen_Cuts_V7_8_11_2023") || currentFolderVersion.includes("SIDIS_python_Images_From_Gen_Cuts_V6_7_19_2023") || currentFolderVersion.includes("SIDIS_python_Images_From_Gen_Cuts_V6_8_2_2023")){
+                //     currentName = currentName.replace("RooUnfold_bayes", "Bayesian")
+                //     currentName = currentName.replace("RooUnfold_svd",   "SVD")
+                //     if(! currentName.includes("Histo_2D_Binning_Tests") && ! currentName.includes("Histo_2D_Sector_Tests")){
+                //         currentName = currentName.replace("_smear",      "_Smeared")
+                //     }
+                // }
+                currentName = currentName.replace("RooUnfold_bayes", "Bayesian")
+                currentName = currentName.replace("RooUnfold_svd",   "SVD")
+                if(! currentName.includes("Histo_2D_Binning_Tests") && ! currentName.includes("Histo_2D_Sector_Tests")){currentName = currentName.replace("_smear", "_Smeared")}
 
                 if(Multi_Unfold.includes("Kinematic_Comparison") && currentName.includes("z_pT_Bin_All/Q2_y_Bin")){
                     // currentName = currentName.replace("_Bayesian", "")
@@ -679,6 +709,16 @@
                     currentName = currentName.replace("Kinematic_Comparison", "Unfolded")
                 }
                 
+                if(z_pT_Bin_Number_Name.includes("All") && Variable_Options_Select != ""){
+                    if(Unfolding_Options_Select_Val.includes("Data") || Unfolding_Options_Select_Val.includes("rdf") || Unfolding_Options_Select_Val.includes("mdf") || Unfolding_Options_Select_Val.includes("gdf") || Unfolding_Options_Select_Val.includes("Kinematic_Comparison")){
+                        currentName = currentName.replace(".png", "_" + Variable_Options_Select + ".png")
+                    }
+                    else{
+                        alert("Unfolding_Options_Select_Val = " + Unfolding_Options_Select_Val + " is not supported for the variable selected");
+                    }
+                    // alert(currentName);
+                }
+
                 document.images.pic1.src = currentName;
                 if(Image_Version.includes("Extra")){
                     document.images.pic1.src = currentName.replace(".png", "_Extra_Parameters.png");
@@ -758,6 +798,82 @@
 
         }
 
+
+        function change_picture_P2_smear_richcap(hide){
+            if(hide){
+                // var currentFolderVersion = "Web_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Pass_2_New_Q2_Y_Bins_V5_4_30_2024/";
+                var currentFolderVersion = "Web_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Pass_2_5D_Unfold_Test_V1_5_9_2024/";
+
+                var New_Smearing_div_2 = document.getElementById("New_Smearing_div_2");
+                New_Smearing_div_2.setAttribute("hidden", "hidden");
+
+                var currentName = "";
+
+                var Smear_Compare_Input  = document.getElementById("P2 Smear Effect List");
+                var Smear_Compare        = Smear_Compare_Input.value;
+
+                document.images.pic1.width  = 1200;
+                document.images.pic1.height = 1800;
+
+                var New_Smearing_div_4 = document.getElementById("New_Smearing_div_4");
+                var New_Smearing_div_5 = document.getElementById("New_Smearing_div_5");
+                var New_Smearing_div_6 = document.getElementById("New_Smearing_div_6");
+                if(Smear_Compare.includes("Smearing_Creation")){
+                    New_Smearing_div_4.removeAttribute("hidden");
+                    New_Smearing_div_5.setAttribute("hidden", "hidden");
+                    New_Smearing_div_6.setAttribute("hidden", "hidden");
+                    var Histogram_Type_Input = document.getElementById("P2 Smear Plot List");
+                    var Smear_Particle_Input = document.getElementById("P2 Smear Particle List");
+                    var Variable_Smear_Input = document.getElementById("P2 Smear Variable List");
+                    var Histogram_Type       = Histogram_Type_Input.value;
+                    var Variable_Smear       = Variable_Smear_Input.value;
+                    var Smear_Particle       = Smear_Particle_Input.value;
+                    if(Histogram_Type.includes("_")){
+                        document.images.pic1.height = 800;
+                    }
+                    else{
+                        document.images.pic1.height = 1800;
+                    }
+                    currentName = currentFolderVersion + Smear_Compare + "/" + Variable_Smear + "_" + Smear_Particle + Histogram_Type + ".png";
+                }
+                else{
+                    New_Smearing_div_4.setAttribute("hidden", "hidden");
+                    if(Smear_Compare.includes("Smear")){
+                        New_Smearing_div_6.removeAttribute("hidden");
+                        New_Smearing_div_5.setAttribute("hidden", "hidden");
+                        var Plot_Input    = document.getElementById("P2_SIDIS_Smear_Plot");
+                        var Binning_Input = document.getElementById("Q2_y_Bin_Smearing");
+                    }
+                    else{
+                        New_Smearing_div_5.removeAttribute("hidden");
+                        New_Smearing_div_6.setAttribute("hidden", "hidden");
+                        var Plot_Input    = document.getElementById("P2_Mom_Cor_Plot");
+                        var Binning_Input = document.getElementById("Q2_y_Bin_Mom_Cor");
+                    }
+                    document.images.pic1.width  = 1300;
+                    document.images.pic1.height = 725;
+                    
+                    var Binning_Value = Binning_Input.value;
+                    var Plot_Value = Plot_Input.value;
+
+                    currentName = currentFolderVersion + Smear_Compare + "/z_pT_Bin_All/Q2_y_Bin_" + Binning_Value + "/Unfolded_Histos_Q2_y_Bin_" + Binning_Value + "_" + Plot_Value + ".png";
+                }
+
+                document.images.pic1.src = currentName;
+            }
+            else{
+                var New_Smearing_div_3 = document.getElementById("New_Smearing_div_3");
+                var New_Smearing_div_4 = document.getElementById("New_Smearing_div_4");
+                var New_Smearing_div_5 = document.getElementById("New_Smearing_div_5");
+                var New_Smearing_div_6 = document.getElementById("New_Smearing_div_6");
+                New_Smearing_div_3.setAttribute("hidden", "hidden");
+                New_Smearing_div_4.setAttribute("hidden", "hidden");
+                New_Smearing_div_5.setAttribute("hidden", "hidden");
+                New_Smearing_div_6.setAttribute("hidden", "hidden");
+            }
+        }
+
+
         function change_picture_fit_table(number){
             // alert("Start (change_picture_fit_table)")
             var Bin                   = document.getElementById("Q2-xB Bin");
@@ -806,6 +922,9 @@
             currentName  = currentName.replace("Kinematic_Comparison_Response_Matrix_Normal",   "Kinematic_Comparison");
             currentName2 = currentName2.replace("/Response_Matrix_Normal", "/" + Multi_Unfold + "Response_Matrix_Normal");
             currentName2 = currentName2.replace("Kinematic_Comparison_Response_Matrix_Normal",  "Response_Matrix_Normal");
+
+            currentName  = currentName.replace("Multi_5D_Response",  "Multi_5D_Unfold_Response");
+            currentName2 = currentName2.replace("Multi_5D_Response", "Multi_5D_Unfold_Response");
 
             currentName  = currentName.replace("Only_Kinematic", "Kinematic");
 
@@ -860,132 +979,132 @@
             // aaa = window.open(currentName2, currentName2)//, 'height=6,width=600,scrollbars=no,resizable=no');
         }
 
-        function z_pT_bin_values(Q2_y_Bin_Num, bin, return_type){
+        // function z_pT_bin_values(Q2_y_Bin_Num, bin, return_type){
 
-            // For Q2-y Bin 1
-            let z_bins_list  = [0.15, 0.20, 0.24, 0.29, 0.40, 0.73]
-            // For Q2-y Bin 1/2/3
-            let pT_bins_list = [0.05, 0.20, 0.30, 0.40, 0.50, 0.60, 0.75, 1.00]
+        //     // For Q2-y Bin 1
+        //     let z_bins_list  = [0.15, 0.20, 0.24, 0.29, 0.40, 0.73]
+        //     // For Q2-y Bin 1/2/3
+        //     let pT_bins_list = [0.05, 0.20, 0.30, 0.40, 0.50, 0.60, 0.75, 1.00]
 
-            // For Q2-y Bin 2
-            if(Q2_y_Bin_Num == "2"){
-                z_bins_list  = [0.18, 0.23, 0.26, 0.31, 0.38, 0.50, 0.74]
-            }
-            // For Q2-y Bin 3
-            if(Q2_y_Bin_Num == "3"){
-                z_bins_list  = [0.22, 0.28, 0.35, 0.45, 0.60, 0.78]
-            }
-            // For Q2-y Bin 4
-            if(Q2_y_Bin_Num == "4"){
-                z_bins_list  = [0.26, 0.32, 0.37, 0.43, 0.50, 0.60, 0.71]
-                pT_bins_list = [0.05, 0.20, 0.30, 0.40, 0.50, 0.60, 0.80]
-            }
-            // For Q2-y Bin 5
-            if(Q2_y_Bin_Num == "5"){
-                z_bins_list  = [0.15, 0.19, 0.24, 0.29, 0.38, 0.50, 0.73]
-                pT_bins_list = [0.05, 0.22, 0.32, 0.41, 0.51, 0.65, 1.00]
-            }
-            // For Q2-y Bin 6
-            if(Q2_y_Bin_Num == "6"){
-                z_bins_list  = [0.18, 0.23, 0.30, 0.39, 0.50, 0.78]
-                pT_bins_list = [0.05, 0.22, 0.32, 0.41, 0.51, 0.65, 1.00]
-            }
-            // For Q2-y Bin 7
-            if(Q2_y_Bin_Num == "7"){
-                z_bins_list  = [0.18, 0.23, 0.30, 0.39, 0.50, 0.78]
-                pT_bins_list = [0.05, 0.20, 0.30, 0.40, 0.50, 0.65, 1.00]
-            }
-            // For Q2-y Bin 8
-            if(Q2_y_Bin_Num == "8"){
-                z_bins_list  = [0.26, 0.32, 0.36, 0.40, 0.45, 0.53, 0.72]
-                pT_bins_list = [0.05, 0.20, 0.30, 0.40, 0.52, 0.75]
-            }
-            // For Q2-y Bin 9
-            if(Q2_y_Bin_Num == "9"){
-                z_bins_list  = [0.15, 0.20, 0.24, 0.30, 0.38, 0.48, 0.72]
-                pT_bins_list = [0.05, 0.22, 0.30, 0.38, 0.46, 0.60, 0.95]
-            }
-            // For Q2-y Bin 10
-            if(Q2_y_Bin_Num == "10"){
-                z_bins_list  = [0.18, 0.23, 0.26, 0.32, 0.40, 0.50, 0.72]
-                pT_bins_list = [0.05, 0.22, 0.32, 0.41, 0.51, 0.65, 1.00]
-            }
-            // For Q2-y Bin 11
-            if(Q2_y_Bin_Num == "11"){
-                z_bins_list  = [0.21, 0.26, 0.32, 0.40, 0.50, 0.70]
-                pT_bins_list = [0.05, 0.20, 0.31, 0.40, 0.50, 0.64, 0.95]
-            }
-            // For Q2-y Bin 12
-            if(Q2_y_Bin_Num == "12"){
-                z_bins_list  = [0.26, 0.32, 0.40, 0.50, 0.70]
-                pT_bins_list = [0.05, 0.22, 0.32, 0.41, 0.51, 0.67]
-            }
-            // For Q2-y Bin 13
-            if(Q2_y_Bin_Num == "13"){
-                z_bins_list  = [0.15, 0.20, 0.24, 0.30, 0.40, 0.72]
-                pT_bins_list = [0.05, 0.23, 0.34, 0.43, 0.55, 0.90]
-            }
-            // For Q2-y Bin 14
-            if(Q2_y_Bin_Num == "14"){
-                z_bins_list  = [0.18, 0.23, 0.27, 0.33, 0.44, 0.74]
-                pT_bins_list = [0.05, 0.23, 0.34, 0.44, 0.55, 0.90]
-            }
-            // For Q2-y Bin 15
-            if(Q2_y_Bin_Num == "15"){
-                z_bins_list  = [0.21, 0.28, 0.35, 0.47, 0.72]
-                pT_bins_list = [0.05, 0.23, 0.34, 0.45, 0.58, 0.90]
-            }
-            // For Q2-y Bin 16
-            if(Q2_y_Bin_Num == "16"){
-                z_bins_list  = [0.15, 0.20, 0.25, 0.32, 0.41, 0.71]
-                pT_bins_list = [0.05, 0.24, 0.36, 0.55, 0.80]
-            }
-            // For Q2-y Bin 17
-            if(Q2_y_Bin_Num == "17"){
-                z_bins_list  = [0.18, 0.23, 0.30, 0.38, 0.48, 0.72]
-                pT_bins_list = [0.05, 0.23, 0.36, 0.51, 0.85]
-            }
+        //     // For Q2-y Bin 2
+        //     if(Q2_y_Bin_Num == "2"){
+        //         z_bins_list  = [0.18, 0.23, 0.26, 0.31, 0.38, 0.50, 0.74]
+        //     }
+        //     // For Q2-y Bin 3
+        //     if(Q2_y_Bin_Num == "3"){
+        //         z_bins_list  = [0.22, 0.28, 0.35, 0.45, 0.60, 0.78]
+        //     }
+        //     // For Q2-y Bin 4
+        //     if(Q2_y_Bin_Num == "4"){
+        //         z_bins_list  = [0.26, 0.32, 0.37, 0.43, 0.50, 0.60, 0.71]
+        //         pT_bins_list = [0.05, 0.20, 0.30, 0.40, 0.50, 0.60, 0.80]
+        //     }
+        //     // For Q2-y Bin 5
+        //     if(Q2_y_Bin_Num == "5"){
+        //         z_bins_list  = [0.15, 0.19, 0.24, 0.29, 0.38, 0.50, 0.73]
+        //         pT_bins_list = [0.05, 0.22, 0.32, 0.41, 0.51, 0.65, 1.00]
+        //     }
+        //     // For Q2-y Bin 6
+        //     if(Q2_y_Bin_Num == "6"){
+        //         z_bins_list  = [0.18, 0.23, 0.30, 0.39, 0.50, 0.78]
+        //         pT_bins_list = [0.05, 0.22, 0.32, 0.41, 0.51, 0.65, 1.00]
+        //     }
+        //     // For Q2-y Bin 7
+        //     if(Q2_y_Bin_Num == "7"){
+        //         z_bins_list  = [0.18, 0.23, 0.30, 0.39, 0.50, 0.78]
+        //         pT_bins_list = [0.05, 0.20, 0.30, 0.40, 0.50, 0.65, 1.00]
+        //     }
+        //     // For Q2-y Bin 8
+        //     if(Q2_y_Bin_Num == "8"){
+        //         z_bins_list  = [0.26, 0.32, 0.36, 0.40, 0.45, 0.53, 0.72]
+        //         pT_bins_list = [0.05, 0.20, 0.30, 0.40, 0.52, 0.75]
+        //     }
+        //     // For Q2-y Bin 9
+        //     if(Q2_y_Bin_Num == "9"){
+        //         z_bins_list  = [0.15, 0.20, 0.24, 0.30, 0.38, 0.48, 0.72]
+        //         pT_bins_list = [0.05, 0.22, 0.30, 0.38, 0.46, 0.60, 0.95]
+        //     }
+        //     // For Q2-y Bin 10
+        //     if(Q2_y_Bin_Num == "10"){
+        //         z_bins_list  = [0.18, 0.23, 0.26, 0.32, 0.40, 0.50, 0.72]
+        //         pT_bins_list = [0.05, 0.22, 0.32, 0.41, 0.51, 0.65, 1.00]
+        //     }
+        //     // For Q2-y Bin 11
+        //     if(Q2_y_Bin_Num == "11"){
+        //         z_bins_list  = [0.21, 0.26, 0.32, 0.40, 0.50, 0.70]
+        //         pT_bins_list = [0.05, 0.20, 0.31, 0.40, 0.50, 0.64, 0.95]
+        //     }
+        //     // For Q2-y Bin 12
+        //     if(Q2_y_Bin_Num == "12"){
+        //         z_bins_list  = [0.26, 0.32, 0.40, 0.50, 0.70]
+        //         pT_bins_list = [0.05, 0.22, 0.32, 0.41, 0.51, 0.67]
+        //     }
+        //     // For Q2-y Bin 13
+        //     if(Q2_y_Bin_Num == "13"){
+        //         z_bins_list  = [0.15, 0.20, 0.24, 0.30, 0.40, 0.72]
+        //         pT_bins_list = [0.05, 0.23, 0.34, 0.43, 0.55, 0.90]
+        //     }
+        //     // For Q2-y Bin 14
+        //     if(Q2_y_Bin_Num == "14"){
+        //         z_bins_list  = [0.18, 0.23, 0.27, 0.33, 0.44, 0.74]
+        //         pT_bins_list = [0.05, 0.23, 0.34, 0.44, 0.55, 0.90]
+        //     }
+        //     // For Q2-y Bin 15
+        //     if(Q2_y_Bin_Num == "15"){
+        //         z_bins_list  = [0.21, 0.28, 0.35, 0.47, 0.72]
+        //         pT_bins_list = [0.05, 0.23, 0.34, 0.45, 0.58, 0.90]
+        //     }
+        //     // For Q2-y Bin 16
+        //     if(Q2_y_Bin_Num == "16"){
+        //         z_bins_list  = [0.15, 0.20, 0.25, 0.32, 0.41, 0.71]
+        //         pT_bins_list = [0.05, 0.24, 0.36, 0.55, 0.80]
+        //     }
+        //     // For Q2-y Bin 17
+        //     if(Q2_y_Bin_Num == "17"){
+        //         z_bins_list  = [0.18, 0.23, 0.30, 0.38, 0.48, 0.72]
+        //         pT_bins_list = [0.05, 0.23, 0.36, 0.51, 0.85]
+        //     }
 
-            var output = "Error"
-            if(return_type.includes("_z")){
-                var z_bin_num = (z_bins_list.length) - bin
-                if((bin + 1) > z_bins_list.length){
-                    output = "";
-                    // alert(output);
-                }
-                else{
-                    if(return_type.includes("Center")){
-                        // output = ((z_bins_list[bin] + z_bins_list[bin - 1])/2).toFixed(3);
-                        output = ((z_bins_list[z_bin_num] + z_bins_list[z_bin_num - 1])/2).toFixed(3);
-                    }
-                    else{
-                        // var min_z = (z_bins_list[bin - 1]).toFixed(2);
-                        // var max_z = (z_bins_list[bin]).toFixed(2);
-                        var min_z = (z_bins_list[z_bin_num - 1]).toFixed(2);
-                        var max_z = (z_bins_list[z_bin_num]).toFixed(2);
-                        output = min_z + " - " + max_z;
-                    }
-                }
-            }
-            if(return_type.includes("_pT")){
-                if((bin + 1) > pT_bins_list.length){
-                    output = "";
-                    // alert(output);
-                }
-                else{
-                    if(return_type.includes("Center")){
-                        output = ((pT_bins_list[bin] + pT_bins_list[bin - 1])/2).toFixed(3);
-                    }
-                    else{
-                        var min_pT = (pT_bins_list[bin - 1]).toFixed(2);
-                        var max_pT = (pT_bins_list[bin]).toFixed(2);
-                        output = min_pT + " - " + max_pT;
-                    }
-                }
-            }
+        //     var output = "Error"
+        //     if(return_type.includes("_z")){
+        //         var z_bin_num = (z_bins_list.length) - bin
+        //         if((bin + 1) > z_bins_list.length){
+        //             output = "";
+        //             // alert(output);
+        //         }
+        //         else{
+        //             if(return_type.includes("Center")){
+        //                 // output = ((z_bins_list[bin] + z_bins_list[bin - 1])/2).toFixed(3);
+        //                 output = ((z_bins_list[z_bin_num] + z_bins_list[z_bin_num - 1])/2).toFixed(3);
+        //             }
+        //             else{
+        //                 // var min_z = (z_bins_list[bin - 1]).toFixed(2);
+        //                 // var max_z = (z_bins_list[bin]).toFixed(2);
+        //                 var min_z = (z_bins_list[z_bin_num - 1]).toFixed(2);
+        //                 var max_z = (z_bins_list[z_bin_num]).toFixed(2);
+        //                 output = min_z + " - " + max_z;
+        //             }
+        //         }
+        //     }
+        //     if(return_type.includes("_pT")){
+        //         if((bin + 1) > pT_bins_list.length){
+        //             output = "";
+        //             // alert(output);
+        //         }
+        //         else{
+        //             if(return_type.includes("Center")){
+        //                 output = ((pT_bins_list[bin] + pT_bins_list[bin - 1])/2).toFixed(3);
+        //             }
+        //             else{
+        //                 var min_pT = (pT_bins_list[bin - 1]).toFixed(2);
+        //                 var max_pT = (pT_bins_list[bin]).toFixed(2);
+        //                 output = min_pT + " - " + max_pT;
+        //             }
+        //         }
+        //     }
 
-            return output;
-        }
+        //     return output;
+        // }
 
         function table_bin_numbers(){
             var Bin = document.getElementById("Q2-xB Bin");
@@ -1055,24 +1174,27 @@
             row_num_6.innerText = "0.29 - 0.4";
             row_num_7.innerText = "0.4 - 0.73";
 
+            var Image_Version_Input = document.getElementById("Image_Version");
+            var Image_Version       = Image_Version_Input.value;
             
-            column_1.innerText = z_pT_bin_values(Q2_xB_Num, 1, "Axis_pT");
-            column_2.innerText = z_pT_bin_values(Q2_xB_Num, 2, "Axis_pT");
-            column_3.innerText = z_pT_bin_values(Q2_xB_Num, 3, "Axis_pT");
-            column_4.innerText = z_pT_bin_values(Q2_xB_Num, 4, "Axis_pT");
-            column_5.innerText = z_pT_bin_values(Q2_xB_Num, 5, "Axis_pT");
-            column_6.innerText = z_pT_bin_values(Q2_xB_Num, 6, "Axis_pT");
-            column_7.innerText = z_pT_bin_values(Q2_xB_Num, 7, "Axis_pT");
+            // column_1.innerText = z_pT_bin_values(Q2_xB_Num, 1, "Axis_pT");
+            column_1.innerText = z_pT_bin_values_New(Q2_xB_Num, 1, "Axis_pT", Image_Version);
+            column_2.innerText = z_pT_bin_values_New(Q2_xB_Num, 2, "Axis_pT", Image_Version);
+            column_3.innerText = z_pT_bin_values_New(Q2_xB_Num, 3, "Axis_pT", Image_Version);
+            column_4.innerText = z_pT_bin_values_New(Q2_xB_Num, 4, "Axis_pT", Image_Version);
+            column_5.innerText = z_pT_bin_values_New(Q2_xB_Num, 5, "Axis_pT", Image_Version);
+            column_6.innerText = z_pT_bin_values_New(Q2_xB_Num, 6, "Axis_pT", Image_Version);
+            column_7.innerText = z_pT_bin_values_New(Q2_xB_Num, 7, "Axis_pT", Image_Version);
 
-            row_num_1.innerText = z_pT_bin_values(Q2_xB_Num, 7, "Axis_z");
-            row_num_2.innerText = z_pT_bin_values(Q2_xB_Num, 6, "Axis_z");
-            row_num_3.innerText = z_pT_bin_values(Q2_xB_Num, 5, "Axis_z");
-            row_num_4.innerText = z_pT_bin_values(Q2_xB_Num, 4, "Axis_z");
-            row_num_5.innerText = z_pT_bin_values(Q2_xB_Num, 3, "Axis_z");
-            row_num_6.innerText = z_pT_bin_values(Q2_xB_Num, 2, "Axis_z");
-            row_num_7.innerText = z_pT_bin_values(Q2_xB_Num, 1, "Axis_z");
+            row_num_1.innerText = z_pT_bin_values_New(Q2_xB_Num, 7, "Axis_z", Image_Version);
+            row_num_2.innerText = z_pT_bin_values_New(Q2_xB_Num, 6, "Axis_z", Image_Version);
+            row_num_3.innerText = z_pT_bin_values_New(Q2_xB_Num, 5, "Axis_z", Image_Version);
+            row_num_4.innerText = z_pT_bin_values_New(Q2_xB_Num, 4, "Axis_z", Image_Version);
+            row_num_5.innerText = z_pT_bin_values_New(Q2_xB_Num, 3, "Axis_z", Image_Version);
+            row_num_6.innerText = z_pT_bin_values_New(Q2_xB_Num, 2, "Axis_z", Image_Version);
+            row_num_7.innerText = z_pT_bin_values_New(Q2_xB_Num, 1, "Axis_z", Image_Version);
 
-            column_1.innerText = column_1.innerText;
+            column_1.innerText   = column_1.innerText;
             column_2_2.innerText = column_2.innerText;
             column_3_2.innerText = column_3.innerText;
             column_4_2.innerText = column_4.innerText;
@@ -1088,32 +1210,37 @@
             row_num_6_2.innerText = row_num_6.innerText;
             row_num_7_2.innerText = row_num_7.innerText;
 
+            var z_pT_Bin = document.getElementById("z-pT Bin");
+
+            if(z_pT_Bin.value != "All"){
+                var table = document.getElementById("Main_Table");
+                var rows = table.getElementsByTagName("tr");
+                // Loop through each row of the table
+                for(var row = 0;     row < rows.length; row++){ // Starting at 1 to skip the header row
+                    var cells = rows[row].getElementsByTagName("td");
+                    // Loop through each cell in the current row
+                    for(var col = 0; col < cells.length; col++){
+                        var cell = cells[col];
+                        if(col < 7){
+                            bin_box_numbers(row, col+1, cell, 'update');
+                        }
+                    }
+                }
+            }
+
         }
 
         function bin_box_numbers(row, column, object, option){
             var Bin       = document.getElementById("Q2-xB Bin");
             var Q2_xB_Num = Bin.value;
 
-            var row_start = 7; // Refers to the number of pT bins in the Q2-xB/Q2-y bin
-            //  row_start = 7 for Bin 1, 2, and 3
-            if(Q2_xB_Num == "4"  || Q2_xB_Num == "5"  || Q2_xB_Num == "6"  || Q2_xB_Num == "7"  || Q2_xB_Num == "9" || Q2_xB_Num == "10" || Q2_xB_Num == "11"){
-                row_start = 6;
-            }
-            if(Q2_xB_Num == "8"  || Q2_xB_Num == "12" || Q2_xB_Num == "13" || Q2_xB_Num == "14" || Q2_xB_Num == "15"){
-                row_start = 5;
-            }
-            if(Q2_xB_Num == "16" || Q2_xB_Num == "17"){
-                row_start = 4;
-            }
+            var Image_Version_Input = document.getElementById("Image_Version");
+            var Image_Version       = Image_Version_Input.value;
 
+            var row_start = 7; // Refers to the number of pT bins in the Q2-xB/Q2-y bin
             var num_rows = 6; // Refers to the number of z bins in the Q2-xB/Q2-y bin
-            //  num_rows = 6 for Bin 2, 4, 5, 8, 9, and 10
-            if(Q2_xB_Num == "1"  || Q2_xB_Num == "3"  || Q2_xB_Num == "6" || Q2_xB_Num == "7" || Q2_xB_Num == "11" || Q2_xB_Num == "13" || Q2_xB_Num == "14" || Q2_xB_Num == "16" || Q2_xB_Num == "17"){
-                num_rows = 5;
-            }
-            if(Q2_xB_Num == "12" || Q2_xB_Num == "15"){
-                num_rows = 4;
-            }
+            row_start = z_pT_Rows_Function(Q2_xB_Num, Image_Version)[0]
+            num_rows  = z_pT_Rows_Function(Q2_xB_Num, Image_Version)[1]
 
             var Bin_Number = row_start*(row - 1) + column;
 
@@ -1130,67 +1257,74 @@
             }
 
             // Skipping the empty bins by Q2-xB/Q2-y bins
-            if((Q2_xB_Num == "1")  && (Bin_Number == 28 || Bin_Number == 34 || Bin_Number == 35)){
+            var output_bool = false;
+            output_bool = Overflow_z_pT_Bins(Q2_xB_Num, Bin_Number, Image_Version);
+            if(output_bool){
                 Bin_Number = "";
                 object.style.backgroundColor = "red";
             }
-            if((Q2_xB_Num == "2")  && (Bin_Number == 28 || Bin_Number == 35 || Bin_Number == 41 || Bin_Number == 42)){
-                Bin_Number = "";
-                object.style.backgroundColor = "red";
-            }
-            if((Q2_xB_Num == "3")  && (Bin_Number == 28 || Bin_Number == 35)){
-                Bin_Number = "";
-                object.style.backgroundColor = "red";
-            }
-            if((Q2_xB_Num == "4")  && (Bin_Number == 6  || Bin_Number == 36)){
-                Bin_Number = "";
-                object.style.backgroundColor = "red";
-            }
-            if((Q2_xB_Num == "5")  && (Bin_Number == 30 || Bin_Number == 36)){
-                Bin_Number = "";
-                object.style.backgroundColor = "red";
-            }
-            if((Q2_xB_Num == "6")  && (Bin_Number == 30)){
-                Bin_Number = "";
-                object.style.backgroundColor = "red";
-            }
-            if((Q2_xB_Num == "7")  && (Bin_Number == 24 || Bin_Number == 30)){
-                Bin_Number = "";
-                object.style.backgroundColor = "red";
-            }
-            if((Q2_xB_Num == "9")  && (Bin_Number == 36)){
-                Bin_Number = "";
-                object.style.backgroundColor = "red";
-            }
-            if((Q2_xB_Num == "10") && (Bin_Number == 30 || Bin_Number == 36)){
-                Bin_Number = "";
-                object.style.backgroundColor = "red";
-            }
-            if((Q2_xB_Num == "11") && (Bin_Number == 24 || Bin_Number == 30)){
-                Bin_Number = "";
-                object.style.backgroundColor = "red";
-            }
-            if((Q2_xB_Num == "13") && (Bin_Number == 25)){
-                Bin_Number = "";
-                object.style.backgroundColor = "red";
-            }
-            if((Q2_xB_Num == "14") && (Bin_Number == 25)){
-                Bin_Number = "";
-                object.style.backgroundColor = "red";
-            }
-            if((Q2_xB_Num == "15") && (Bin_Number == 20)){
-                Bin_Number = "";
-                object.style.backgroundColor = "red";
-            }
-            if((Q2_xB_Num == "16") && (Bin_Number == 20)){
-                Bin_Number = "";
-                object.style.backgroundColor = "red";
-            }
-            if((Q2_xB_Num == "17") && (Bin_Number == 20)){
-                Bin_Number = "";
-                object.style.backgroundColor = "red";
-            }
-
+            // else{
+            //     if((Q2_xB_Num == "1")  && (Bin_Number == 28 || Bin_Number == 34 || Bin_Number == 35)){
+            //         Bin_Number = "";
+            //         object.style.backgroundColor = "red";
+            //     }
+            //     if((Q2_xB_Num == "2")  && (Bin_Number == 28 || Bin_Number == 35 || Bin_Number == 41 || Bin_Number == 42)){
+            //         Bin_Number = "";
+            //         object.style.backgroundColor = "red";
+            //     }
+            //     if((Q2_xB_Num == "3")  && (Bin_Number == 28 || Bin_Number == 35)){
+            //         Bin_Number = "";
+            //         object.style.backgroundColor = "red";
+            //     }
+            //     if((Q2_xB_Num == "4")  && (Bin_Number == 6  || Bin_Number == 36)){
+            //         Bin_Number = "";
+            //         object.style.backgroundColor = "red";
+            //     }
+            //     if((Q2_xB_Num == "5")  && (Bin_Number == 30 || Bin_Number == 36)){
+            //         Bin_Number = "";
+            //         object.style.backgroundColor = "red";
+            //     }
+            //     if((Q2_xB_Num == "6")  && (Bin_Number == 30)){
+            //         Bin_Number = "";
+            //         object.style.backgroundColor = "red";
+            //     }
+            //     if((Q2_xB_Num == "7")  && (Bin_Number == 24 || Bin_Number == 30)){
+            //         Bin_Number = "";
+            //         object.style.backgroundColor = "red";
+            //     }
+            //     if((Q2_xB_Num == "9")  && (Bin_Number == 36)){
+            //         Bin_Number = "";
+            //         object.style.backgroundColor = "red";
+            //     }
+            //     if((Q2_xB_Num == "10") && (Bin_Number == 30 || Bin_Number == 36)){
+            //         Bin_Number = "";
+            //         object.style.backgroundColor = "red";
+            //     }
+            //     if((Q2_xB_Num == "11") && (Bin_Number == 24 || Bin_Number == 30)){
+            //         Bin_Number = "";
+            //         object.style.backgroundColor = "red";
+            //     }
+            //     if((Q2_xB_Num == "13") && (Bin_Number == 25)){
+            //         Bin_Number = "";
+            //         object.style.backgroundColor = "red";
+            //     }
+            //     if((Q2_xB_Num == "14") && (Bin_Number == 25)){
+            //         Bin_Number = "";
+            //         object.style.backgroundColor = "red";
+            //     }
+            //     if((Q2_xB_Num == "15") && (Bin_Number == 20)){
+            //         Bin_Number = "";
+            //         object.style.backgroundColor = "red";
+            //     }
+            //     if((Q2_xB_Num == "16") && (Bin_Number == 20)){
+            //         Bin_Number = "";
+            //         object.style.backgroundColor = "red";
+            //     }
+            //     if((Q2_xB_Num == "17") && (Bin_Number == 20)){
+            //     Bin_Number = "";
+            //     object.style.backgroundColor = "red";
+            // }
+            // }
 
             object.innerText = Bin_Number;
 
@@ -1292,11 +1426,14 @@
                                             <p font="500px">Select Image Type:</p>
                                             <select onchange="change_picture_fit_richcap();" id="Image_Type" name="Image_Type" />
                                                 <optgroup label="Standard Unfolding Images">
-                                                    <option value="Unfold" id="Unfold_select" title="These images do not apply any additional momentum smearing to the MC REC distributions" selected>Unfolded</option>
-                                                    <option value="Unfold_smear" id="Unfold_smear_select" title="These images apply a momentum smearing function to the MC REC distributions (See 'Smearing/Correction Histos' for more info)">Smeared Unfolded</option>
-                                                    <option value="Fit_Par" id="Fit_Par_select" title="These images show how the fit parameters from the phi_h plots appear as functions of z and pT">Fit Parameters</option>
-                                                    <option value="Histo_2D_Test" id="Histo_2D_Test_select" title="These images show the newly developed 2D Binning Schemes for the Q2-y and z-PT plots (Preliminary Version + Bin Definitions)">New (Test) Bins</option>
-                                                    <option value="New_Smearing"    title="These images show the plots related to momentum corrections/smearing">Smearing/Correction Histos</option>
+                                                    <option value="Unfold"        id="Unfold_select"        title="These images do not apply any additional momentum smearing to the MC REC distributions" selected>Unfolded</option>
+                                                    <option value="Unfold_smear"  id="Unfold_smear_select"  title="These images apply a momentum smearing function to the MC REC distributions (See 'Smearing/Correction Histos' for more info)">Smeared Unfolded</option>
+                                                    <option value="Fit_Par"       id="Fit_Par_select"       title="These images show how the fit parameters from the phi_h plots appear as functions of z and pT">Fitted Moments</option>
+                                                </optgroup>
+                                                <optgroup label="Other Image Types">
+                                                    <option value="Histo_2D_Test" id="Histo_2D_Test_select" title="These images show the 2D Binning Schemes for the Q2-y and z-PT plots with Bin Definitions">Binning Definitions</option>
+                                                    <!-- <option value="New_Smearing"   title="These images show the plots related to momentum corrections/smearing">Smearing/Correction Histos</option> -->
+                                                    <option value="P2_Smearing"                             title="These images show the plots related to the updated momentum corrections/smearing for Pass 2">Smearing/Correction Histos (Pass 2)</option>
                                                 </optgroup>
                                                 
                                             </select>
@@ -1309,18 +1446,20 @@
                                             <!-- <psmall id="psmall" font="5px">Last Updated: 2/25/2024</psmall> -->
                                             <!-- <select onchange="change_picture_fit_richcap();" id="Image_Version" name="Image_Version" class="__web-inspector-hide-shortcut__"> -->
                                             <select onchange="change_picture_fit_richcap();" id="Image_Version" name="Image_Version">
-                                                <optgroup label="New (Test) Binning">
-                                                    <option value="Web_Only_New"        title="Last Updated on 3-6-2023 - Unfolding from Outside (i.e., With Background Subtraction of Generated Missing Mass)">Pass 1 - Unfolding from Outside</option>
-                                                    <option value="Web_Only_Pass_2_New" title="Last Updated on 3-6-2023 - Unfolding from Outside (i.e., With Background Subtraction of Generated Missing Mass)">Pass 2 - Unfolding from Outside</option>
+                                                <optgroup label="New Binning">
+                                                    <!-- <option value="Web_Only_Pass_2_New"     title="Last Updated on 5-9-2024 - Unfolding with Background Subtraction (Generated Missing Mass and Mis-Identified Particles)">Pass 2 - w/BG Subtraction</option>
+                                                    <option value="Web_Only_New"            title="Last Updated on ...-2024 - Unfolding with Background Subtraction (Generated Missing Mass and Mis-Identified Particles)">Pass 1 - w/BG Subtraction</option> -->
+                                                    <option value="Web_Only_Pass_2_New_PID" title="Last Updated on 5-15-2024 - Unfolding with Background Subtraction (Mis-Identified Particles Only)">Pass 2 - Mis-Identified Particles</option>
+                                                    <option value="Web_Only_New_PID"        title="Last Updated on 5-15-2024 - Unfolding with Background Subtraction (Mis-Identified Particles Only)">Pass 1 - Mis-Identified Particles</option>
                                                     <!-- <option value="All_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Pass_2_CrossCheck_V3_2_22_2024/Unfolding_Images/" title="Updated on 2-22-2024">Pass 2</option> -->
-                                                <optgroup label="Old Binning">
-                                                    <option value="Web_Only"            title="Last Updated on 2-29-2023 - Without Background Subtraction (i.e., Without cutting on Generated Missing Mass)">(Old) Pass 1 - W/out BG Subtraction</option>
-                                                    <option value="Web_Only_Background" title="Last Updated on 2-27-2023 - Unfolding from Outside (i.e., With Background Subtraction of Generated Missing Mass)">(Old) Pass 1 - Unfolding from Outside</option>
-                                                    <option value="Web_Only_Pass_2"     title="Last Updated on 2-26-2023 - Unfolding from Outside (i.e., With Background Subtraction of Generated Missing Mass)">(Old) Pass 2 - Unfolding from Outside</option>
-                                                </optgroup>
+                                                <!-- <optgroup label="Old Binning">
+                                                    <option value="Web_Only"            title="Last Updated on 2-29-2024 - Without Background Subtraction (i.e., Without cutting on Generated Missing Mass)">(Old) Pass 1 - W/out BG Subtraction</option>
+                                                    <option value="Web_Only_Background" title="Last Updated on 2-27-2024 - Unfolding from Outside (i.e., With Background Subtraction of Generated Missing Mass)">(Old) Pass 1 - Unfolding from Outside</option>
+                                                    <option value="Web_Only_Pass_2"     title="Last Updated on 2-26-2024 - Unfolding from Outside (i.e., With Background Subtraction of Generated Missing Mass)">(Old) Pass 2 - Unfolding from Outside</option>
+                                                </optgroup> -->
                                                 <optgroup label="Unfolding Closure Tests/Older Versions - See GitHub" title="Not currently available on this page">
                                                     <!-- <option onclick="Older_Page_Version_Link();">See GitHub</option> -->
-                                                    <!-- <option value="Current" title="Last Updated on 2-20-2023">Latest Version</option> -->
+                                                    <!-- <option value="Current" title="Last Updated on 2-20-2024">Latest Version</option> -->
                                                 </optgroup>
                                             </select><br/><br/>
                                         </form>
@@ -1354,12 +1493,12 @@
 
                             <div id="Pars_Controls" hidden="hidden">
                                 <form id="Parameter_Select_Form" name="Parameter_Select_Form">
-                                    <p font="450px">Select Parameter:</p>
+                                    <p font="450px">Select Moment:</p>
                                     <select onchange="change_picture_fit_richcap();" id="Parameter_Select" name="Parameter_Select" />
                                         <optgroup label="Select which parameter to plot:">
-                                            <!-- <option value="A" title="Refers to the Multiplicity term">A</option> -->
-                                            <option value="B" title="Refers to the Cos(phi) Moment" selected>B</option>
-                                            <option value="C" title="Refers to the Cos(2*phi) Moment">C</option>
+                                            <!-- <option value="A" title="Refers to the Multiplicity term (Fit Parameter A)">Multiplicity</option> -->
+                                            <option value="B" title="Refers to the Cos(phi) Moment (Fit Parameter B)" selected>Cos(&phi;h)</option>
+                                            <option value="C" title="Refers to the Cos(2*phi) Moment (Fit Parameter C)">Cos(2&phi;h)</option>
                                         </optgroup>
                                     </select><br/><br/>
                                 </form> 
@@ -1369,10 +1508,12 @@
                                     <!-- <select onchange="change_z_pT_Fit_Center_Select(); change_picture_fit_richcap();" id="Parameter_VS" name="Parameter_VS" /> -->
                                     <select onchange="change_picture_fit_richcap();" id="Parameter_VS" name="Parameter_VS" />
                                         <optgroup label="Select which variable/dimension to plot the parameters against:">
-                                            <option value="_phi_t_VS_Z"  title="These images use the 1D (unfolded) plots">Plot vs z (1D)</option>
-                                            <option value="_phi_t_VS_PT" title="These images use the 1D (unfolded) plots">Plot vs pT (1D)</option>
-                                            <option value="_Multi_Dim_z_pT_Bin_y_bin_phi_t_VS_Z"  title="These images use the plots created for the multidimensional unfolding procedures">Plot vs z (Multi-Dim)</option>
-                                            <option value="_Multi_Dim_z_pT_Bin_y_bin_phi_t_VS_PT" title="These images use the plots created for the multidimensional unfolding procedures">Plot vs pT (Multi-Dim)</option>
+                                            <option value="_phi_t_VS_Z"                           title="These images use the 1D (unfolded) plots">Plot vs z  (1D)</option>
+                                            <!-- <option value="_phi_t_VS_PT"                          title="These images use the 1D (unfolded) plots">Plot vs pT (1D)</option> -->
+                                            <option value="_Multi_Dim_z_pT_Bin_y_bin_phi_t_VS_Z"  title="These images use the plots created for the 3D multidimensional unfolding procedures">Plot vs z  (3D)</option>
+                                            <!-- <option value="_Multi_Dim_z_pT_Bin_y_bin_phi_t_VS_PT" title="These images use the plots created for the 3D multidimensional unfolding procedures">Plot vs pT (3D)</option> -->
+                                            <option value="_MultiDim_Q2_y_z_pT_phi_h_VS_Z"        title="These images use the plots created for the 5D multidimensional unfolding procedures">Plot vs z  (5D)</option>
+                                            <!-- <option value="_MultiDim_Q2_y_z_pT_phi_h_VS_PT"       title="These images use the plots created for the 5D multidimensional unfolding procedures">Plot vs pT (5D)</option> -->
                                         </optgroup>
                                     </select><br/><br/>
                                 </form> 
@@ -1392,12 +1533,12 @@
                                     <select onchange="change_picture_fit_richcap();" id="Parameter_Method" name="Parameter_Method" />
                                         <optgroup label="Select the data type used to make the plot:">
                                             <option value="Bayesian" title="Uses the Bayesian Unfolding Method to create the plots">Bayesian</option>
-                                            <option value="Bin" title="Uses the Bin-by-Bin Acceptance Correction Method to create the plots">Bin-by-Bin</option>
-                                            <option value="gdf" title="Fits come from the plots of the MC Generated events (i.e., the simulated 'true' data)">MC GEN</option>
+                                            <option value="Bin"      title="Uses the Bin-by-Bin Acceptance Correction Method to create the plots">Bin-by-Bin</option>
+                                            <option value="gdf"      title="Fits come from the plots of the MC Generated events (i.e., the simulated 'true' data)">MC GEN</option>
                                         </optgroup>
-                                        <optgroup label="Option not available for Multidimensional Unfolding:">
-                                            <option value="SVD" title="Uses the SVD Unfolding Method to create the plots">SVD</option>
-                                        </optgroup>
+                                        <!-- <optgroup label="Option not available for Multidimensional Unfolding:">
+                                            <option value="SVD"      title="Uses the SVD Unfolding Method to create the plots">SVD</option>
+                                        </optgroup> -->
                                     </select><br/><br/>
                                 </form> 
 
@@ -1479,10 +1620,14 @@
                                             <select onchange="change_picture_fit_richcap();" id="Multi_Unfold" name="Multi_Unfold" />
                                                 <optgroup label="1D Corrections (Original Method)">
                                                     <option value="">1D Unfolding</option>
-                                                    <option value="Kinematic_Comparison_" title="Highlights the comparisons between Data and MC (must use the 'Checking Individual z-PT Bins' option for the z-PT bins)">Kinematic Comparisons</option>
+                                                    <!-- <option value="Kinematic_Comparison_" title="Highlights the comparisons between Data and MC (must use the 'Checking Individual z-PT Bins' option for the z-PT bins)">Kinematic Comparisons</option> -->
                                                 </optgroup>
                                                 <optgroup label="Multi-Dimensional Unfolding/Plotting">
-                                                    <option value="Multi_Unfold_Only_">Multi-Dimensional Unfolding</option>
+                                                    <option value="Multi_Unfold_Only_">3D Unfolding</option>
+                                                    <option value="Multi_5D_" title="Not available for bayesian unfolding as of 5/8/2024">5D Unfolding</option>
+                                                </optgroup>
+                                                <optgroup label="1D Corrections (Individual z-PT Bins Only)">
+                                                    <option value="Kinematic_Comparison_" title="Highlights the comparisons between Data and MC (must use the 'Checking Individual z-PT Bins' option for the z-PT bins)">Kinematic Comparisons</option>
                                                 </optgroup>
                                             </select><br/><br/>
                                         </form> 
@@ -1521,25 +1666,41 @@
                                         <form id="Unfolding Option Form" name="Unfolding_Option_form">
                                             <p font="450px" id="Unfolding_Type">Select Unfolding Option:</p>
                                             <select onchange="change_picture_fit_richcap();table_bin_numbers();" id="Unfolding Option" name="Unfolding_Option" />
-                                                <option value="Data"              Title="Shows plots the pre-unfolded/acceptance corrected plots including the experimental data and the Monte Carlo Generated and Reconstructed distributions (All normalized to be plotted together)">Data Histograms</option>
-                                                <option value="Unfold"            Title="Shows all of the unfolded histograms together in the same image.">All Unfolded Together</option>
-                                                <option value="RooUnfold_bayes"   Title="Shows plots which were produced after applying the Bayesian Unfolding method included in the RooUnfold library">RooUnfold Bayesian</option>
-                                                <option value="Bin"               Title="Shows plots which were produced after applying bin-by-bin acceptance corrections">Bin-By-Bin Correction</option>
-                                                <option value="mdf"               Title="">Reconstructed MC Only</option>
-                                                <option value="Acceptance"        Title="">MC Acceptance</option>
+                                                <option value="Data"                 Title="Shows plots the pre-unfolded/acceptance corrected plots including the experimental data and the Monte Carlo Generated and Reconstructed distributions (All normalized to be plotted together)">Data Histograms</option>
+                                                <option value="Unfold"               Title="Shows all of the unfolded histograms together in the same image.">All Unfolded Together</option>
+                                                <option value="RooUnfold_bayes"      Title="Shows plots which were produced after applying the Bayesian Unfolding method included in the RooUnfold library">RooUnfold Bayesian</option>
+                                                <option value="Bin"                  Title="Shows plots which were produced after applying bin-by-bin acceptance corrections">Bin-By-Bin Correction</option>
+                                                <option value="mdf"                  Title="">Reconstructed MC Only</option>
+                                                <option value="Acceptance"           Title="">MC Acceptance</option>
+                                                <!-- <option value="Kinematic_Comparison" Title="Compares Data to Monte Carlo Distributions">Kinematic Comparison</option> -->
                                                 <optgroup label="Not Available with smearing">
-                                                    <option value="rdf"           Title="Fall 2018 Inbending Pass 1 (or 2 - depending on 'Update Version')">Experimental Data Only</option>
-                                                    <option value="gdf"           Title="">Generated MC Only</option>
+                                                    <option value="rdf"              Title="Fall 2018 Inbending Pass 1 (or 2 - depending on 'Update Version')">Experimental Data Only</option>
+                                                    <option value="gdf"              Title="">Generated MC Only</option>
                                                 </optgroup>
-                                                <optgroup label="Only Available with Closure Tests - Without smearing">
+                                                <!-- <optgroup label="Only Available with Closure Tests - Without smearing">
                                                     <option value="tdf" title="The 'true' distribution refers to the generated distribution which originally produced the reconstructed data which was unfolded">True MC Only</option>
-                                                </optgroup>
+                                                </optgroup> -->
                                                 <optgroup label="Not Available with Multi-Dimensional Unfolding">
                                                     <option value="Response">Response Matrix</option>
-                                                    <option value="RooUnfold_svd" Title="Shows plots which were produced after applying the SVD Unfolding method included in the RooUnfold library">RooUnfold SVD</option>
+                                                    <!-- <option value="RooUnfold_svd" Title="Shows plots which were produced after applying the SVD Unfolding method included in the RooUnfold library">RooUnfold SVD</option> -->
                                                 </optgroup>
                                             </select><br/><br/>
                                         </form>
+                                        
+                                        <!-- <form hidden="hidden" id="Variable_Choice_Main_Plots" name="Variable_Choice_Main_Plots_form">
+                                            <p font="450px" id="Variable_Type" hidden="hidden">Select Variable Option:</p>
+                                            <select hidden="hidden" onchange="change_picture_fit_richcap();table_bin_numbers();" id="Variable Option" name="Variable_Option" />
+                                                <option hidden="hidden" value=""           Title="Default option (use for all standard plot options)">&phi;h (Trento &phi;)</option>
+                                                <optgroup                  Title="Particle Kinematic Plots" label="Not Available w/any Unfolding Options">
+                                                    <option value="el"     Title="May not be available for some options">Electron Momentum</option>
+                                                    <option value="elth"   Title="May not be available for some options">Electron &theta;</option>
+                                                    <option value="elPhi"  Title="May not be available for some options">Electron &phi;</option>
+                                                    <option value="pip"    Title="May not be available for some options">Pion Momentum</option>
+                                                    <option value="pipth"  Title="May not be available for some options">Pion &theta;</option>
+                                                    <option value="pipPhi" Title="May not be available for some options">Pion &phi;</option>
+                                                </optgroup>
+                                            </select><br/><br/>
+                                        </form> -->
                                         
                                         <form id="z-pT Axis Choice" name="z_pT_axis_choice">
                                             <!-- <p font="450px" id="z-pT Axis Choice Title">Cuts and z vs. P<sub>T</sub> or P<sub>T</sub> vs. z (Disabled):</p> -->
@@ -1549,7 +1710,7 @@
                                                 <optgroup label="Normal Cuts - May need to select 'Default' for some versions">
                                                 <!-- <optgroup label="Disabled as of 2/23/2024 (See GitHub Link for other versions)"> -->
                                                     <option value="">Default</option>
-                                                    <option value="_Flipped">Flipped</option>
+                                                    <!-- <option value="_Flipped">Flipped</option> -->
                                                 </optgroup>
                                             </select><br/>
                                             
@@ -1597,6 +1758,157 @@
                                 </table>
                             </div>
 
+
+
+
+                            <div id="New_Smearing_div_3" hidden="hidden">
+                                <table>
+                                    <colgroup></colgroup> 
+                                    <colgroup class="slim"></colgroup>
+                                        <thead>
+
+                                            <form id="Smear Compare Form" name="Smear_Compare_Form">
+                                                <p font="450px" id="P2 Smear Effects">Select Image Option:</p>
+                                                <select onchange="change_picture_P2_smear_richcap(true);" id="P2 Smear Effect List" name="P2_Smear_Effect_List" />
+                                                    <option value="Smearing_Creation">Smearing Creation</option>
+                                                    <optgroup label="Effects on SIDIS">
+                                                        <option value="Unfolding_Images">Mom Cor Effects</option>
+                                                        <option value="Unfolding_Images/Smeared">Smearing Effects</option>
+                                                    </optgroup>
+                                                </select><br/><br/>
+                                            </form>
+                                            
+                                            <button onclick="Smear_Function_Code_Link();"><span title="Link to code used when applying the momentum smearing function (to Monte Carlo) and the momentum corrections (to data)">Smearing/Mom Cor Code</span></button>
+                                            <br/><br/>
+
+                                        </thead>
+                                </table>
+                                
+                            </div>
+
+                            <div id="New_Smearing_div_4" hidden="hidden">
+                                <table>
+                                    <colgroup></colgroup> 
+                                    <colgroup class="slim"></colgroup>
+                                        <thead>
+
+                                            <form id="Smear Compare Form" name="Smear_Compare_Form">
+                                                <p font="450px" id="P2 Smear Variable">Select Variables:</p>
+                                                <select onchange="change_picture_P2_smear_richcap(true);" id="P2 Smear Variable List" name="P2_Smear_Variable_List" />
+                                                    <option value="Delta_P_Vs_P">∆P vs Momentum</option>
+                                                    <option value="Missing_Mass_Vs_P">Missing Mass vs Momentum</option>
+                                                    <option value="Delta_P_Vs_Theta">∆P vs &theta;</option>
+                                                    <option value="Missing_Mass_Vs_Theta">Missing Mass vs &theta;</option>
+                                                    <option value="Delta_P_P_Vs_Theta">∆P/P vs &theta;</option>
+                                                </select><br/><br/>
+                                            </form>
+
+                                            <form id="Smear Compare Form" name="Smear_Compare_Form">
+                                                <p font="450px" id="P2 Smear Particle">Select Particle:</p>
+                                                <select onchange="change_picture_P2_smear_richcap(true);" id="P2 Smear Particle List" name="P2_Smear_Particle_List" />
+                                                    <option value="El">Electron</option>
+                                                    <option value="Pip">π+ Pion</option>
+                                                </select><br/><br/>
+                                            </form>
+
+                                            <form id="Smear Compare Form" name="Smear_Compare_Form">
+                                                <p font="450px" id="P2 Smear Particle">Select Plot Type:</p>
+                                                <select onchange="change_picture_P2_smear_richcap(true);" id="P2 Smear Plot List" name="P2_Smear_Plot_List" />
+                                                    <option value="" title="Shows the full fits (peaks+widths) of the selected variable">Fits</option>
+                                                    <option value="_Smear_Compare" title="Shows the Ratios of the widths between data and MC before and after smearing">Ratio of &sigma;</option>
+                                                    <optgroup label="Not Available w/Missing Mass">
+                                                        <option value="_Smear_Function" title="Shows the widths of the selected variable (used for smearing function creation)">Widths (&sigma;)</option>
+                                                    </optgroup>
+                                                </select><br/><br/>
+                                            </form>
+
+
+                                        </thead>
+                                </table>
+                                
+                            </div>
+
+                            <div id="New_Smearing_div_5" hidden="hidden">
+                                <table>
+                                    <colgroup></colgroup> 
+                                    <colgroup class="slim"></colgroup>
+                                        <thead>
+
+                                            <form id="Smear Compare Form" name="Smear_Compare_Form">
+                                                <p font="450px" id="P2 Mom Cor Plot">Select Variables:</p>
+                                                <select onchange="change_picture_P2_smear_richcap(true);" id="P2_Mom_Cor_Plot" name="P2_Mom_Cor_Plot" />
+                                                    <optgroup label="1D Plots">
+                                                        <option value="rdf_Complete_Correction_Factor_Ele">∆P (El) Factor</option>
+                                                        <option value="rdf_Complete_Correction_Factor_Pip">∆P (π+) Factor</option>
+                                                    </optgroup>
+                                                    <optgroup label="2D Plots">
+                                                        <option value="rdf_Complete_Correction_Factor_Ele_el">∆P (El) Factor vs Momentum</option>
+                                                        <option value="rdf_Complete_Correction_Factor_Pip_pip">∆P (π+) Factor vs Momentum</option>
+                                                    </optgroup>
+                                                </select><br/><br/>
+                                            </form>
+
+                                            <form id="Q2_y_Bin_Form" name="Q2_y_Bin_Form">
+                                                <p font="450px">Q<sup>2</sup>-y Bin: <span id="sliderValue_6">1</span></p>
+                                                <input type="range" min="1" max="17" value="1" onchange="change_picture_P2_smear_richcap(true); handleSliderChange(event);" id="Q2_y_Bin_Mom_Cor" name="Q2_y_Bin_Mom_Cor">
+                                            </form><br/><br/>
+
+                                        </thead>
+                                </table>
+                                
+                            </div>
+
+                            <div id="New_Smearing_div_6" hidden="hidden">
+                                <table>
+                                    <colgroup></colgroup> 
+                                    <colgroup class="slim"></colgroup>
+                                        <thead>
+                                            <form id="Smear Compare Form" name="Smear_Compare_Form">
+                                                <p font="450px" id="P2 Smear SIDS Plot">Select Variables:</p>
+                                                <select onchange="change_picture_P2_smear_richcap(true);" id="P2_SIDIS_Smear_Plot" name="P2_SIDIS_Smear_Plot" />
+                                                    <optgroup label="1D (Absolute Dif) Plots">
+                                                        <option value="mdf_Smeared_Effect_on_phi_h">Absolute Dif &phi;h</option>
+                                                        <option value="mdf_Smeared_Effect_on_el">Absolute Dif Momentum (El)</option>
+                                                        <option value="mdf_Smeared_Effect_on_pip">Absolute Dif Momentum (π+)</option>
+                                                        <option value="mdf_Smeared_Effect_on_Q2">Absolute Dif Q2</option>
+                                                        <option value="mdf_Smeared_Effect_on_y">Absolute Dif y</option>
+                                                        <option value="mdf_Smeared_Effect_on_z">Absolute Dif z</option>
+                                                        <option value="mdf_Smeared_Effect_on_pT">Absolute Dif pT</option>
+                                                        <!-- <option value="mdf_Smeared_Effect_on_MM">Absolute Dif Missing Mass</option> -->
+                                                    </optgroup>
+                                                    <optgroup label="1D (% Dif) Plots">
+                                                        <option value="mdf_Smeared_Percent_of_el">% Dif Momentum (El)</option>
+                                                        <option value="mdf_Smeared_Percent_of_pip">% Dif Momentum (π+)</option>
+                                                        <option value="mdf_Smeared_Percent_of_Q2">% Dif Q2</option>
+                                                        <option value="mdf_Smeared_Percent_of_y">% Dif y</option>
+                                                        <option value="mdf_Smeared_Percent_of_z">% Dif z</option>
+                                                        <option value="mdf_Smeared_Percent_of_pT">% Dif pT</option>
+                                                        <option value="mdf_Smeared_Percent_of_MM">% Dif Missing Mass</option>
+                                                    </optgroup>
+                                                    <optgroup label="2D Plots">
+                                                        <option value="mdf_Smeared_Effect_on_phi_h_Vs_phi_h">Absolute Dif &phi;h</option>
+                                                        <option value="mdf_Smeared_Percent_of_el_Vs_el">% Dif Momentum (El)</option>
+                                                        <option value="mdf_Smeared_Percent_of_pip_Vs_pip">% Dif Momentum (π+)</option>
+                                                        <option value="mdf_Smeared_Percent_of_Q2_Vs_Q2">% Dif Q2</option>
+                                                        <option value="mdf_Smeared_Percent_of_y_Vs_y">% Dif y</option>
+                                                        <option value="mdf_Smeared_Percent_of_z_Vs_z">% Dif z</option>
+                                                        <option value="mdf_Smeared_Percent_of_pT_Vs_pT">% Dif pT</option>
+                                                        <option value="mdf_Smeared_Percent_of_MM_Vs_MM">% Dif Missing Mass</option>
+                                                    </optgroup>
+                                                </select><br/><br/>
+                                            </form>
+
+                                            <form id="Q2_y_Bin_Form" name="Q2_y_Bin_Form">
+                                                <p font="450px">Q<sup>2</sup>-y Bin: <span id="sliderValue_7">1</span></p>
+                                                <input type="range" min="1" max="17" value="1" onchange="change_picture_P2_smear_richcap(true); handleSliderChange(event);" id="Q2_y_Bin_Smearing" name="Q2_y_Bin_Smearing">
+                                            </form><br/><br/>
+
+                                        </thead>
+                                </table>
+                                
+                            </div>
+
+
                             <script>
                                 const slider        = document.getElementById("Q2-xB Bin");
                                 const slider_2      = document.getElementById("Q2-xB Bin 2");
@@ -1605,12 +1917,16 @@
                                 const sliderValue_2 = document.getElementById("sliderValue_2");
                                 const sliderValue_3 = document.getElementById("sliderValue_3");
                                 const sliderValue_4 = document.getElementById("sliderValue_4");
+                                const sliderValue_6 = document.getElementById("sliderValue_6");
+                                const sliderValue_7 = document.getElementById("sliderValue_7");
                                 function handleSliderChange(event){
                                     const newValue          = event.target.value;
                                     sliderValue.innerText   = newValue;
                                     sliderValue_2.innerText = newValue;
                                     sliderValue_3.innerText = newValue;
                                     sliderValue_4.innerText = newValue;
+                                    sliderValue_6.innerText = newValue;
+                                    sliderValue_7.innerText = newValue;
                                     // Do something with the new value, such as updating some other parts of the page
                                 }
                                 const sliderValue_5 = document.getElementById("sliderValue_5");
@@ -1618,14 +1934,15 @@
                                     const newValue          = event.target.value;
                                     sliderValue_5.innerText = newValue;
                                 }
-                                slider.addEventListener("input",   handleSliderChange);
-                                slider_2.addEventListener("input", handleSliderChange);
-                                slider_3.addEventListener("input", handleSliderChange);
-                                slider_4.addEventListener("input", handleSliderChange);
-                                slider_5.addEventListener("input", handleSliderChange_z_pT);
+                                slider.addEventListener("input",        handleSliderChange);
+                                slider_2.addEventListener("input",      handleSliderChange);
+                                slider_3.addEventListener("input",      handleSliderChange);
+                                sliderValue_4.addEventListener("input", handleSliderChange);
+                                sliderValue_5.addEventListener("input", handleSliderChange_z_pT);
+                                sliderValue_6.addEventListener("input", handleSliderChange);
+                                sliderValue_7.addEventListener("input", handleSliderChange);
 
                             </script>
-
 
                             <div id="div02" hidden="hidden">
                                 <table>
@@ -2005,7 +2322,8 @@
                             </div>
 
                             <div id="divE" hidden="hidden">
-                                <img src="Web_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_New_Q2_Y_Bins_V2_3_3_2024/Unfolding_Images/z_pT_Bin_Individual/Q2_xB_Bin_1/Response_Matrix_Normal_Q2_xB_Bin_1_z_pT_Bin_1_Unfolded_Histos.png" name="pic2" width="600px" height="550px" ondblclick="PicturePopUp_click(this);">
+                                <!-- <img src="Web_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Pass_2_New_Q2_Y_Bins_V5_4_17_2024/Unfolding_Images/z_pT_Bin_Individual/Q2_xB_Bin_1/Response_Matrix_Normal_Q2_xB_Bin_1_z_pT_Bin_1_Unfolded_Histos.png" name="pic2" width="600px" height="550px" ondblclick="PicturePopUp_click(this);"> -->
+                                <img src="Web_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Pass_2_5D_Unfold_Test_V5_5_15_2024/Unfolding_Images/z_pT_Bin_Individual/Q2_xB_Bin_1/Response_Matrix_Normal_Q2_xB_Bin_1_z_pT_Bin_1_Unfolded_Histos.png" name="pic2" width="600px" height="550px" ondblclick="PicturePopUp_click(this);">
                                 <!-- <img src="All_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_CrossCheck_V2_2_21_2024/Unfolding_Images/z_pT_Bin_Individual/Q2_xB_Bin_1/Response_Matrix_Normal_Q2_xB_Bin_1_z_pT_Bin_1_Unfolded_Histos.png" name="pic2" width="600px" height="550px" ondblclick="PicturePopUp_click(this);"> -->
                                 <!-- <img src="All_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Gen_Cuts_V7_8_11_2023/Unfolding_Images/z_pT_Bin_Individual/Q2_xB_Bin_1/Response_Matrix_Normal_Q2_xB_Bin_1_z_pT_Bin_1_Unfolded_Histos.png" name="pic2" width="600px" height="550px" ondblclick="PicturePopUp_click(this);"> -->
                             </div>
@@ -2229,8 +2547,10 @@
                                 <!-- <img src="All_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Gen_Cuts_V7_8_30_2023/Unfolding_Images/z_pT_Bin_All/Q2_y_Bin_1/Unfolded_Histos_Q2_y_Bin_1_Bayesian.png" name="pic1" width="1300px" ondblclick="PicturePopUp_click(this);"> -->
                                 <!-- <img src="All_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_CrossCheck_V2_2_21_2024/Unfolding_Images/z_pT_Bin_All/Q2_y_Bin_1/Unfolded_Histos_Q2_y_Bin_1_Data.png" name="pic1" width="1300px" ondblclick="PicturePopUp_click(this);">
                                 <img src="All_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_CrossCheck_V2_2_21_2024/Unfolding_Images/z_pT_Bin_All/Q2_y_Bin_1/Unfolded_Histos_Q2_y_Bin_1_Data.png" name="pic3" width="1300px" ondblclick="PicturePopUp_click(this);" hidden="hidden"> -->
-                                <img src="Web_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_New_Q2_Y_Bins_V2_3_3_2024/Unfolding_Images/z_pT_Bin_All/Q2_y_Bin_1/Unfolded_Histos_Q2_y_Bin_1_Data.png" name="pic1" width="1300px" ondblclick="PicturePopUp_click(this);">
-                                <img src="Web_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_New_Q2_Y_Bins_V2_3_3_2024/Unfolding_Images/z_pT_Bin_All/Q2_y_Bin_1/Unfolded_Histos_Q2_y_Bin_1_Data.png" name="pic3" width="1300px" ondblclick="PicturePopUp_click(this);" hidden="hidden">
+                                <!-- <img src="Web_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Pass_2_New_Q2_Y_Bins_V5_4_17_2024/Unfolding_Images/z_pT_Bin_All/Q2_y_Bin_1/Unfolded_Histos_Q2_y_Bin_1_Data.png" name="pic1" width="1300px" ondblclick="PicturePopUp_click(this);">
+                                <img src="Web_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Pass_2_New_Q2_Y_Bins_V5_4_17_2024/Unfolding_Images/z_pT_Bin_All/Q2_y_Bin_1/Unfolded_Histos_Q2_y_Bin_1_Data.png" name="pic3" width="1300px" ondblclick="PicturePopUp_click(this);" hidden="hidden"> -->
+                                <img src="Web_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Pass_2_5D_Unfold_Test_V5_5_15_2024/Unfolding_Images/z_pT_Bin_All/Q2_y_Bin_1/Unfolded_Histos_Q2_y_Bin_1_Data.png" name="pic1" width="1300px" ondblclick="PicturePopUp_click(this);">
+                                <img src="Web_Images_Interactive_Webpage_SIDIS_richcap/SIDIS_python_Images_From_Pass_2_5D_Unfold_Test_V5_5_15_2024/Unfolding_Images/z_pT_Bin_All/Q2_y_Bin_1/Unfolded_Histos_Q2_y_Bin_1_Data.png" name="pic3" width="1300px" ondblclick="PicturePopUp_click(this);" hidden="hidden">
                             </div>
 
                         </form>
