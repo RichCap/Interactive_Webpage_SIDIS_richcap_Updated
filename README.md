@@ -15,6 +15,9 @@ This README.md file contains update notes and links related to the work shown in
         * As of this update, the online version has not been updated - this is a local update
             * Update will be pushed to the online version at a later time (will be noted here)
     * Added TableNumbersScripts.js for better organization of javascripts used by this page
+    * Fixed issue with the individual 'All' plot option automatically trying to revert back to the "Together" images 
+        * Some gliches still exist, but now hovering over the 'All' option will not reset the bin table when the Q2-y bin is changed
+        * Also the drop-down form now also shows which bin is selected instead of becoming blank whenever either 'Bin 1' or 'Bin All' are not selected
 
 * On 2-23-2024:
     * Updated the webpage to feature fewer image options (save space on the server)
